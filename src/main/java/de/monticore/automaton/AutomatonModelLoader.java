@@ -5,7 +5,7 @@
  */
 package de.monticore.automaton;
 
-import de.cd4analysis._ast.ASTAutomaton;
+import de.monticore.automaton._ast.ASTAutomaton;
 import de.monticore.automaton.symboltable.AutomatonSymbolTableCreator;
 import de.monticore.modelloader.ModelingLanguageModelLoader;
 import de.monticore.symboltable.ArtifactScope;

@@ -9,13 +9,11 @@ import de.monticore.symboltable.CommonSymbolTableCreator;
 import de.monticore.symboltable.MutableScope;
 import de.monticore.symboltable.ResolverConfiguration;
 
-import javax.annotation.Nullable;
-
 public class CommonAutomatonSymbolTableCreator extends CommonSymbolTableCreator implements
     AutomatonSymbolTableCreator {
 
-  public CommonAutomatonSymbolTableCreator(ResolverConfiguration resolverConfig, @Nullable
-  MutableScope enclosingScope) {
+  public CommonAutomatonSymbolTableCreator(final ResolverConfiguration resolverConfig,
+      final MutableScope enclosingScope) {
     super(resolverConfig, enclosingScope);
   }
 

@@ -6,8 +6,8 @@
 package de.monticore.automaton;
 
 import com.google.common.base.Optional;
-import de.cd4analysis._parser.AutomatonMCParser;
 import de.monticore.AbstractModelingLanguage;
+import de.monticore.automaton._parser.AutomatonMCParser;
 import de.monticore.automaton.symboltable.AutomatonSymbol;
 import de.monticore.automaton.symboltable.AutomatonSymbolTableCreator;
 import de.monticore.automaton.symboltable.CommonAutomatonSymbolTableCreator;

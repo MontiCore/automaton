@@ -5,11 +5,11 @@
  */
 package de.monticore.automaton.symboltable;
 
-import de.cd4analysis._ast.ASTAutomaton;
-import de.cd4analysis._ast.ASTAutomatonBase;
-import de.cd4analysis._ast.ASTState;
-import de.cd4analysis._ast.ASTTransition;
-import de.cd4analysis._visitor.AutomatonVisitor;
+import de.monticore.automaton._ast.ASTAutomaton;
+import de.monticore.automaton._ast.ASTAutomatonBase;
+import de.monticore.automaton._ast.ASTState;
+import de.monticore.automaton._ast.ASTTransition;
+import de.monticore.automaton._visitor.AutomatonVisitor;
 import de.monticore.symboltable.Scope;
 import de.monticore.symboltable.SymbolTableCreator;
 
