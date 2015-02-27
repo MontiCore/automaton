@@ -11,8 +11,11 @@ import de.monticore.AbstractModelingLanguage;
 import de.monticore.automaton.symboltable.AutomatonSymbol;
 import de.monticore.automaton.symboltable.AutomatonSymbolTableCreator;
 import de.monticore.automaton.symboltable.CommonAutomatonSymbolTableCreator;
+import de.monticore.automaton.symboltable.StateSymbol;
+import de.monticore.automaton.symboltable.TransitionSymbol;
 import de.monticore.symboltable.MutableScope;
 import de.monticore.symboltable.ResolverConfiguration;
+import de.monticore.symboltable.resolving.CommonResolvingFilter;
 
 import javax.annotation.Nullable;
 
@@ -21,8 +24,10 @@ public class AutomatonLanguage extends AbstractModelingLanguage {
   
   public AutomatonLanguage() {
     super("Automaton Language", FILE_ENDING, AutomatonSymbol.KIND);
-    
 
+    addResolver(CommonResolvingFilter.create(AutomatonSymbol.class, AutomatonSymbol.KIND));
+    addResolver(CommonResolvingFilter.create(StateSymbol.class, StateSymbol.KIND));
+    addResolver(CommonResolvingFilter.create(TransitionSymbol.class, TransitionSymbol.KIND));
   }
 
   @Override

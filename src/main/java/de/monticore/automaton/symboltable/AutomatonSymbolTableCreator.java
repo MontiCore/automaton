@@ -5,7 +5,10 @@
  */
 package de.monticore.automaton.symboltable;
 
+import de.cd4analysis._ast.ASTAutomaton;
 import de.cd4analysis._ast.ASTAutomatonBase;
+import de.cd4analysis._ast.ASTState;
+import de.cd4analysis._ast.ASTTransition;
 import de.cd4analysis._visitor.AutomatonVisitor;
 import de.monticore.symboltable.Scope;
 import de.monticore.symboltable.SymbolTableCreator;
@@ -27,4 +30,42 @@ public interface AutomatonSymbolTableCreator extends AutomatonVisitor, SymbolTab
     return getFirstCreatedScope();
   }
 
+  @Override
+  public default void visit(final ASTAutomaton automatonNode) {
+    final AutomatonSymbol automaton = new AutomatonSymbol(automatonNode.getName());
+    automaton.setAstNode(automatonNode);
+
+    defineInScope(automaton);
+    putScopeOnStackAndSetEnclosingIfExists(automaton);
+  }
+
+  @Override
+  public default void endVisit(final ASTAutomaton automatonNode) {
+    removeCurrentScope();
+  }
+
+  @Override
+  public default void visit(final ASTState stateNode) {
+    final StateSymbol stateSymbol = new StateSymbol(stateNode.getName());
+    stateSymbol.setAstNode(stateNode);
+
+    stateSymbol.setInitial(stateNode.isInitial());
+    stateSymbol.setFinal(stateNode.isFinal());
+
+    defineInScope(stateSymbol);
+  }
+
+  @Override
+  public default void visit(final ASTTransition transitionNode) {
+    final StateSymbolReference fromState =
+        new StateSymbolReference(transitionNode.getFrom(), currentScope().get());
+    final StateSymbolReference toState =
+        new StateSymbolReference(transitionNode.getTo(), currentScope().get());
+
+    // TODO PN What is the name of a transition?
+    final TransitionSymbol transitionSymbol =
+        new TransitionSymbol(transitionNode.getActivate(), fromState, toState);
+
+    defineInScope(transitionSymbol);
+  }
 }
