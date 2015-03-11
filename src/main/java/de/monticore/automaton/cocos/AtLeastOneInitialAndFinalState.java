@@ -11,7 +11,6 @@ import de.monticore.automaton._cocos.AutomatonASTAutomatonCoCo;
 import de.monticore.cocos.CoCoHelper;
 import de.se_rwth.commons.logging.Log;
 
-// TODO PN write test
 public class AtLeastOneInitialAndFinalState implements AutomatonASTAutomatonCoCo {
   public static final String ERROR_CODE = "0xAUT001";
   public static final String ERROR_MSG_FORMAT =

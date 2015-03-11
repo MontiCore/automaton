@@ -13,7 +13,7 @@ import de.se_rwth.commons.logging.Log;
 public class StateNameStartsWithCapitalLetter implements AutomatonASTStateCoCo {
   public static final String ERROR_CODE = "0xAUT002";
   public static final String ERROR_MSG_FORMAT =
-      "A state name should start with a capital letter.";
+      "State name '%s' should start with a capital letter.";
 
   @Override
   public void check(ASTState state) {
@@ -24,10 +24,9 @@ public class StateNameStartsWithCapitalLetter implements AutomatonASTStateCoCo {
       // Warning output
       Log.warn(CoCoHelper.buildErrorMsg(
           ERROR_CODE,
-          ERROR_MSG_FORMAT,
+          String.format(ERROR_MSG_FORMAT, stateName),
           state.get_SourcePositionStart()));
     }
   }
-
 
 }
