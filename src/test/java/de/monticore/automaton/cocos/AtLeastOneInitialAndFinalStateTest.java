@@ -13,7 +13,6 @@ import de.monticore.cocos.LogMock;
 import de.monticore.cocos.helper.Assert;
 import de.se_rwth.commons.logging.Log;
 import mc.ast.SourcePosition;
-import org.antlr.v4.runtime.RecognitionException;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -36,7 +35,7 @@ public class AtLeastOneInitialAndFinalStateTest {
   }
 
   @Before
-  public void setUp() throws RecognitionException, IOException {
+  public void setUp() {
     LogMock.getFindings().clear();
   }
 
