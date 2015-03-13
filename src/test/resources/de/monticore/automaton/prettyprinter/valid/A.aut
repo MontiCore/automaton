@@ -1,0 +1,7 @@
+automaton A {
+  state S
+        <<initial>>
+  <<final>>;
+  
+}
+
