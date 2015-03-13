@@ -6,6 +6,8 @@
 package de.monticore.automaton.cocos;
 
 import com.google.common.base.Optional;
+
+import de.monticore.automaton.AbstractTest;
 import de.monticore.automaton._ast.ASTAutomaton;
 import de.monticore.automaton._parser.AutomatonMCParser;
 import de.monticore.cocos.CoCoHelper;
@@ -13,6 +15,7 @@ import de.monticore.cocos.LogMock;
 import de.monticore.cocos.helper.Assert;
 import de.se_rwth.commons.logging.Log;
 import mc.ast.SourcePosition;
+
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -25,7 +28,7 @@ import java.util.Collection;
 
 import static org.junit.Assert.assertTrue;
 
-public class AtLeastOneInitialAndFinalStateTest {
+public class AtLeastOneInitialAndFinalStateTest extends AbstractTest {
 
   @BeforeClass
   public static void init() {
@@ -41,12 +44,7 @@ public class AtLeastOneInitialAndFinalStateTest {
 
   @Test
   public void testValid() throws IOException {
-    Path model = Paths.get("src/test/resources/de/monticore/automaton/cocos/valid/A.aut");
-    AutomatonMCParser parser = new AutomatonMCParser();
-    Optional<ASTAutomaton> optAutomaton = parser.parse(model.toString());
-    assertTrue(optAutomaton.isPresent());
-    ASTAutomaton automaton = optAutomaton.get();
-
+    ASTAutomaton automaton = parseModel("src/test/resources/de/monticore/automaton/cocos/valid/A.aut");
     AtLeastOneInitialAndFinalState coco = new AtLeastOneInitialAndFinalState();
     coco.check(automaton);
 
@@ -55,11 +53,7 @@ public class AtLeastOneInitialAndFinalStateTest {
 
   @Test
   public void testMissingInitialState() throws IOException {
-    Path model = Paths.get("src/test/resources/de/monticore/automaton/cocos/invalid/MissingInitialState.aut");
-    AutomatonMCParser parser = new AutomatonMCParser();
-    Optional<ASTAutomaton> optAutomaton = parser.parse(model.toString());
-    assertTrue(optAutomaton.isPresent());
-    ASTAutomaton automaton = optAutomaton.get();
+    ASTAutomaton automaton = parseModel("src/test/resources/de/monticore/automaton/cocos/invalid/MissingInitialState.aut");
 
     AtLeastOneInitialAndFinalState coco = new AtLeastOneInitialAndFinalState();
     coco.check(automaton);

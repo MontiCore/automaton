@@ -5,18 +5,7 @@
  */
 package de.monticore.automaton.cocos;
 
-import com.google.common.base.Optional;
-import de.monticore.automaton._ast.ASTAutomaton;
-import de.monticore.automaton._cocos.AutomatonCoCoChecker;
-import de.monticore.automaton._parser.AutomatonMCParser;
-import de.monticore.cocos.CoCoHelper;
-import de.monticore.cocos.LogMock;
-import de.monticore.cocos.helper.Assert;
-import de.se_rwth.commons.logging.Log;
-import mc.ast.SourcePosition;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -24,9 +13,24 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collection;
 
-import static org.junit.Assert.assertTrue;
+import mc.ast.SourcePosition;
 
-public class AutomatonCoCosTest {
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import com.google.common.base.Optional;
+
+import de.monticore.automaton.AbstractTest;
+import de.monticore.automaton._ast.ASTAutomaton;
+import de.monticore.automaton._cocos.AutomatonCoCoChecker;
+import de.monticore.automaton._parser.AutomatonMCParser;
+import de.monticore.cocos.CoCoHelper;
+import de.monticore.cocos.LogMock;
+import de.monticore.cocos.helper.Assert;
+import de.se_rwth.commons.logging.Log;
+
+public class AutomatonCoCosTest extends AbstractTest {
 
   @BeforeClass
   public static void init() {
@@ -42,13 +46,9 @@ public class AutomatonCoCosTest {
 
   @Test
   public void testWithChecker() throws IOException {
-    Path model = Paths.get("src/test/resources/de/monticore/automaton/cocos/invalid"
+    ASTAutomaton automaton = parseModel("src/test/resources/de/monticore/automaton/cocos/invalid"
         + "/StateDoesNotStartWithCapitalLetter.aut");
-    AutomatonMCParser parser = new AutomatonMCParser();
-    Optional<ASTAutomaton> optAutomaton = parser.parse(model.toString());
-    assertTrue(optAutomaton.isPresent());
-    ASTAutomaton automaton = optAutomaton.get();
-
+    
     // checker and cocos
     AutomatonCoCoChecker checker = new AutomatonCoCoChecker();
     checker.addCoCo(new AtLeastOneInitialAndFinalState());

@@ -6,36 +6,25 @@
 package de.monticore.automaton.prettyprint;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import org.junit.Test;
 
-import com.google.common.base.Optional;
-
+import de.monticore.automaton.AbstractTest;
 import de.monticore.automaton._ast.ASTAutomaton;
-import de.monticore.automaton._parser.AutomatonMCParser;
 
 /**
  * Test for {@link PrettyPrinter}.
  *
  * @author Robert Heim
  */
-public class PrettyPrinterTest {
+public class PrettyPrinterTest extends AbstractTest {
   @Test
   public void test() throws IOException
   {
+    ASTAutomaton automaton = parseModel("src/test/resources/de/monticore/automaton/prettyprinter/valid/A.aut");
     PrettyPrinter pp = new PrettyPrinter();
-    
-    Path model = Paths.get("src/test/resources/de/monticore/automaton/prettyprinter/valid/A.aut");
-    AutomatonMCParser parser = new AutomatonMCParser();
-    Optional<ASTAutomaton> optAutomaton = parser.parse(model.toString());
-    assertTrue(optAutomaton.isPresent());
-    ASTAutomaton automaton = optAutomaton.get();
-    
     pp.handle(automaton);
     
     String actual = pp.getResult();

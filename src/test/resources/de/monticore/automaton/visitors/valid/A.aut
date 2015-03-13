@@ -1,0 +1,5 @@
+automaton A {
+  state S1  <<initial>> <<final>>;
+  state S2;
+  state S3;
+}
