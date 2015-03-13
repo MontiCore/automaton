@@ -7,6 +7,7 @@ package de.monticore.automaton.prettyprint;
 
 import de.monticore.automaton._ast.ASTAutomaton;
 import de.monticore.automaton._ast.ASTState;
+import de.monticore.automaton._ast.ASTTransition;
 import de.monticore.automaton._visitor.AutomatonVisitor;
 
 /**
@@ -53,6 +54,13 @@ public class PrettyPrinter implements AutomatonVisitor {
   }
   
   @Override
+  public void traverse(ASTAutomaton node) {
+    // guarantee ordering: states before transitions
+    node.getStates().accept(getRealThis());
+    node.getTransitions().accept(getRealThis());
+  }
+
+  @Override
   public void visit(ASTState node) {
     print("state " + node.getName());
     if (node.isInitial()) {
@@ -61,6 +69,14 @@ public class PrettyPrinter implements AutomatonVisitor {
     if (node.isFinal()) {
       print(" <<final>>");
     }
+    println(";");
+  }
+  
+  @Override
+  public void visit(ASTTransition node) {
+    print(node.getFrom());
+    print(" - " + node.getActivate() + " > ");
+    print(node.getTo());
     println(";");
   }
   
