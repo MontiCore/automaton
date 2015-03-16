@@ -42,7 +42,7 @@ public class AutomatonCoCosTest extends AbstractTest {
     ASTAutomaton automaton = parseModel("src/test/resources/de/monticore/automaton/cocos/invalid"
         + "/StateDoesNotStartWithCapitalLetter.aut");
     
-    AutomatonCoCoChecker checker = AutomatonCoCos.getCheckerForAllCoCos();
+    AutomatonCoCoChecker checker = new AutomatonCoCos().getCheckerForAllCoCos();
     
     Collection<String> expectedErrors = Arrays.asList(
         CoCoHelper.buildErrorMsg("0xAUT002", "State name 'notCapital' should start with a capital "

@@ -42,7 +42,7 @@ public class AtLeastOneInitialAndFinalStateTest extends AbstractTest {
   @Test
   public void testValid() throws IOException {
     ASTAutomaton automaton = parseModel("src/test/resources/de/monticore/automaton/cocos/valid/A.aut");
-    AutomatonCoCoChecker checker = AutomatonCoCos.getCheckerForAllCoCos();
+    AutomatonCoCoChecker checker = new AutomatonCoCos().getCheckerForAllCoCos();
     checker.checkAll(automaton);
     
     assertTrue(LogMock.getFindings().isEmpty());
@@ -52,7 +52,7 @@ public class AtLeastOneInitialAndFinalStateTest extends AbstractTest {
   public void testMissingInitialState() throws IOException {
     ASTAutomaton automaton = parseModel("src/test/resources/de/monticore/automaton/cocos/invalid/MissingInitialState.aut");
     
-    AutomatonCoCoChecker checker = AutomatonCoCos.getCheckerForAllCoCos();
+    AutomatonCoCoChecker checker = new AutomatonCoCos().getCheckerForAllCoCos();
     checker.checkAll(automaton);
     
     Collection<String> expectedErrors = Arrays.asList(

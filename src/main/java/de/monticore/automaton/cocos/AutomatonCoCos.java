@@ -9,7 +9,7 @@ import de.monticore.automaton._cocos.AutomatonCoCoChecker;
 
 public class AutomatonCoCos {
 
-  public static AutomatonCoCoChecker getCheckerForAllCoCos() {
+  public AutomatonCoCoChecker getCheckerForAllCoCos() {
     final AutomatonCoCoChecker checker = new AutomatonCoCoChecker();
     checker.addCoCo(new AtLeastOneInitialAndFinalState());
     checker.addCoCo(new StateNameStartsWithCapitalLetter());
