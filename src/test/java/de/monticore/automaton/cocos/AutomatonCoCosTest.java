@@ -45,7 +45,7 @@ public class AutomatonCoCosTest extends AbstractTest {
     AutomatonCoCoChecker checker = new AutomatonCoCos().getCheckerForAllCoCos();
     
     Collection<String> expectedErrors = Arrays.asList(
-        CoCoHelper.buildErrorMsg("0xAUT002", "State name 'notCapital' should start with a capital "
+        CoCoHelper.buildErrorMsg("0xAUT02", "State name 'notCapital' should start with a capital "
             + "letter.",
             new SourcePosition(3, 2))
         );

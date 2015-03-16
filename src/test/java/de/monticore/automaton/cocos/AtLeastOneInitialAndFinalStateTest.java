@@ -57,7 +57,7 @@ public class AtLeastOneInitialAndFinalStateTest extends AbstractTest {
     
     Collection<String> expectedErrors = Arrays.asList(
         CoCoHelper.buildErrorMsg(
-            "0xAUT001", "An automaton must have at least one initial and one final state.",
+            "0xAUT01", "An automaton must have at least one initial and one final state.",
             new SourcePosition(1, 0))
         );
     

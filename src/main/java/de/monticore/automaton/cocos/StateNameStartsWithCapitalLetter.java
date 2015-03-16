@@ -11,7 +11,7 @@ import de.monticore.cocos.CoCoHelper;
 import de.se_rwth.commons.logging.Log;
 
 public class StateNameStartsWithCapitalLetter implements AutomatonASTStateCoCo {
-  public static final String ERROR_CODE = "0xAUT002";
+  public static final String ERROR_CODE = "0xAUT02";
   public static final String ERROR_MSG_FORMAT =
       "State name '%s' should start with a capital letter.";
 
