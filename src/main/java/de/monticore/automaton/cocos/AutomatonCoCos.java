@@ -13,6 +13,8 @@ public class AutomatonCoCos {
     final AutomatonCoCoChecker checker = new AutomatonCoCoChecker();
     checker.addCoCo(new AtLeastOneInitialAndFinalState());
     checker.addCoCo(new StateNameStartsWithCapitalLetter());
+    // TODO PN uncomment
+//    checker.addCoCo(new ExistingTransitionSource());
 
     return checker;
   }

@@ -1,0 +1,7 @@
+package invalid;
+
+automaton MissingInitialState {
+  state s;
+
+  a - t > s;
+}

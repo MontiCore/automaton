@@ -29,7 +29,6 @@ public class AtLeastOneInitialAndFinalStateTest extends AbstractTest {
   public static void init() {
     LogMock.init();
     Log.enableFailQuick(false);
-    LogMock.setProduceOutput(false);
   }
   
   @Before

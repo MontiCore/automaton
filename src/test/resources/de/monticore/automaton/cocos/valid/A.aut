@@ -1,3 +1,6 @@
 automaton A {
   state S  <<initial>> <<final>>;
+  state R;
+
+  S - t > R;
 }
