@@ -35,6 +35,9 @@ public interface AutomatonSymbolTableCreator extends AutomatonVisitor, SymbolTab
     final AutomatonSymbol automaton = new AutomatonSymbol(automatonNode.getName());
     automaton.setAstNode(automatonNode);
 
+    automatonNode.setSymbol(automaton);
+    automatonNode.setEnclosingScope(currentScope().orNull());
+
     defineInScope(automaton);
     putScopeOnStackAndSetEnclosingIfExists(automaton);
   }
@@ -52,6 +55,9 @@ public interface AutomatonSymbolTableCreator extends AutomatonVisitor, SymbolTab
     stateSymbol.setInitial(stateNode.isInitial());
     stateSymbol.setFinal(stateNode.isFinal());
 
+    stateNode.setSymbol(stateSymbol);
+    stateNode.setEnclosingScope(currentScope().orNull());
+
     defineInScope(stateSymbol);
   }
 
@@ -65,6 +71,9 @@ public interface AutomatonSymbolTableCreator extends AutomatonVisitor, SymbolTab
     // TODO PN What is the name of a transition?
     final TransitionSymbol transitionSymbol =
         new TransitionSymbol(transitionNode.getActivate(), fromState, toState);
+
+    transitionNode.setSymbol(transitionSymbol);
+    transitionNode.setEnclosingScope(currentScope().orNull());
 
     defineInScope(transitionSymbol);
   }

@@ -44,12 +44,16 @@ public class AutomatonSymbolTableCreatorTest {
     assertEquals("PingPong", automatonSymbol.getFullName());
     assertEquals(3, automatonSymbol.getStates().size());
     assertEquals(5, automatonSymbol.getTransitions().size());
+    assertSame(automatonSymbol, automatonSymbol.getAstNode().get().getSymbol().get());
+    assertSame(automatonSymbol.getDefiningScope(), automatonSymbol.getAstNode().get().getEnclosingScope().get());
 
     final StateSymbol noGameState = automatonSymbol.getState("NoGame").orNull();
     assertNotNull(noGameState);
     assertEquals("NoGame", noGameState.getName());
     assertTrue(noGameState.isInitial());
     assertFalse(noGameState.isFinal());
+    assertSame(noGameState, noGameState.getAstNode().get().getSymbol().get());
+    assertSame(noGameState.getDefiningScope(), noGameState.getAstNode().get().getEnclosingScope().get());
 
     final StateSymbol pingState = automatonSymbol.getState("Ping").orNull();
     assertNotNull(pingState);
