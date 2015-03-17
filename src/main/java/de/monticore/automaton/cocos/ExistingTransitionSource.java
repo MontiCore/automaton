@@ -24,17 +24,15 @@ public class ExistingTransitionSource implements AutomatonASTTransitionCoCo {
   public void check(final ASTTransition node) {
     checkArgument(node.getEnclosingScope().isPresent());
 
-    final Scope enclosingScope = node.getEnclosingScope().get();
-
-    final Optional<StateSymbol> sourceState = enclosingScope.resolve(node.getFrom(), StateSymbol.KIND);
+    Scope enclosingScope = node.getEnclosingScope().get();
+    Optional<StateSymbol> sourceState = enclosingScope.resolve(node.getFrom(), StateSymbol.KIND);
 
     if (!sourceState.isPresent()) {
-      // Error output...
+      // Issue error...
       Log.error(CoCoHelper.buildErrorMsg(
           ERROR_CODE,
           ERROR_MSG_FORMAT,
           node.get_SourcePositionStart()));
     }
-
   }
 }

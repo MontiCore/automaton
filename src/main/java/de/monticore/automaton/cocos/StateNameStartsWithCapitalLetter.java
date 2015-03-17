@@ -21,7 +21,7 @@ public class StateNameStartsWithCapitalLetter implements AutomatonASTStateCoCo {
     boolean startsWithUpperCase = Character.isUpperCase(stateName.charAt(0));
 
     if (!startsWithUpperCase) {
-      // Warning output
+      // Issue warning...
       Log.warn(CoCoHelper.buildErrorMsg(
           ERROR_CODE,
           String.format(ERROR_MSG_FORMAT, stateName),

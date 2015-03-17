@@ -31,7 +31,7 @@ public class AtLeastOneInitialAndFinalState implements AutomatonASTAutomatonCoCo
     }
 
     if (!initialState || !finalState) {
-      // Error output...
+      // Issue error...
       Log.error(CoCoHelper.buildErrorMsg(
           ERROR_CODE,
           ERROR_MSG_FORMAT,
