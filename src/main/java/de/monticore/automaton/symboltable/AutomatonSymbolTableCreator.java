@@ -33,12 +33,8 @@ public interface AutomatonSymbolTableCreator extends AutomatonVisitor, SymbolTab
   @Override
   public default void visit(final ASTAutomaton automatonNode) {
     final AutomatonSymbol automaton = new AutomatonSymbol(automatonNode.getName());
-    automaton.setAstNode(automatonNode);
 
-    automatonNode.setSymbol(automaton);
-    automatonNode.setEnclosingScope(currentScope().orNull());
-
-    defineInScope(automaton);
+    defineInScopeAndSetLinkBetweenSymbolAndAst(automaton, automatonNode);
     putScopeOnStackAndSetEnclosingIfExists(automaton);
   }
 
@@ -50,15 +46,11 @@ public interface AutomatonSymbolTableCreator extends AutomatonVisitor, SymbolTab
   @Override
   public default void visit(final ASTState stateNode) {
     final StateSymbol stateSymbol = new StateSymbol(stateNode.getName());
-    stateSymbol.setAstNode(stateNode);
 
     stateSymbol.setInitial(stateNode.isInitial());
     stateSymbol.setFinal(stateNode.isFinal());
 
-    stateNode.setSymbol(stateSymbol);
-    stateNode.setEnclosingScope(currentScope().orNull());
-
-    defineInScope(stateSymbol);
+    defineInScopeAndSetLinkBetweenSymbolAndAst(stateSymbol, stateNode);
   }
 
   @Override
@@ -72,9 +64,6 @@ public interface AutomatonSymbolTableCreator extends AutomatonVisitor, SymbolTab
     final TransitionSymbol transitionSymbol =
         new TransitionSymbol(transitionNode.getActivate(), fromState, toState);
 
-    transitionNode.setSymbol(transitionSymbol);
-    transitionNode.setEnclosingScope(currentScope().orNull());
-
-    defineInScope(transitionSymbol);
+    defineInScopeAndSetLinkBetweenSymbolAndAst(transitionSymbol, transitionNode);
   }
 }
