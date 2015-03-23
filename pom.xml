@@ -16,7 +16,7 @@
 
     <guava.version>18.0</guava.version>
     <junit.version>4.11</junit.version>
-    <se-commons.version>1.6.2-SNAPSHOT</se-commons.version>
+    <se-commons.version>1.7.0-SNAPSHOT</se-commons.version>
     <antlr.version>4.3</antlr.version>
 
     <!-- .. Plugins ....................................................... -->
