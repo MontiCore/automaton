@@ -25,9 +25,11 @@
 
     <mc4.maven.version>4.0.2-SNAPSHOT</mc4.maven.version>
 
+    <assembly.plugin>2.5.3</assembly.plugin>
     <compiler.plugin>3.2</compiler.plugin>
     <release.plugin>2.5.1</release.plugin>
     <source.plugin>2.4</source.plugin>
+    <surefire.plugin>2.18.1</surefire.plugin>
 
     <!-- Classifiers -->
 
@@ -103,6 +105,16 @@
       </plugin>
 
       <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${surefire.plugin}</version>
+        <configuration>
+          <classpathDependencyExcludes>
+            <classpathDependencyExclude>de.monticore:monticore-cli</classpathDependencyExclude>
+          </classpathDependencyExcludes>
+        </configuration>
+      </plugin>
+
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-release-plugin</artifactId>
         <version>${release.plugin}</version>
@@ -119,6 +131,30 @@
             <phase>package</phase>
             <goals>
               <goal>jar-no-fork</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>${assembly.plugin}</version>
+        <executions>
+          <execution>
+            <configuration>
+              <formats>
+                <format>zip</format>
+              </formats>
+              <descriptor>src/main/assemblies/zip-assembly.xml</descriptor>
+              <finalName>monticore-cli.zip</finalName>
+              <attach>false</attach>
+              <appendAssemblyId>false</appendAssemblyId>
+            </configuration>
+            <id>monticore-cli-assembly</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
             </goals>
           </execution>
         </executions>
@@ -200,6 +236,20 @@
       <artifactId>logback-classic</artifactId>
       <version>${logback.version}</version>
       <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>de.monticore</groupId>
+      <artifactId>monticore-cli</artifactId>
+      <version>${monticore.version}</version>
+      <classifier>jar-with-dependencies</classifier>
+      <scope>runtime</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>*</groupId>
+          <artifactId>*</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
 
   </dependencies>
