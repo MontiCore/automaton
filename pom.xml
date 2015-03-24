@@ -15,6 +15,7 @@
     <monticore.version>4.0.2-SNAPSHOT</monticore.version>
 
     <guava.version>18.0</guava.version>
+    <jsr305.version>3.0.0</jsr305.version>
     <junit.version>4.11</junit.version>
     <se-commons.version>1.7.0-SNAPSHOT</se-commons.version>
     <antlr.version>4.3</antlr.version>
@@ -140,6 +141,12 @@
     </dependency>
 
     <dependency>
+      <groupId>com.google.code.findbugs</groupId>
+      <artifactId>jsr305</artifactId>
+      <version>${jsr305.version}</version>
+    </dependency>
+
+    <dependency>
       <groupId>org.antlr</groupId>
       <artifactId>antlr4-annotations</artifactId>
       <version>${antlr.version}</version>
@@ -169,6 +176,7 @@
       <artifactId>monticore-grammar</artifactId>
       <version>${monticore.version}</version>
       <classifier>${grammars.classifier}</classifier>
+      <scope>provided</scope>
     </dependency>
 
     <!-- .. Test Libraries ............................................... -->
