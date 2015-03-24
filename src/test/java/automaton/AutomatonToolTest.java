@@ -19,7 +19,7 @@ public class AutomatonToolTest {
   
   @Test
   public void executeMain() {
-    AutomatonTool.main(new String[] { "src/test/resources/automaton/parser/PingPong.aut" });
+    AutomatonTool.main(new String[] { "src/main/resources/example/PingPong.aut" });
     
     assertTrue(!false);
   }
