@@ -12,14 +12,15 @@ import de.se_rwth.commons.logging.Log;
 
 public class StateNameStartsWithCapitalLetter implements AutomatonASTStateCoCo {
   public static final String ERROR_CODE = "0xAUT02";
+  
   public static final String ERROR_MSG_FORMAT =
       "State name '%s' should start with a capital letter.";
-
+  
   @Override
   public void check(ASTState state) {
     String stateName = state.getName();
     boolean startsWithUpperCase = Character.isUpperCase(stateName.charAt(0));
-
+    
     if (!startsWithUpperCase) {
       // Issue warning...
       Log.warn(CoCoHelper.buildErrorMsg(
@@ -28,5 +29,5 @@ public class StateNameStartsWithCapitalLetter implements AutomatonASTStateCoCo {
           state.get_SourcePositionStart()));
     }
   }
-
+  
 }

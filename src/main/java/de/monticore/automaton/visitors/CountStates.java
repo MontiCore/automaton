@@ -15,7 +15,7 @@ import de.monticore.automaton._visitor.AutomatonVisitor;
  */
 public class CountStates implements AutomatonVisitor {
   private int count = 0;
-
+  
   @Override
   public void visit(ASTState node) {
     count++;

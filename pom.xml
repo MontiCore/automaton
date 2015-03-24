@@ -18,6 +18,7 @@
     <junit.version>4.11</junit.version>
     <se-commons.version>1.7.0-SNAPSHOT</se-commons.version>
     <antlr.version>4.3</antlr.version>
+    <logback.version>1.1.2</logback.version>
 
     <!-- .. Plugins ....................................................... -->
 
@@ -30,8 +31,6 @@
     <!-- Classifiers -->
 
     <grammars.classifier>grammars</grammars.classifier>
-    <symbols.classifier>symbols</symbols.classifier>
-    <models.classifier>models</models.classifier>
 
     <!-- .. Misc .......................................................... -->
 
@@ -45,7 +44,7 @@
   <!-- == PROJECT METAINFORMATION ========================================= -->
 
   <name>Automaton</name>
-  <url>http://lab11.se.rwth-aachen.de/nexus/service/local/repositories/se-sites/content/monticore/${project.version}/</url>
+  <url>http://lab11.se.rwth-aachen.de/nexus/service/local/repositories/se-sites/content/monticore/automaton/${project.version}/</url>
   <inceptionYear>2013</inceptionYear>
 
   <organization>
@@ -77,16 +76,11 @@
     </extensions>
 
     <plugins>
-      <!-- MontiCore Configuration -->
-
       <!-- MontiCore Generation -->
       <plugin>
         <groupId>de.monticore.mojo</groupId>
         <artifactId>monticore-maven-plugin</artifactId>
         <version>${mc4.maven.version}</version>
-        <configuration>
-          <skip>false</skip>
-        </configuration>
         <executions>
           <execution>
             <goals>
@@ -112,7 +106,7 @@
         <artifactId>maven-release-plugin</artifactId>
         <version>${release.plugin}</version>
         <configuration>
-          <tagNameFormat>monticore-@{project.version}</tagNameFormat>
+          <tagNameFormat>automaton-@{project.version}</tagNameFormat>
         </configuration>
       </plugin>
 
@@ -127,11 +121,6 @@
             </goals>
           </execution>
         </executions>
-      </plugin>
-      <!-- Create grammars jar -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-assembly-plugin</artifactId>
       </plugin>
     </plugins>
 
@@ -198,6 +187,13 @@
       <scope>test</scope>
     </dependency>
 
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>${logback.version}</version>
+      <scope>test</scope>
+    </dependency>
+
   </dependencies>
 
   <!-- == DISTRIBUTION ==================================================== -->
@@ -213,7 +209,7 @@
     </snapshotRepository>
     <site>
       <id>se-nexus</id>
-      <url>dav:http://lab11.se.rwth-aachen.de/nexus/content/sites/se-sites/monticore/${project.version}/</url>
+      <url>dav:http://lab11.se.rwth-aachen.de/nexus/content/sites/se-sites/monticore/automaton/${project.version}/</url>
     </site>
   </distributionManagement>
 

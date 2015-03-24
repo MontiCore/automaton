@@ -11,11 +11,10 @@ import de.monticore.symboltable.ResolverConfiguration;
 
 public class CommonAutomatonSymbolTableCreator extends CommonSymbolTableCreator implements
     AutomatonSymbolTableCreator {
-
+  
   public CommonAutomatonSymbolTableCreator(final ResolverConfiguration resolverConfig,
       final MutableScope enclosingScope) {
     super(resolverConfig, enclosingScope);
   }
-
-
+  
 }

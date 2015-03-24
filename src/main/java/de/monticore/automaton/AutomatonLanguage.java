@@ -5,7 +5,10 @@
  */
 package de.monticore.automaton;
 
+import javax.annotation.Nullable;
+
 import com.google.common.base.Optional;
+
 import de.monticore.AbstractModelingLanguage;
 import de.monticore.automaton._parser.AutomatonMCParser;
 import de.monticore.automaton.symboltable.AutomatonSymbol;
@@ -17,19 +20,17 @@ import de.monticore.symboltable.MutableScope;
 import de.monticore.symboltable.ResolverConfiguration;
 import de.monticore.symboltable.resolving.CommonResolvingFilter;
 
-import javax.annotation.Nullable;
-
 public class AutomatonLanguage extends AbstractModelingLanguage {
   public static final String FILE_ENDING = "aut";
   
   public AutomatonLanguage() {
     super("Automaton Language", FILE_ENDING, AutomatonSymbol.KIND);
-
+    
     addResolver(CommonResolvingFilter.create(AutomatonSymbol.class, AutomatonSymbol.KIND));
     addResolver(CommonResolvingFilter.create(StateSymbol.class, StateSymbol.KIND));
     addResolver(CommonResolvingFilter.create(TransitionSymbol.class, TransitionSymbol.KIND));
   }
-
+  
   @Override
   public AutomatonMCParser getParser() {
     return new AutomatonMCParser();
@@ -38,14 +39,15 @@ public class AutomatonLanguage extends AbstractModelingLanguage {
   @Override
   public Optional<AutomatonSymbolTableCreator> getSymbolTableCreator(
       ResolverConfiguration resolverConfiguration, @Nullable MutableScope enclosingScope) {
-    return Optional.of(new CommonAutomatonSymbolTableCreator(resolverConfiguration, enclosingScope));
+    return Optional
+        .of(new CommonAutomatonSymbolTableCreator(resolverConfiguration, enclosingScope));
   }
   
   @Override
   public AutomatonModelLoader getModelLoader() {
     return (AutomatonModelLoader) super.getModelLoader();
   }
-
+  
   @Override
   protected AutomatonModelLoader provideModelLoader() {
     return new AutomatonModelLoader(this);

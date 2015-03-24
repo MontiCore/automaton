@@ -5,6 +5,18 @@
  */
 package de.monticore.automaton.cocos;
 
+import static org.junit.Assert.assertTrue;
+
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collection;
+
+import mc.ast.SourcePosition;
+
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 import de.monticore.automaton.AbstractTest;
 import de.monticore.automaton._ast.ASTAutomaton;
 import de.monticore.automaton._cocos.AutomatonCoCoChecker;
@@ -12,16 +24,6 @@ import de.monticore.cocos.CoCoHelper;
 import de.monticore.cocos.LogMock;
 import de.monticore.cocos.helper.Assert;
 import de.se_rwth.commons.logging.Log;
-import mc.ast.SourcePosition;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collection;
-
-import static org.junit.Assert.assertTrue;
 
 public class AtLeastOneInitialAndFinalStateTest extends AbstractTest {
   

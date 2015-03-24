@@ -59,7 +59,7 @@ public class PrettyPrinter implements AutomatonVisitor {
     node.getStates().accept(getRealThis());
     node.getTransitions().accept(getRealThis());
   }
-
+  
   @Override
   public void visit(ASTState node) {
     print("state " + node.getName());

@@ -2,7 +2,7 @@
 automaton PingPong {
   state NoGame <<initial>>;
   state Ping;
-  state Pong;
+  state Pong <<final>>;
 
   NoGame - startGame > Ping;
 
