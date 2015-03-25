@@ -17,6 +17,7 @@ import org.antlr.v4.runtime.RecognitionException;
 
 import automaton._ast.ASTAutomaton;
 import automaton._parser.AutomatonMCParser;
+import automaton._parser.AutomatonParserFactory;
 
 import com.google.common.base.Optional;
 
@@ -35,7 +36,7 @@ abstract public class AbstractTest {
    */
   protected ASTAutomaton parseModel(String modelFile) {
     Path model = Paths.get(modelFile);
-    AutomatonMCParser parser = new AutomatonMCParser();
+    AutomatonMCParser parser = AutomatonParserFactory.createAutomatonMCParser();
     Optional<ASTAutomaton> optAutomaton;
     try {
       optAutomaton = parser.parse(model.toString());

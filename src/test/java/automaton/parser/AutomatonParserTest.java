@@ -18,6 +18,7 @@ import org.junit.Test;
 import automaton.AbstractTest;
 import automaton._ast.ASTAutomaton;
 import automaton._ast.ASTState;
+import automaton._parser.AutomatonParserFactory;
 import automaton._parser.StateMCParser;
 
 import com.google.common.base.Optional;
@@ -32,7 +33,7 @@ public class AutomatonParserTest extends AbstractTest {
   
   @Test
   public void testState() throws RecognitionException, IOException {
-    StateMCParser parser = new StateMCParser();
+    StateMCParser parser = AutomatonParserFactory.createStateMCParser();
     Optional<ASTState> state = parser.parse(
         new StringReader("state Ping;"));
     assertFalse(parser.hasErrors());

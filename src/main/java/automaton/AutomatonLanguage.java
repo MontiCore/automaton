@@ -8,6 +8,7 @@ package automaton;
 import javax.annotation.Nullable;
 
 import automaton._parser.AutomatonMCParser;
+import automaton._parser.AutomatonParserFactory;
 import automaton.symboltable.AutomatonSymbol;
 import automaton.symboltable.AutomatonSymbolTableCreator;
 import automaton.symboltable.CommonAutomatonSymbolTableCreator;
@@ -34,7 +35,7 @@ public class AutomatonLanguage extends AbstractModelingLanguage {
   
   @Override
   public AutomatonMCParser getParser() {
-    return new AutomatonMCParser();
+    return AutomatonParserFactory.createAutomatonMCParser();
   }
   
   @Override
