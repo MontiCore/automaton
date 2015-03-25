@@ -147,7 +147,7 @@
                 <format>zip</format>
               </formats>
               <descriptor>src/main/assemblies/zip-assembly.xml</descriptor>
-              <finalName>monticore-cli.zip</finalName>
+              <finalName>monticore-cli</finalName>
               <attach>false</attach>
               <appendAssemblyId>false</appendAssemblyId>
             </configuration>
