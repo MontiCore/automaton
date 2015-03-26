@@ -144,14 +144,11 @@
           <execution>
             <configuration>
               <formats>
-                <format>zip</format>
+                <format>jar</format>
               </formats>
-              <descriptor>src/main/assemblies/zip-assembly.xml</descriptor>
-              <finalName>monticore-cli</finalName>
-              <attach>false</attach>
-              <appendAssemblyId>false</appendAssemblyId>
+              <descriptor>src/main/assemblies/example-assembly.xml</descriptor>
             </configuration>
-            <id>monticore-cli-assembly</id>
+            <id>automaton-example-assembly</id>
             <phase>package</phase>
             <goals>
               <goal>single</goal>
@@ -237,21 +234,6 @@
       <version>${logback.version}</version>
       <scope>test</scope>
     </dependency>
-
-    <dependency>
-      <groupId>de.monticore</groupId>
-      <artifactId>monticore-cli</artifactId>
-      <version>${monticore.version}</version>
-      <classifier>jar-with-dependencies</classifier>
-      <scope>runtime</scope>
-      <exclusions>
-        <exclusion>
-          <groupId>*</groupId>
-          <artifactId>*</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-
   </dependencies>
 
   <!-- == DISTRIBUTION ==================================================== -->
