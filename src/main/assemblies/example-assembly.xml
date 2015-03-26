@@ -15,7 +15,7 @@
       <directory>src/main/grammars</directory>
     </fileSet>
     <fileSet>
-      <outputDirectory>src</outputDirectory>
+      <outputDirectory />
       <directory>src/main/resources</directory>
     </fileSet>
   </fileSets>
