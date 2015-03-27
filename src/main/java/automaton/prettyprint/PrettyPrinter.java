@@ -75,7 +75,7 @@ public class PrettyPrinter implements AutomatonVisitor {
   @Override
   public void visit(ASTTransition node) {
     print(node.getFrom());
-    print(" - " + node.getActivate() + " > ");
+    print(" - " + node.getInput() + " > ");
     print(node.getTo());
     println(";");
   }

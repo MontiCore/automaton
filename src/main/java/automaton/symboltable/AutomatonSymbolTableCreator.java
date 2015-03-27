@@ -61,7 +61,7 @@ public interface AutomatonSymbolTableCreator extends AutomatonVisitor, SymbolTab
     
     // TODO PN What is the name of a transition?
     final TransitionSymbol transitionSymbol =
-        new TransitionSymbol(transitionNode.getActivate(), fromState, toState);
+        new TransitionSymbol(transitionNode.getInput(), fromState, toState);
     
     defineInScopeAndSetLinkBetweenSymbolAndAst(transitionSymbol, transitionNode);
   }
