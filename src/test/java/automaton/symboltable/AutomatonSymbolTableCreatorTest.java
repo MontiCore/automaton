@@ -5,22 +5,17 @@
  */
 package automaton.symboltable;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
-
-import java.nio.file.Paths;
-
-import org.junit.Before;
-import org.junit.Test;
-
 import automaton.AutomatonLanguage;
 import de.monticore.io.paths.ModelPath;
 import de.monticore.symboltable.GlobalScope;
 import de.monticore.symboltable.ResolverConfiguration;
 import de.monticore.symboltable.Scope;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.nio.file.Paths;
+
+import static org.junit.Assert.*;
 
 public class AutomatonSymbolTableCreatorTest {
   
@@ -51,7 +46,7 @@ public class AutomatonSymbolTableCreatorTest {
     assertEquals(3, automatonSymbol.getStates().size());
     assertEquals(5, automatonSymbol.getTransitions().size());
     assertSame(automatonSymbol, automatonSymbol.getAstNode().get().getSymbol().get());
-    assertSame(automatonSymbol.getDefiningScope(), automatonSymbol.getAstNode().get()
+    assertSame(automatonSymbol.getEnclosingScope(), automatonSymbol.getAstNode().get()
         .getEnclosingScope().get());
     
     final StateSymbol noGameState = automatonSymbol.getState("NoGame").orNull();
@@ -60,7 +55,7 @@ public class AutomatonSymbolTableCreatorTest {
     assertTrue(noGameState.isInitial());
     assertFalse(noGameState.isFinal());
     assertSame(noGameState, noGameState.getAstNode().get().getSymbol().get());
-    assertSame(noGameState.getDefiningScope(), noGameState.getAstNode().get().getEnclosingScope()
+    assertSame(noGameState.getEnclosingScope(), noGameState.getAstNode().get().getEnclosingScope()
         .get());
     
     final StateSymbol pingState = automatonSymbol.getState("Ping").orNull();

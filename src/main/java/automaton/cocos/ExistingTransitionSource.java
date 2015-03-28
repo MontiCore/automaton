@@ -5,16 +5,15 @@
  */
 package automaton.cocos;
 
-import static com.google.common.base.Preconditions.checkArgument;
 import automaton._ast.ASTTransition;
 import automaton._cocos.AutomatonASTTransitionCoCo;
 import automaton.symboltable.StateSymbol;
-
 import com.google.common.base.Optional;
-
 import de.monticore.cocos.CoCoHelper;
 import de.monticore.symboltable.Scope;
 import de.se_rwth.commons.logging.Log;
+
+import static com.google.common.base.Preconditions.checkArgument;
 
 public class ExistingTransitionSource implements AutomatonASTTransitionCoCo {
   public static final String ERROR_CODE = "0xAUT03";
@@ -23,7 +22,7 @@ public class ExistingTransitionSource implements AutomatonASTTransitionCoCo {
       "The source state of the transition does not exist.";
   
   @Override
-  public void check(final ASTTransition node) {
+  public void check(ASTTransition node) {
     checkArgument(node.getEnclosingScope().isPresent());
     
     Scope enclosingScope = node.getEnclosingScope().get();
