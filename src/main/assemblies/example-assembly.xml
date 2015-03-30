@@ -9,9 +9,20 @@
     <fileSet>
       <outputDirectory>src</outputDirectory>
       <directory>src/main/java</directory>
+      <excludes>
+        <exclude>_ast/ASTState.java</exclude>
+      </excludes>
+      
     </fileSet>
     <fileSet>
-      <outputDirectory>src</outputDirectory>
+      <outputDirectory>hwc</outputDirectory>
+      <directory>src/main/java</directory>
+      <includes>
+        <include>_ast/ASTState.java</include>
+      </includes>
+    </fileSet>
+    <fileSet>
+      <outputDirectory />
       <directory>src/main/grammars</directory>
     </fileSet>
     <fileSet>
