@@ -7,7 +7,7 @@ grammar Automaton extends de.monticore.lexicals.Lexicals {
     @attribute Transitions List of transitions
 */
 Automaton =
-  "automaton" Name "{" (States:State | Transitions:Transition)* "}" ;
+  "automaton" Name "{" (State | Transition)* "}" ;
 
 /** A ASTState represents a state of a finite automaton
     @attribute Name Name of state
@@ -19,9 +19,9 @@ Automaton =
 State =
   "state" Name
   
-  (("<<" Initial:["initial"] ">>" ) | ("<<" Final:["final"] ">>" ))*
+  (("<<" ["initial"] ">>" ) | ("<<" ["final"] ">>" ))*
   
-  ( ("{" (States:State | Transitions:Transition)* "}") | ";") ;
+  ( ("{" (State | Transition)* "}") | ";") ;
 
 
 /** A ASTTransition represents a transition
