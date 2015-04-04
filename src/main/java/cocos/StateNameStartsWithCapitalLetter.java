@@ -7,8 +7,7 @@ package cocos;
 
 import _ast.ASTState;
 import _cocos.AutomatonASTStateCoCo;
-import de.monticore.cocos.CoCoHelper;
-import de.se_rwth.commons.logging.Log;
+import de.monticore.cocos.CoCoLog;
 
 public class StateNameStartsWithCapitalLetter implements AutomatonASTStateCoCo {
   public static final String ERROR_CODE = "0xAUT02";
@@ -23,10 +22,8 @@ public class StateNameStartsWithCapitalLetter implements AutomatonASTStateCoCo {
     
     if (!startsWithUpperCase) {
       // Issue warning...
-      Log.warn(CoCoHelper.buildErrorMsg(
-          ERROR_CODE,
-          String.format(ERROR_MSG_FORMAT, stateName),
-          state.get_SourcePositionStart()));
+      CoCoLog.warn(ERROR_CODE, String.format(ERROR_MSG_FORMAT, stateName),
+          state.get_SourcePositionStart());
     }
   }
   

@@ -1,5 +1,3 @@
-package invalid;
-
 automaton MissingInitialState {
   state s;
 

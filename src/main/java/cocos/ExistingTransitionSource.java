@@ -5,16 +5,15 @@
  */
 package cocos;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import symboltable.StateSymbol;
 import _ast.ASTTransition;
 import _cocos.AutomatonASTTransitionCoCo;
 
 import com.google.common.base.Optional;
 
-import de.monticore.cocos.CoCoHelper;
+import de.monticore.cocos.CoCoLog;
 import de.monticore.symboltable.Scope;
-import de.se_rwth.commons.logging.Log;
-import static com.google.common.base.Preconditions.checkArgument;
 
 public class ExistingTransitionSource implements AutomatonASTTransitionCoCo {
   public static final String ERROR_CODE = "0xAUT03";
@@ -31,10 +30,7 @@ public class ExistingTransitionSource implements AutomatonASTTransitionCoCo {
     
     if (!sourceState.isPresent()) {
       // Issue error...
-      Log.error(CoCoHelper.buildErrorMsg(
-          ERROR_CODE,
-          ERROR_MSG_FORMAT,
-          node.get_SourcePositionStart()));
+      CoCoLog.error(ERROR_CODE, ERROR_MSG_FORMAT, node.get_SourcePositionStart());
     }
   }
 }

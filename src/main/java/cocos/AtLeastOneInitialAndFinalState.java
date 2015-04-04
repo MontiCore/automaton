@@ -5,11 +5,10 @@
  */
 package cocos;
 
-import _ast.ASTState;
 import _ast.ASTAutomaton;
+import _ast.ASTState;
 import _cocos.AutomatonASTAutomatonCoCo;
-import de.monticore.cocos.CoCoHelper;
-import de.se_rwth.commons.logging.Log;
+import de.monticore.cocos.CoCoLog;
 
 public class AtLeastOneInitialAndFinalState implements AutomatonASTAutomatonCoCo {
   public static final String ERROR_CODE = "0xAUT01";
@@ -33,10 +32,7 @@ public class AtLeastOneInitialAndFinalState implements AutomatonASTAutomatonCoCo
     
     if (!initialState || !finalState) {
       // Issue error...
-      Log.error(CoCoHelper.buildErrorMsg(
-          ERROR_CODE,
-          ERROR_MSG_FORMAT,
-          automaton.get_SourcePositionStart()));
+      CoCoLog.error(ERROR_CODE, ERROR_MSG_FORMAT, automaton.get_SourcePositionStart());
     }
   }
   

@@ -12,29 +12,27 @@ import java.util.Collection;
 import lang.AbstractTest;
 import mc.ast.SourcePosition;
 
+import org.antlr.v4.runtime.RecognitionException;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import cocos.AutomatonCoCos;
 import _ast.ASTAutomaton;
 import _cocos.AutomatonCoCoChecker;
-import de.monticore.cocos.CoCoHelper;
-import de.monticore.cocos.LogMock;
+import de.monticore.cocos.CoCoFinding;
+import de.monticore.cocos.CoCoLog;
 import de.monticore.cocos.helper.Assert;
-import de.se_rwth.commons.logging.Log;
 
 public class AutomatonCoCosTest extends AbstractTest {
   
   @BeforeClass
   public static void init() {
-    LogMock.init();
-    Log.enableFailQuick(false);
+    CoCoLog.setDelegateToLog(false);
   }
   
   @Before
-  public void setUp() {
-    LogMock.getFindings().clear();
+  public void setUp() throws RecognitionException, IOException {
+    CoCoLog.getFindings().clear();
   }
   
   @Test
@@ -45,12 +43,13 @@ public class AutomatonCoCosTest extends AbstractTest {
     
     checker.checkAll(automaton);
     
-    Collection<String> expectedErrors = Arrays.asList(
-        CoCoHelper.buildErrorMsg("0xAUT02", "State name 'notCapital\n  //custom ASTState node\n ' should start with a capital "
-            + "letter.",
-            new SourcePosition(3, 2))
+    Collection<CoCoFinding> expectedErrors = Arrays.asList(
+        CoCoFinding.warning(StateNameStartsWithCapitalLetter.ERROR_CODE, String.format(
+            StateNameStartsWithCapitalLetter.ERROR_MSG_FORMAT,
+            "notCapital\n  //custom ASTState node\n ")
+            , new SourcePosition(3, 2))
         );
-    Assert.assertErrors(expectedErrors, LogMock.getFindings());
+    Assert.assertErrors(expectedErrors, CoCoLog.getFindings());
   }
   
   @Test
@@ -60,13 +59,14 @@ public class AutomatonCoCosTest extends AbstractTest {
     AutomatonCoCoChecker checker = new AutomatonCoCos().getCheckerForAllCoCos();
     checker.checkAll(automaton);
     
-    Collection<String> expectedErrors = Arrays.asList(
-        CoCoHelper.buildErrorMsg(
-            "0xAUT02", "State name 'notCapital\n  //custom ASTState node\n ' should start with a capital letter.",
-            new SourcePosition(3, 2))
+    Collection<CoCoFinding> expectedErrors = Arrays.asList(
+        CoCoFinding.warning(StateNameStartsWithCapitalLetter.ERROR_CODE, String.format(
+            StateNameStartsWithCapitalLetter.ERROR_MSG_FORMAT,
+            "notCapital\n  //custom ASTState node\n ")
+            , new SourcePosition(3, 2))
         );
     
-    Assert.assertErrors(expectedErrors, LogMock.getFindings());
+    Assert.assertErrors(expectedErrors, CoCoLog.getFindings());
   }
   
 }
