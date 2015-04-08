@@ -6,12 +6,12 @@
 package cocos;
 
 import static com.google.common.base.Preconditions.checkArgument;
+
+import java.util.Optional;
+
 import symboltable.StateSymbol;
 import _ast.ASTTransition;
 import _cocos.AutomatonASTTransitionCoCo;
-
-import com.google.common.base.Optional;
-
 import de.monticore.cocos.CoCoLog;
 import de.monticore.symboltable.Scope;
 

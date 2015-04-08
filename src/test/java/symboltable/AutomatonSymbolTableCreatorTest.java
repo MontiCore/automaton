@@ -46,7 +46,7 @@ public class AutomatonSymbolTableCreatorTest {
   @Test
   public void testAutomatonSymbolTableCreation() {
     final AutomatonSymbol automatonSymbol =
-        globalScope.<AutomatonSymbol> resolve("PingPong", AutomatonSymbol.KIND).orNull();
+        globalScope.<AutomatonSymbol> resolve("PingPong", AutomatonSymbol.KIND).orElse(null);
     
     assertNotNull(automatonSymbol);
     assertEquals("PingPong", automatonSymbol.getName());
@@ -57,7 +57,7 @@ public class AutomatonSymbolTableCreatorTest {
     assertSame(automatonSymbol.getEnclosingScope(), automatonSymbol.getAstNode().get()
         .getEnclosingScope().get());
     
-    final StateSymbol noGameState = automatonSymbol.getState("NoGame").orNull();
+    final StateSymbol noGameState = automatonSymbol.getState("NoGame").orElse(null);
     assertNotNull(noGameState);
     assertEquals("NoGame", noGameState.getName());
     assertTrue(noGameState.isInitial());
@@ -66,13 +66,13 @@ public class AutomatonSymbolTableCreatorTest {
     assertSame(noGameState.getEnclosingScope(), noGameState.getAstNode().get().getEnclosingScope()
         .get());
     
-    final StateSymbol pingState = automatonSymbol.getState("Ping").orNull();
+    final StateSymbol pingState = automatonSymbol.getState("Ping").orElse(null);
     assertNotNull(pingState);
     assertEquals("Ping", pingState.getName());
     assertFalse(pingState.isInitial());
     assertFalse(pingState.isFinal());
     
-    final StateSymbol pongState = automatonSymbol.getState("Pong").orNull();
+    final StateSymbol pongState = automatonSymbol.getState("Pong").orElse(null);
     assertNotNull(pongState);
     assertEquals("Pong", pongState.getName());
     assertFalse(pongState.isInitial());

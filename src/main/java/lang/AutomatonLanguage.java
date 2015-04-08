@@ -5,6 +5,8 @@
  */
 package lang;
 
+import java.util.Optional;
+
 import javax.annotation.Nullable;
 
 import symboltable.AutomatonModelLoader;
@@ -15,9 +17,6 @@ import symboltable.StateSymbol;
 import symboltable.TransitionSymbol;
 import _parser.AutomatonMCParser;
 import _parser.AutomatonParserFactory;
-
-import com.google.common.base.Optional;
-
 import de.monticore.AbstractModelingLanguage;
 import de.monticore.symboltable.MutableScope;
 import de.monticore.symboltable.ResolverConfiguration;

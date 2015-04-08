@@ -24,7 +24,7 @@ public class AutomatonModelLoader extends ModelingLanguageModelLoader<ASTAutomat
   protected void createSymbolTableFromAST(final ASTAutomaton ast, final String modelName,
       final MutableScope enclosingScope, final ResolverConfiguration resolverConfiguration) {
     final AutomatonSymbolTableCreator symbolTableCreator = getModelingLanguage()
-        .getSymbolTableCreator(resolverConfiguration, enclosingScope).orNull();
+        .getSymbolTableCreator(resolverConfiguration, enclosingScope).orElse(null);
     
     if (symbolTableCreator != null) {
       Log.info("Start creation of symbol table for model \"" + modelName + "\".",

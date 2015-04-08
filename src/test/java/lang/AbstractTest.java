@@ -12,14 +12,13 @@ import static org.junit.Assert.fail;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Optional;
 
 import org.antlr.v4.runtime.RecognitionException;
 
 import _ast.ASTAutomaton;
 import _parser.AutomatonMCParser;
 import _parser.AutomatonParserFactory;
-
-import com.google.common.base.Optional;
 
 /**
  * Provides some helpers for tests.

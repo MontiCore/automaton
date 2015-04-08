@@ -11,18 +11,17 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.Optional;
 
 import lang.AbstractTest;
 
 import org.antlr.v4.runtime.RecognitionException;
 import org.junit.Test;
 
-import _ast.ASTState;
 import _ast.ASTAutomaton;
+import _ast.ASTState;
 import _parser.AutomatonParserFactory;
 import _parser.StateMCParser;
-
-import com.google.common.base.Optional;
 
 public class AutomatonParserTest extends AbstractTest {
   

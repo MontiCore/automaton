@@ -5,6 +5,7 @@
  */
 
 import java.io.IOException;
+import java.util.Optional;
 
 import lang.AutomatonLanguage;
 
@@ -21,9 +22,6 @@ import cocos.AtLeastOneInitialAndFinalState;
 import cocos.AutomatonCoCos;
 import cocos.ExistingTransitionSource;
 import cocos.StateNameStartsWithCapitalLetter;
-
-import com.google.common.base.Optional;
-
 import de.monticore.io.paths.ModelPath;
 import de.monticore.symboltable.GlobalScope;
 import de.monticore.symboltable.ResolverConfiguration;

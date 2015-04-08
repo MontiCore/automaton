@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Optional;
 
 import lang.AbstractTest;
 import lang.AutomatonLanguage;
@@ -26,9 +27,6 @@ import symboltable.AutomatonSymbolTableCreator;
 import _ast.ASTAutomaton;
 import _ast.ASTTransition;
 import _cocos.AutomatonCoCoChecker;
-
-import com.google.common.base.Optional;
-
 import de.monticore.ModelingLanguage;
 import de.monticore.cocos.CoCoFinding;
 import de.monticore.cocos.CoCoLog;

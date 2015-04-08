@@ -6,8 +6,7 @@
 package symboltable;
 
 import java.util.List;
-
-import com.google.common.base.Optional;
+import java.util.Optional;
 
 import de.monticore.symboltable.CommonScopeSpanningSymbol;
 import de.monticore.symboltable.SymbolKind;
