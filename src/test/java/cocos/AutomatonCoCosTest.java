@@ -5,23 +5,21 @@
  */
 package cocos;
 
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collection;
-
-import lang.AbstractTest;
-import mc.ast.SourcePosition;
-
-import org.antlr.v4.runtime.RecognitionException;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import _ast.ASTAutomaton;
 import _cocos.AutomatonCoCoChecker;
 import de.monticore.cocos.CoCoFinding;
 import de.monticore.cocos.CoCoLog;
 import de.monticore.cocos.helper.Assert;
+import lang.AbstractTest;
+import mc.ast.SourcePosition;
+import org.antlr.v4.runtime.RecognitionException;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collection;
 
 public class AutomatonCoCosTest extends AbstractTest {
   
@@ -37,11 +35,14 @@ public class AutomatonCoCosTest extends AbstractTest {
   
   @Test
   public void testWithChecker() throws IOException {
-    ASTAutomaton automaton = parseModel("src/test/resources/automaton/cocos/invalid/StateDoesNotStartWithCapitalLetter.aut");
+    ASTAutomaton ast = // ...
+        parseModel("src/test/resources/automaton/cocos/invalid/StateDoesNotStartWithCapitalLetter.aut");
     
-    AutomatonCoCoChecker checker = new AutomatonCoCos().getCheckerForAllCoCos();
-    
-    checker.checkAll(automaton);
+    AutomatonCoCoChecker checker = new AutomatonCoCoChecker();
+    checker.addCoCo(new AtLeastOneInitialAndFinalState());
+    checker.addCoCo(new StateNameStartsWithCapitalLetter());
+
+    checker.checkAll(ast);
     
     Collection<CoCoFinding> expectedErrors = Arrays.asList(
         CoCoFinding.warning(StateNameStartsWithCapitalLetter.ERROR_CODE, String.format(
