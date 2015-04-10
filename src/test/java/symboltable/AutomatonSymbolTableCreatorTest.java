@@ -9,19 +9,13 @@ import de.monticore.io.paths.ModelPath;
 import de.monticore.symboltable.GlobalScope;
 import de.monticore.symboltable.ResolverConfiguration;
 import de.monticore.symboltable.Scope;
-
+import lang.AutomatonLanguage;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import symboltable.AutomatonSymbol;
-import symboltable.StateSymbol;
-import symboltable.StateSymbolReference;
-import symboltable.TransitionSymbol;
-
 import java.nio.file.Paths;
 
-import lang.AutomatonLanguage;
 import static org.junit.Assert.*;
 
 public class AutomatonSymbolTableCreatorTest {
@@ -41,8 +35,8 @@ public class AutomatonSymbolTableCreatorTest {
     globalScope = new GlobalScope(modelPath, automatonLanguage.getModelLoader(),
         resolverConfiguration);
   }
-  
-  @Ignore
+
+  @Ignore("Fixed for (at least) MC 4.1.2-SNAPSHOT")
   @Test
   public void testAutomatonSymbolTableCreation() {
     final AutomatonSymbol automatonSymbol =
@@ -63,8 +57,7 @@ public class AutomatonSymbolTableCreatorTest {
     assertTrue(noGameState.isInitial());
     assertFalse(noGameState.isFinal());
     assertSame(noGameState, noGameState.getAstNode().get().getSymbol().get());
-    assertSame(noGameState.getEnclosingScope(), noGameState.getAstNode().get().getEnclosingScope()
-        .get());
+    assertSame(noGameState.getEnclosingScope(), noGameState.getAstNode().get().getEnclosingScope().get());
     
     final StateSymbol pingState = automatonSymbol.getState("Ping").orElse(null);
     assertNotNull(pingState);

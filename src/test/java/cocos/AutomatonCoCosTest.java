@@ -47,7 +47,7 @@ public class AutomatonCoCosTest extends AbstractTest {
     Collection<CoCoFinding> expectedErrors = Arrays.asList(
         CoCoFinding.warning(StateNameStartsWithCapitalLetter.ERROR_CODE, String.format(
             StateNameStartsWithCapitalLetter.ERROR_MSG_FORMAT,
-            "notCapital\n  //custom ASTState node\n ")
+            "notCapital")
             , new SourcePosition(3, 2))
         );
     Assert.assertErrors(expectedErrors, CoCoLog.getFindings());
@@ -63,7 +63,7 @@ public class AutomatonCoCosTest extends AbstractTest {
     Collection<CoCoFinding> expectedErrors = Arrays.asList(
         CoCoFinding.warning(StateNameStartsWithCapitalLetter.ERROR_CODE, String.format(
             StateNameStartsWithCapitalLetter.ERROR_MSG_FORMAT,
-            "notCapital\n  //custom ASTState node\n ")
+            "notCapital")
             , new SourcePosition(3, 2))
         );
     

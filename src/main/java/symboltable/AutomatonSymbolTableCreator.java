@@ -5,14 +5,19 @@
  */
 package symboltable;
 
-import static java.util.Objects.requireNonNull;
-import _ast.ASTState;
 import _ast.ASTAutomaton;
 import _ast.ASTAutomatonBase;
+import _ast.ASTState;
 import _ast.ASTTransition;
 import _visitor.AutomatonVisitor;
+import de.monticore.symboltable.ArtifactScope;
 import de.monticore.symboltable.Scope;
 import de.monticore.symboltable.SymbolTableCreator;
+
+import java.util.ArrayList;
+import java.util.Optional;
+
+import static java.util.Objects.requireNonNull;
 
 public interface AutomatonSymbolTableCreator extends AutomatonVisitor, SymbolTableCreator {
   
@@ -23,37 +28,38 @@ public interface AutomatonSymbolTableCreator extends AutomatonVisitor, SymbolTab
    * @param rootNode the root node
    * @return the first scope that was created
    */
-  public default Scope createFromAST(ASTAutomatonBase rootNode) {
+  default Scope createFromAST(ASTAutomatonBase rootNode) {
     requireNonNull(rootNode);
     rootNode.accept(this);
     return getFirstCreatedScope();
   }
   
   @Override
-  public default void visit(final ASTAutomaton automatonNode) {
+  default void visit(final ASTAutomaton automatonNode) {
+    final ArtifactScope artifactScope = new ArtifactScope(Optional.empty(), "", new ArrayList<>());
+    putOnStackAndSetEnclosingIfExists(artifactScope);
+
     final AutomatonSymbol automaton = new AutomatonSymbol(automatonNode.getName());
-    
-    defineInScopeAndSetLinkBetweenSymbolAndAst(automaton, automatonNode);
-    putScopeOnStackAndSetEnclosingIfExists(automaton);
+    defineInScopeAndLinkWithAst(automaton, automatonNode);
   }
   
   @Override
-  public default void endVisit(final ASTAutomaton automatonNode) {
+  default void endVisit(final ASTAutomaton automatonNode) {
     removeCurrentScope();
   }
   
   @Override
-  public default void visit(final ASTState stateNode) {
+  default void visit(final ASTState stateNode) {
     final StateSymbol stateSymbol = new StateSymbol(stateNode.getName());
     
     stateSymbol.setInitial(stateNode.isInitial());
     stateSymbol.setFinal(stateNode.isFinal());
-    
-    defineInScopeAndSetLinkBetweenSymbolAndAst(stateSymbol, stateNode);
+
+    defineInScopeAndLinkWithAst(stateSymbol, stateNode);
   }
   
   @Override
-  public default void visit(final ASTTransition transitionNode) {
+  default void visit(final ASTTransition transitionNode) {
     final StateSymbolReference fromState =
         new StateSymbolReference(transitionNode.getFrom(), currentScope().get());
     final StateSymbolReference toState =
@@ -62,7 +68,7 @@ public interface AutomatonSymbolTableCreator extends AutomatonVisitor, SymbolTab
     // TODO PN What is the name of a transition?
     final TransitionSymbol transitionSymbol =
         new TransitionSymbol(transitionNode.getInput(), fromState, toState);
-    
-    defineInScopeAndSetLinkBetweenSymbolAndAst(transitionSymbol, transitionNode);
+
+    defineInScopeAndLinkWithAst(transitionSymbol, transitionNode);
   }
 }

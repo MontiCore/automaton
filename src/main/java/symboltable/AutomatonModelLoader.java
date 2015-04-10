@@ -5,7 +5,6 @@
  */
 package symboltable;
 
-import lang.AutomatonLanguage;
 import _ast.ASTAutomaton;
 import de.monticore.modelloader.ModelingLanguageModelLoader;
 import de.monticore.symboltable.ArtifactScope;
@@ -13,6 +12,7 @@ import de.monticore.symboltable.MutableScope;
 import de.monticore.symboltable.ResolverConfiguration;
 import de.monticore.symboltable.Scope;
 import de.se_rwth.commons.logging.Log;
+import lang.AutomatonLanguage;
 
 public class AutomatonModelLoader extends ModelingLanguageModelLoader<ASTAutomaton> {
   
@@ -33,7 +33,7 @@ public class AutomatonModelLoader extends ModelingLanguageModelLoader<ASTAutomat
       final Scope scope = symbolTableCreator.createFromAST(ast);
       
       if (!(scope instanceof ArtifactScope)) {
-        Log.warn("Top scope of model " + modelName + " is expected to be a compilation scope, but"
+        Log.warn("Top scope of model " + modelName + " is expected to be an artifact scope, but"
             + " is scope \"" + scope.getName() + "\"");
       }
       

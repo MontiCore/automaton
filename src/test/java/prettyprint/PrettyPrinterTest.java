@@ -5,16 +5,13 @@
  */
 package prettyprint;
 
-import static org.junit.Assert.assertEquals;
+import _ast.ASTAutomaton;
+import lang.AbstractTest;
+import org.junit.Test;
 
 import java.io.IOException;
 
-import lang.AbstractTest;
-
-import org.junit.Test;
-
-import prettyprint.PrettyPrinter;
-import _ast.ASTAutomaton;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Test for {@link PrettyPrinter}.
@@ -30,7 +27,7 @@ public class PrettyPrinterTest extends AbstractTest {
     pp.handle(automaton);
     
     String actual = pp.getResult();
-    String expected = "automaton A {\n  state S\n  //custom ASTState node\n  <<initial>> <<final>>;\n}\n";
+    String expected = "automaton A {\n  state S <<initial>> <<final>>;\n}\n";
     assertEquals(expected, actual);
   }
   

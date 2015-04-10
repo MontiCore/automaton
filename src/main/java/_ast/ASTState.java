@@ -33,8 +33,4 @@ public class ASTState extends ASTStateTOP {
     this.reachableStates.add(s);
   }
   
-  public String getName() {
-    return super.getName() + "\n  //custom ASTState node\n ";
-  }
-  
 }
