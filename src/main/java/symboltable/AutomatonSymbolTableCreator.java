@@ -11,16 +11,22 @@ import _ast.ASTState;
 import _ast.ASTTransition;
 import _visitor.AutomatonVisitor;
 import de.monticore.symboltable.ArtifactScope;
+import de.monticore.symboltable.CommonSymbolTableCreator;
+import de.monticore.symboltable.MutableScope;
+import de.monticore.symboltable.ResolverConfiguration;
 import de.monticore.symboltable.Scope;
-import de.monticore.symboltable.SymbolTableCreator;
 
 import java.util.ArrayList;
 import java.util.Optional;
 
 import static java.util.Objects.requireNonNull;
 
-public interface AutomatonSymbolTableCreator extends AutomatonVisitor, SymbolTableCreator {
-  
+public class AutomatonSymbolTableCreator extends CommonSymbolTableCreator implements AutomatonVisitor {
+
+  public AutomatonSymbolTableCreator(final ResolverConfiguration resolverConfig, final MutableScope enclosingScope) {
+    super(resolverConfig, enclosingScope);
+  }
+
   /**
    * Creates the symbol table starting from the <code>rootNode</code> and
    * returns the first scope that was created.
@@ -28,14 +34,14 @@ public interface AutomatonSymbolTableCreator extends AutomatonVisitor, SymbolTab
    * @param rootNode the root node
    * @return the first scope that was created
    */
-  default Scope createFromAST(ASTAutomatonBase rootNode) {
+  public Scope createFromAST(ASTAutomatonBase rootNode) {
     requireNonNull(rootNode);
     rootNode.accept(this);
     return getFirstCreatedScope();
   }
   
   @Override
-  default void visit(final ASTAutomaton automatonNode) {
+  public void visit(final ASTAutomaton automatonNode) {
     final ArtifactScope artifactScope = new ArtifactScope(Optional.empty(), "", new ArrayList<>());
     putOnStackAndSetEnclosingIfExists(artifactScope);
 
@@ -44,12 +50,12 @@ public interface AutomatonSymbolTableCreator extends AutomatonVisitor, SymbolTab
   }
   
   @Override
-  default void endVisit(final ASTAutomaton automatonNode) {
+  public void endVisit(final ASTAutomaton automatonNode) {
     removeCurrentScope();
   }
   
   @Override
-  default void visit(final ASTState stateNode) {
+  public void visit(final ASTState stateNode) {
     final StateSymbol stateSymbol = new StateSymbol(stateNode.getName());
     
     stateSymbol.setInitial(stateNode.isInitial());
@@ -59,7 +65,7 @@ public interface AutomatonSymbolTableCreator extends AutomatonVisitor, SymbolTab
   }
   
   @Override
-  default void visit(final ASTTransition transitionNode) {
+  public void visit(final ASTTransition transitionNode) {
     final StateSymbolReference fromState =
         new StateSymbolReference(transitionNode.getFrom(), currentScope().get());
     final StateSymbolReference toState =

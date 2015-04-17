@@ -5,22 +5,20 @@
  */
 package lang;
 
-import java.util.Optional;
-
-import javax.annotation.Nullable;
-
-import symboltable.AutomatonModelLoader;
-import symboltable.AutomatonSymbol;
-import symboltable.AutomatonSymbolTableCreator;
-import symboltable.CommonAutomatonSymbolTableCreator;
-import symboltable.StateSymbol;
-import symboltable.TransitionSymbol;
 import _parser.AutomatonMCParser;
 import _parser.AutomatonParserFactory;
 import de.monticore.AbstractModelingLanguage;
 import de.monticore.symboltable.MutableScope;
 import de.monticore.symboltable.ResolverConfiguration;
 import de.monticore.symboltable.resolving.CommonResolvingFilter;
+import symboltable.AutomatonModelLoader;
+import symboltable.AutomatonSymbol;
+import symboltable.AutomatonSymbolTableCreator;
+import symboltable.StateSymbol;
+import symboltable.TransitionSymbol;
+
+import javax.annotation.Nullable;
+import java.util.Optional;
 
 public class AutomatonLanguage extends AbstractModelingLanguage {
   public static final String FILE_ENDING = "aut";
@@ -42,7 +40,7 @@ public class AutomatonLanguage extends AbstractModelingLanguage {
   public Optional<AutomatonSymbolTableCreator> getSymbolTableCreator(
       ResolverConfiguration resolverConfiguration, @Nullable MutableScope enclosingScope) {
     return Optional
-        .of(new CommonAutomatonSymbolTableCreator(resolverConfiguration, enclosingScope));
+        .of(new AutomatonSymbolTableCreator(resolverConfiguration, enclosingScope));
   }
   
   @Override
