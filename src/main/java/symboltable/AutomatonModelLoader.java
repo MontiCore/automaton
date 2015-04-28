@@ -27,7 +27,7 @@ public class AutomatonModelLoader extends ModelingLanguageModelLoader<ASTAutomat
         .getSymbolTableCreator(resolverConfiguration, enclosingScope).orElse(null);
     
     if (symbolTableCreator != null) {
-      Log.info("Start creation of symbol table for model \"" + modelName + "\".",
+      Log.debug("Start creation of symbol table for model \"" + modelName + "\".",
           AutomatonModelLoader.class
               .getSimpleName());
       final Scope scope = symbolTableCreator.createFromAST(ast);
@@ -37,7 +37,7 @@ public class AutomatonModelLoader extends ModelingLanguageModelLoader<ASTAutomat
             + " is scope \"" + scope.getName() + "\"");
       }
       
-      Log.info("Created symbol table for model \"" + modelName + "\".", AutomatonModelLoader.class
+      Log.debug("Created symbol table for model \"" + modelName + "\".", AutomatonModelLoader.class
           .getSimpleName());
     }
     else {
