@@ -5,11 +5,12 @@
  */
 package symboltable;
 
+import de.monticore.symboltable.CommonScopeSpanningSymbol;
+import de.monticore.symboltable.MutableScope;
+import de.monticore.symboltable.SymbolKind;
+
 import java.util.List;
 import java.util.Optional;
-
-import de.monticore.symboltable.CommonScopeSpanningSymbol;
-import de.monticore.symboltable.SymbolKind;
 
 public class AutomatonSymbol extends CommonScopeSpanningSymbol {
   
@@ -18,7 +19,12 @@ public class AutomatonSymbol extends CommonScopeSpanningSymbol {
   public AutomatonSymbol(final String name) {
     super(name, KIND);
   }
-  
+
+  @Override
+  protected MutableScope createSpannedScope() {
+    return new AutomatonScope(Optional.empty());
+  }
+
   public Optional<StateSymbol> getState(final String name) {
     return getSpannedScope().resolveLocally(name, StateSymbol.KIND);
   }
