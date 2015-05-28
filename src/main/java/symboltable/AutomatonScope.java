@@ -13,6 +13,6 @@ import java.util.Optional;
 public class AutomatonScope extends CommonScope {
 
   public AutomatonScope(Optional<MutableScope> enclosingScope) {
-    super(enclosingScope);
+    super(enclosingScope, true);
   }
 }

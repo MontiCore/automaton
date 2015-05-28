@@ -36,7 +36,6 @@ public class AutomatonSymbolTableCreatorTest {
         resolverConfiguration);
   }
 
-  @Ignore("Fixed for (at least) MC 4.1.2-SNAPSHOT")
   @Test
   public void testAutomatonSymbolTableCreation() {
     final AutomatonSymbol automatonSymbol =
