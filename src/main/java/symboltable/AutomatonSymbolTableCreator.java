@@ -5,6 +5,11 @@
  */
 package symboltable;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.ArrayList;
+import java.util.Optional;
+
 import _ast.ASTAutomaton;
 import _ast.ASTAutomatonBase;
 import _ast.ASTState;
@@ -15,11 +20,6 @@ import de.monticore.symboltable.CommonSymbolTableCreator;
 import de.monticore.symboltable.MutableScope;
 import de.monticore.symboltable.ResolverConfiguration;
 import de.monticore.symboltable.Scope;
-
-import java.util.ArrayList;
-import java.util.Optional;
-
-import static java.util.Objects.requireNonNull;
 
 public class AutomatonSymbolTableCreator extends CommonSymbolTableCreator implements AutomatonVisitor {
 
@@ -36,15 +36,17 @@ public class AutomatonSymbolTableCreator extends CommonSymbolTableCreator implem
    */
   public Scope createFromAST(ASTAutomatonBase rootNode) {
     requireNonNull(rootNode);
+
+    final ArtifactScope artifactScope = new ArtifactScope(Optional.empty(), "", new ArrayList<>());
+    putOnStackAndSetEnclosingIfExists(artifactScope);
+
     rootNode.accept(this);
-    return getFirstCreatedScope();
+
+    return artifactScope;
   }
   
   @Override
   public void visit(final ASTAutomaton automatonNode) {
-    final ArtifactScope artifactScope = new ArtifactScope(Optional.empty(), "", new ArrayList<>());
-    putOnStackAndSetEnclosingIfExists(artifactScope);
-
     final AutomatonSymbol automaton = new AutomatonSymbol(automatonNode.getName());
     defineInScopeAndLinkWithAst(automaton, automatonNode);
   }
