@@ -32,10 +32,6 @@ public class AutomatonSymbol extends CommonScopeSpanningSymbol {
     return getSpannedScope().resolveLocally(StateSymbol.KIND);
   }
   
-  public List<TransitionSymbol> getTransitions() {
-    return getSpannedScope().resolveLocally(TransitionSymbol.KIND);
-  }
-  
   static final class AutomatonKind extends SymbolKind {
     AutomatonKind() {
     }

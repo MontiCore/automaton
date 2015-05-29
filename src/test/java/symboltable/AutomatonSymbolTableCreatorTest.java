@@ -5,18 +5,21 @@
  */
 package symboltable;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
+
+import java.nio.file.Paths;
+
 import de.monticore.io.paths.ModelPath;
 import de.monticore.symboltable.GlobalScope;
 import de.monticore.symboltable.ResolverConfiguration;
 import de.monticore.symboltable.Scope;
 import lang.AutomatonLanguage;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
-
-import java.nio.file.Paths;
-
-import static org.junit.Assert.*;
 
 public class AutomatonSymbolTableCreatorTest {
   
@@ -45,7 +48,6 @@ public class AutomatonSymbolTableCreatorTest {
     assertEquals("PingPong", automatonSymbol.getName());
     assertEquals("PingPong", automatonSymbol.getFullName());
     assertEquals(3, automatonSymbol.getStates().size());
-    assertEquals(5, automatonSymbol.getTransitions().size());
     assertSame(automatonSymbol, automatonSymbol.getAstNode().get().getSymbol().get());
     assertSame(automatonSymbol.getEnclosingScope(), automatonSymbol.getAstNode().get()
         .getEnclosingScope().get());
@@ -69,17 +71,6 @@ public class AutomatonSymbolTableCreatorTest {
     assertEquals("Pong", pongState.getName());
     assertFalse(pongState.isInitial());
     assertFalse(pongState.isFinal());
-    
-    final TransitionSymbol noGame2Ping = automatonSymbol.getTransitions().get(0);
-    assertEquals("startGame", noGame2Ping.getActivate());
-    assertEquals("NoGame", noGame2Ping.getFrom().getName());
-    assertTrue(noGame2Ping.getFrom().isInitial());
-    assertEquals("Ping", noGame2Ping.getTo().getName());
-    assertFalse(noGame2Ping.getTo().isInitial());
-    
-    // Test reference
-    final StateSymbolReference fromReference = (StateSymbolReference) noGame2Ping.getFrom();
-    assertSame(noGameState, fromReference.getReferencedSymbol());
     
   }
   

@@ -5,6 +5,9 @@
  */
 package lang;
 
+import javax.annotation.Nullable;
+import java.util.Optional;
+
 import _parser.AutomatonMCParser;
 import _parser.AutomatonParserFactory;
 import de.monticore.AbstractModelingLanguage;
@@ -15,10 +18,6 @@ import symboltable.AutomatonModelLoader;
 import symboltable.AutomatonSymbol;
 import symboltable.AutomatonSymbolTableCreator;
 import symboltable.StateSymbol;
-import symboltable.TransitionSymbol;
-
-import javax.annotation.Nullable;
-import java.util.Optional;
 
 public class AutomatonLanguage extends AbstractModelingLanguage {
   public static final String FILE_ENDING = "aut";
@@ -28,7 +27,6 @@ public class AutomatonLanguage extends AbstractModelingLanguage {
     
     addResolver(CommonResolvingFilter.create(AutomatonSymbol.class, AutomatonSymbol.KIND));
     addResolver(CommonResolvingFilter.create(StateSymbol.class, StateSymbol.KIND));
-    addResolver(CommonResolvingFilter.create(TransitionSymbol.class, TransitionSymbol.KIND));
   }
   
   @Override

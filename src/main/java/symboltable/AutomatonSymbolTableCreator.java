@@ -68,15 +68,6 @@ public class AutomatonSymbolTableCreator extends CommonSymbolTableCreator implem
   
   @Override
   public void visit(final ASTTransition transitionNode) {
-    final StateSymbolReference fromState =
-        new StateSymbolReference(transitionNode.getFrom(), currentScope().get());
-    final StateSymbolReference toState =
-        new StateSymbolReference(transitionNode.getTo(), currentScope().get());
-    
-    // TODO PN What is the name of a transition?
-    final TransitionSymbol transitionSymbol =
-        new TransitionSymbol(transitionNode.getInput(), fromState, toState);
-
-    defineInScopeAndLinkWithAst(transitionSymbol, transitionNode);
+    transitionNode.setEnclosingScope(currentScope().get());
   }
 }
