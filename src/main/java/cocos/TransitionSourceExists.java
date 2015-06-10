@@ -15,7 +15,7 @@ import _cocos.AutomatonASTTransitionCoCo;
 import de.monticore.cocos.CoCoLog;
 import de.monticore.symboltable.Scope;
 
-public class ExistingTransitionSource implements AutomatonASTTransitionCoCo {
+public class TransitionSourceExists implements AutomatonASTTransitionCoCo {
   public static final String ERROR_CODE = "0xAUT03";
   
   public static final String ERROR_MSG_FORMAT =

@@ -36,7 +36,7 @@ import de.monticore.symboltable.GlobalScope;
 import de.monticore.symboltable.ResolverConfiguration;
 import de.monticore.symboltable.Scope;
 
-public class ExistingTransitionSourceTest extends AbstractTest {
+public class TransitionSourceExistsTest extends AbstractTest {
   
   @BeforeClass
   public static void init() {
@@ -83,12 +83,12 @@ public class ExistingTransitionSourceTest extends AbstractTest {
     
     ASTTransition transition = ast.getTransitions().get(0);
     
-    ExistingTransitionSource coco = new ExistingTransitionSource();
+    TransitionSourceExists coco = new TransitionSourceExists();
     coco.check(transition);
     
     Collection<CoCoFinding> expectedErrors = Arrays.asList(
-        CoCoFinding.error(ExistingTransitionSource.ERROR_CODE,
-            ExistingTransitionSource.ERROR_MSG_FORMAT, new SourcePosition(4, 2))
+        CoCoFinding.error(TransitionSourceExists.ERROR_CODE,
+            TransitionSourceExists.ERROR_MSG_FORMAT, new SourcePosition(4, 2))
         );
     
     Assert.assertErrors(expectedErrors, CoCoLog.getFindings());

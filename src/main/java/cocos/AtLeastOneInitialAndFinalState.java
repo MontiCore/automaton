@@ -11,7 +11,7 @@ import _cocos.AutomatonASTAutomatonCoCo;
 import de.monticore.cocos.CoCoLog;
 
 public class AtLeastOneInitialAndFinalState implements AutomatonASTAutomatonCoCo {
-  public static final String ERROR_CODE = "0xAUT01";
+  public static final String ERROR_CODE = "0xA0114";
   
   public static final String ERROR_MSG_FORMAT =
       "An automaton must have at least one initial and one final state.";

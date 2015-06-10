@@ -20,7 +20,7 @@ import _cocos.AutomatonCoCoChecker;
 import _parser.AutomatonMCParser;
 import cocos.AtLeastOneInitialAndFinalState;
 import cocos.AutomatonCoCos;
-import cocos.ExistingTransitionSource;
+import cocos.TransitionSourceExists;
 import cocos.StateNameStartsWithCapitalLetter;
 import de.monticore.io.paths.ModelPath;
 import de.monticore.symboltable.GlobalScope;
@@ -130,7 +130,7 @@ public class AutomatonTool {
   
   /**
    * Run the default context conditions {@link AtLeastOneInitialAndFinalState},
-   * {@link ExistingTransitionSource}, and
+   * {@link TransitionSourceExists}, and
    * {@link StateNameStartsWithCapitalLetter}.
    * 
    * @param ast

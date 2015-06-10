@@ -14,7 +14,7 @@ public class AutomatonCoCos {
     checker.addCoCo(new AtLeastOneInitialAndFinalState());
     checker.addCoCo(new StateNameStartsWithCapitalLetter());
     // TODO PN uncomment
-    // checker.addCoCo(new ExistingTransitionSource());
+    // checker.addCoCo(new TransitionSourceExists());
     
     return checker;
   }
