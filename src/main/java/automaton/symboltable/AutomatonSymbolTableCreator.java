@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 import automaton._ast.ASTAutomaton;
-import automaton._ast.ASTAutomatonBase;
 import automaton._ast.ASTState;
 import automaton._ast.ASTTransition;
 import automaton._visitor.AutomatonVisitor;
@@ -37,7 +36,7 @@ public class AutomatonSymbolTableCreator extends CommonSymbolTableCreator implem
    * @param rootNode the root node
    * @return the first scope that was created
    */
-  public Scope createFromAST(ASTAutomatonBase rootNode) {
+  public Scope createFromAST(ASTAutomaton rootNode) {
     requireNonNull(rootNode);
     
     final ArtifactScope artifactScope = new ArtifactScope(Optional.empty(), "", new ArrayList<>());

@@ -53,4 +53,9 @@ public class StateSymbolReference extends StateSymbol implements SymbolReference
   public boolean isFinal() {
     return getReferencedSymbol().isFinal();
   }
+  
+  @Override
+  public boolean isReferencedSymbolLoaded() {
+    return reference.isReferencedSymbolLoaded();
+  }
 }
