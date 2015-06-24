@@ -10,6 +10,7 @@ import java.util.Optional;
 
 import de.monticore.symboltable.CommonScopeSpanningSymbol;
 import de.monticore.symboltable.SymbolKind;
+import static de.monticore.symboltable.Symbols.sortSymbolsByPosition;
 
 public class AutomatonSymbol extends CommonScopeSpanningSymbol {
   
@@ -29,7 +30,7 @@ public class AutomatonSymbol extends CommonScopeSpanningSymbol {
   }
   
   public List<StateSymbol> getStates() {
-    return getSpannedScope().resolveLocally(StateSymbol.KIND);
+    return sortSymbolsByPosition(getSpannedScope().resolveLocally(StateSymbol.KIND));
   }
   
   static final class AutomatonKind extends SymbolKind {
