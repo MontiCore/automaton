@@ -10,8 +10,8 @@ import static com.google.common.base.Preconditions.checkArgument;
 import java.util.Optional;
 
 import automaton._ast.ASTTransition;
-import automaton.symboltable.StateSymbol;
 import automaton._cocos.AutomatonASTTransitionCoCo;
+import automaton._symboltable.StateSymbol;
 import de.monticore.cocos.CoCoLog;
 import de.monticore.symboltable.Scope;
 

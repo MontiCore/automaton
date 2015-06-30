@@ -13,17 +13,15 @@ import static org.junit.Assert.assertTrue;
 
 import java.nio.file.Paths;
 
+import automaton._symboltable.AutomatonLanguage;
+import automaton._symboltable.AutomatonSymbol;
+import automaton._symboltable.StateSymbol;
 import de.monticore.io.paths.ModelPath;
 import de.monticore.symboltable.GlobalScope;
 import de.monticore.symboltable.ResolverConfiguration;
 import de.monticore.symboltable.Scope;
-import automaton.lang.AutomatonLanguage;
-
 import org.junit.Before;
 import org.junit.Test;
-
-import automaton.symboltable.AutomatonSymbol;
-import automaton.symboltable.StateSymbol;
 
 public class AutomatonSymbolTableCreatorTest {
   

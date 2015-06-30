@@ -13,20 +13,13 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Optional;
 
-import mc.ast.SourcePosition;
-
-import org.antlr.v4.runtime.RecognitionException;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import automaton._ast.ASTAutomaton;
 import automaton._ast.ASTTransition;
 import automaton._cocos.AutomatonCoCoChecker;
+import automaton._symboltable.AutomatonLanguage;
+import automaton._symboltable.AutomatonSymbol;
+import automaton._symboltable.AutomatonSymbolTableCreator;
 import automaton.lang.AbstractTest;
-import automaton.lang.AutomatonLanguage;
-import automaton.symboltable.AutomatonSymbol;
-import automaton.symboltable.AutomatonSymbolTableCreator;
 import de.monticore.ModelingLanguage;
 import de.monticore.cocos.CoCoFinding;
 import de.monticore.cocos.CoCoLog;
@@ -35,6 +28,11 @@ import de.monticore.io.paths.ModelPath;
 import de.monticore.symboltable.GlobalScope;
 import de.monticore.symboltable.ResolverConfiguration;
 import de.monticore.symboltable.Scope;
+import mc.ast.SourcePosition;
+import org.antlr.v4.runtime.RecognitionException;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class TransitionSourceExistsTest extends AbstractTest {
   
