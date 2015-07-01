@@ -8,7 +8,7 @@ package automaton._symboltable;
 import java.util.Optional;
 
 public class AutomatonSymbol extends AutomatonSymbolTOP {
-  
+
   public AutomatonSymbol(final String name) {
     super(name);
   }
@@ -21,5 +21,5 @@ public class AutomatonSymbol extends AutomatonSymbolTOP {
   public Optional<StateSymbol> getState(final String name) {
     return getSpannedScope().resolveLocally(name, StateSymbol.KIND);
   }
-  
+
 }
