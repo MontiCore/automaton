@@ -12,14 +12,10 @@ import java.util.Optional;
 import automaton._ast.ASTTransition;
 import automaton._cocos.AutomatonASTTransitionCoCo;
 import automaton._symboltable.StateSymbol;
-import de.monticore.cocos.CoCoLog;
 import de.monticore.symboltable.Scope;
+import de.se_rwth.commons.logging.Log;
 
 public class TransitionSourceExists implements AutomatonASTTransitionCoCo {
-  public static final String ERROR_CODE = "0xAUT03";
-  
-  public static final String ERROR_MSG_FORMAT =
-      "The source state of the transition does not exist.";
   
   @Override
   public void check(ASTTransition node) {
@@ -30,7 +26,8 @@ public class TransitionSourceExists implements AutomatonASTTransitionCoCo {
     
     if (!sourceState.isPresent()) {
       // Issue error...
-      CoCoLog.error(ERROR_CODE, ERROR_MSG_FORMAT, node.get_SourcePositionStart());
+      Log.error("0xAUT03 The source state of the transition does not exist.",
+          node.get_SourcePositionStart());
     }
   }
 }

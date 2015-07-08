@@ -11,8 +11,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 
-import mc.ast.SourcePosition;
-
 import org.antlr.v4.runtime.RecognitionException;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -20,20 +18,21 @@ import org.junit.Test;
 
 import automaton._ast.ASTAutomaton;
 import automaton.lang.AbstractTest;
-import de.monticore.cocos.CoCoFinding;
-import de.monticore.cocos.CoCoLog;
 import de.monticore.cocos.helper.Assert;
+import de.se_rwth.commons.SourcePosition;
+import de.se_rwth.commons.logging.Finding;
+import de.se_rwth.commons.logging.Log;
 
 public class AtLeastOneInitialAndFinalStateTest extends AbstractTest {
   
   @BeforeClass
   public static void init() {
-    CoCoLog.setDelegateToLog(false);
+    Log.enableFailQuick(false);
   }
   
   @Before
   public void setUp() throws RecognitionException, IOException {
-    CoCoLog.getFindings().clear();
+    Log.getFindings().clear();
   }
   
   @Test
@@ -43,7 +42,7 @@ public class AtLeastOneInitialAndFinalStateTest extends AbstractTest {
     AtLeastOneInitialAndFinalState coco = new AtLeastOneInitialAndFinalState();
     coco.check(automaton);
     
-    assertTrue(CoCoLog.getFindings().isEmpty());
+    assertTrue(Log.getFindings().isEmpty());
   }
   
   @Test
@@ -53,12 +52,12 @@ public class AtLeastOneInitialAndFinalStateTest extends AbstractTest {
     AtLeastOneInitialAndFinalState coco = new AtLeastOneInitialAndFinalState();
     coco.check(automaton);
     
-    Collection<CoCoFinding> expectedErrors = Arrays.asList(
-        CoCoFinding.error(AtLeastOneInitialAndFinalState.ERROR_CODE,
-            AtLeastOneInitialAndFinalState.ERROR_MSG_FORMAT, new SourcePosition(1, 0))
+    Collection<Finding> expectedErrors = Arrays.asList(
+        Finding.error("0xA0114 An automaton must have at least one initial and one final state.",
+            new SourcePosition(1, 0))
         );
     
-    Assert.assertErrors(expectedErrors, CoCoLog.getFindings());
+    Assert.assertErrors(expectedErrors, Log.getFindings());
   }
   
 }

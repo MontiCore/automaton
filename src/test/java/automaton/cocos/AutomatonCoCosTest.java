@@ -9,8 +9,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 
-import mc.ast.SourcePosition;
-
 import org.antlr.v4.runtime.RecognitionException;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -19,20 +17,21 @@ import org.junit.Test;
 import automaton._ast.ASTAutomaton;
 import automaton._cocos.AutomatonCoCoChecker;
 import automaton.lang.AbstractTest;
-import de.monticore.cocos.CoCoFinding;
-import de.monticore.cocos.CoCoLog;
 import de.monticore.cocos.helper.Assert;
+import de.se_rwth.commons.SourcePosition;
+import de.se_rwth.commons.logging.Finding;
+import de.se_rwth.commons.logging.Log;
 
 public class AutomatonCoCosTest extends AbstractTest {
   
   @BeforeClass
   public static void init() {
-    CoCoLog.setDelegateToLog(false);
+    Log.enableFailQuick(false);
   }
   
   @Before
   public void setUp() throws RecognitionException, IOException {
-    CoCoLog.getFindings().clear();
+    Log.getFindings().clear();
   }
   
   @Test
@@ -46,13 +45,11 @@ public class AutomatonCoCosTest extends AbstractTest {
     
     checker.checkAll(ast);
     
-    Collection<CoCoFinding> expectedErrors = Arrays.asList(
-        CoCoFinding.warning(StateNameStartsWithCapitalLetter.ERROR_CODE, String.format(
-            StateNameStartsWithCapitalLetter.ERROR_MSG_FORMAT,
-            "notCapital")
+    Collection<Finding> expectedErrors = Arrays.asList(
+        Finding.warning("0xAUT02 State name 'notCapital' should start with a capital letter."
             , new SourcePosition(3, 2))
         );
-    Assert.assertErrors(expectedErrors, CoCoLog.getFindings());
+    Assert.assertErrors(expectedErrors, Log.getFindings());
   }
   
   @Test
@@ -62,14 +59,12 @@ public class AutomatonCoCosTest extends AbstractTest {
     AutomatonCoCoChecker checker = new AutomatonCoCos().getCheckerForAllCoCos();
     checker.checkAll(automaton);
     
-    Collection<CoCoFinding> expectedErrors = Arrays.asList(
-        CoCoFinding.warning(StateNameStartsWithCapitalLetter.ERROR_CODE, String.format(
-            StateNameStartsWithCapitalLetter.ERROR_MSG_FORMAT,
-            "notCapital")
+    Collection<Finding> expectedErrors = Arrays.asList(
+        Finding.warning("0xAUT02 State name 'notCapital' should start with a capital letter."
             , new SourcePosition(3, 2))
         );
     
-    Assert.assertErrors(expectedErrors, CoCoLog.getFindings());
+    Assert.assertErrors(expectedErrors, Log.getFindings());
   }
   
 }

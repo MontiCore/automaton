@@ -8,13 +8,9 @@ package automaton.cocos;
 import automaton._ast.ASTAutomaton;
 import automaton._ast.ASTState;
 import automaton._cocos.AutomatonASTAutomatonCoCo;
-import de.monticore.cocos.CoCoLog;
+import de.se_rwth.commons.logging.Log;
 
 public class AtLeastOneInitialAndFinalState implements AutomatonASTAutomatonCoCo {
-  public static final String ERROR_CODE = "0xA0114";
-  
-  public static final String ERROR_MSG_FORMAT =
-      "An automaton must have at least one initial and one final state.";
   
   @Override
   public void check(ASTAutomaton automaton) {
@@ -32,7 +28,8 @@ public class AtLeastOneInitialAndFinalState implements AutomatonASTAutomatonCoCo
     
     if (!initialState || !finalState) {
       // Issue error...
-      CoCoLog.error(ERROR_CODE, ERROR_MSG_FORMAT, automaton.get_SourcePositionStart());
+      Log.error("0xA0114 An automaton must have at least one initial and one final state.",
+          automaton.get_SourcePositionStart());
     }
   }
   

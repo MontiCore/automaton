@@ -7,13 +7,9 @@ package automaton.cocos;
 
 import automaton._ast.ASTState;
 import automaton._cocos.AutomatonASTStateCoCo;
-import de.monticore.cocos.CoCoLog;
+import de.se_rwth.commons.logging.Log;
 
 public class StateNameStartsWithCapitalLetter implements AutomatonASTStateCoCo {
-  public static final String ERROR_CODE = "0xAUT02";
-  
-  public static final String ERROR_MSG_FORMAT =
-      "State name '%s' should start with a capital letter.";
   
   @Override
   public void check(ASTState state) {
@@ -22,7 +18,8 @@ public class StateNameStartsWithCapitalLetter implements AutomatonASTStateCoCo {
     
     if (!startsWithUpperCase) {
       // Issue warning...
-      CoCoLog.warn(ERROR_CODE, String.format(ERROR_MSG_FORMAT, stateName),
+      Log.warn(
+          String.format("0xAUT02 State name '%s' should start with a capital letter.", stateName),
           state.get_SourcePositionStart());
     }
   }
