@@ -230,6 +230,46 @@
     </dependency>
   </dependencies>
 
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>de.monticore.mojo</groupId>
+        <artifactId>monticore-maven-plugin</artifactId>
+        <version>${monticore.version}</version>
+        <inherited>false</inherited>
+        <configuration>
+          <skipDefaultScripts>true</skipDefaultScripts>
+          <additionalOutputs>
+            <additionalOutput>Automaton/01_Summary.txt</additionalOutput>
+            <additionalOutput>Automaton/02_GeneratedFiles.txt</additionalOutput>
+            <additionalOutput>Automaton/03_HandwrittenCodeFiles.txt</additionalOutput>
+            <additionalOutput>Automaton/04_Templates.txt</additionalOutput>
+            <additionalOutput>Automaton/05_HookPoint.txt</additionalOutput>
+            <additionalOutput>Automaton/06_Instantiations.txt</additionalOutput>
+            <additionalOutput>Automaton/07_Variables.txt</additionalOutput>
+            <additionalOutput>Automaton/08_Detailed.txt</additionalOutput>
+            <additionalOutput>Automaton/09_TemplateTree.txt</additionalOutput>
+            <additionalOutput>Automaton/10_NodeTree.txt</additionalOutput>
+            <additionalOutput>Automaton/11_NodeTreeDecorated.txt</additionalOutput>
+            <additionalOutput>Automaton/12_TypesOfNodes.txt</additionalOutput>
+            <additionalOutput>Automaton/13_SymbolTable.txt</additionalOutput>
+            <additionalOutput>Automaton/14_Transformations.txt</additionalOutput>
+            <additionalOutput>Automaton/15_ArtifactGml.gml</additionalOutput>
+            <additionalOutput>Automaton/16_ArtifactGv.gv</additionalOutput>
+            <additionalOutput>Automaton/17_InputOutputFiles.txt</additionalOutput>
+          </additionalOutputs>
+        </configuration>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>script-report</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+    </plugins>
+  </reporting>
+
   <!-- == DISTRIBUTION ==================================================== -->
 
   <distributionManagement>
