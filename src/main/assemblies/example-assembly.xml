@@ -10,15 +10,16 @@
       <outputDirectory>src</outputDirectory>
       <directory>src/main/java</directory>
       <excludes>
-        <exclude>automaton/_ast/ASTState.java</exclude>
+        <exclude>automaton/_ast/</exclude>
+        <exclude>automaton/_symboltable/</exclude>
       </excludes>
-
     </fileSet>
     <fileSet>
       <outputDirectory>hwc</outputDirectory>
       <directory>src/main/java</directory>
       <includes>
-        <include>automaton/_ast/ASTState.java</include>
+        <include>automaton/_ast/</include>
+        <include>automaton/_symboltable/</include>
       </includes>
     </fileSet>
     <fileSet>
