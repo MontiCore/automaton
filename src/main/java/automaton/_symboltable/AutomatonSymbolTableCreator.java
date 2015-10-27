@@ -41,7 +41,7 @@ public class AutomatonSymbolTableCreator extends AutomatonSymbolTableCreatorTOP 
   @Override
   public void visit(final ASTAutomaton automatonNode) {
     final AutomatonSymbol automaton = new AutomatonSymbol(automatonNode.getName());
-    putInScopeAndLinkWithAst(automaton, automatonNode);
+    addToScopeAndLinkWithNode(automaton, automatonNode);
   }
   
   @Override
@@ -56,7 +56,7 @@ public class AutomatonSymbolTableCreator extends AutomatonSymbolTableCreatorTOP 
     stateSymbol.setInitial(stateNode.isInitial());
     stateSymbol.setFinal(stateNode.isFinal());
 
-    putInScopeAndLinkWithAst(stateSymbol, stateNode);
+    addToScopeAndLinkWithNode(stateSymbol, stateNode);
   }
 
   @Override
