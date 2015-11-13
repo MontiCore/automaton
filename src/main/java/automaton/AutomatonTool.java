@@ -9,9 +9,11 @@ package automaton;
 import java.io.IOException;
 import java.util.Optional;
 
+import org.antlr.v4.runtime.RecognitionException;
+
 import automaton._ast.ASTAutomaton;
 import automaton._cocos.AutomatonCoCoChecker;
-import automaton._parser.AutomatonMCParser;
+import automaton._parser.AutomatonParser;
 import automaton._symboltable.AutomatonLanguage;
 import automaton._symboltable.AutomatonSymbolTableCreator;
 import automaton._symboltable.StateSymbol;
@@ -27,7 +29,6 @@ import de.monticore.symboltable.ResolverConfiguration;
 import de.monticore.symboltable.Scope;
 import de.monticore.symboltable.Symbol;
 import de.se_rwth.commons.logging.Log;
-import org.antlr.v4.runtime.RecognitionException;
 
 /**
  * Main class for the Automaton DSL tool.
@@ -55,7 +56,7 @@ public class AutomatonTool {
     final AutomatonLanguage lang = new AutomatonLanguage();
     
     // parse the model and create the AST representation
-    final ASTAutomaton ast = parse(model, lang.getParser());
+    final ASTAutomaton ast = parse(model);
     Log.info(model + " parsed successfully!", AutomatonTool.class.getName());
     
     // setup the symbol table
@@ -94,8 +95,9 @@ public class AutomatonTool {
    * @param parser
    * @return
    */
-  public static ASTAutomaton parse(String model, AutomatonMCParser parser) {
+  public static ASTAutomaton parse(String model) {
     try {
+      AutomatonParser parser = new AutomatonParser() ;
       Optional<ASTAutomaton> optAutomaton = parser.parse(model);
       
       if (!parser.hasErrors() && optAutomaton.isPresent()) {
