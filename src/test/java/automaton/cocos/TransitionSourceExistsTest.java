@@ -13,11 +13,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Optional;
 
-import org.antlr.v4.runtime.RecognitionException;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import automaton._ast.ASTAutomaton;
 import automaton._ast.ASTTransition;
 import automaton._cocos.AutomatonCoCoChecker;
@@ -34,6 +29,10 @@ import de.monticore.symboltable.Scope;
 import de.se_rwth.commons.SourcePosition;
 import de.se_rwth.commons.logging.Finding;
 import de.se_rwth.commons.logging.Log;
+import org.antlr.v4.runtime.RecognitionException;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class TransitionSourceExistsTest extends AbstractTest {
   
@@ -53,7 +52,7 @@ public class TransitionSourceExistsTest extends AbstractTest {
     ModelingLanguage language = new AutomatonLanguage();
     ResolverConfiguration resolverConfiguration = new ResolverConfiguration();
     resolverConfiguration.addTopScopeResolvers(language.getResolvers());
-    Scope globalScope = new GlobalScope(modelPath, language.getModelLoader(), resolverConfiguration);
+    Scope globalScope = new GlobalScope(modelPath, language, resolverConfiguration);
     
     Optional<AutomatonSymbol> automatonSymbol = globalScope.resolve("A", AutomatonSymbol.KIND);
     assertTrue(automatonSymbol.isPresent());
@@ -71,8 +70,7 @@ public class TransitionSourceExistsTest extends AbstractTest {
     AutomatonLanguage language = new AutomatonLanguage();
     ResolverConfiguration resolverConfiguration = new ResolverConfiguration();
     resolverConfiguration.addTopScopeResolvers(language.getResolvers());
-    GlobalScope globalScope = new GlobalScope(modelPath, language.getModelLoader(),
-        resolverConfiguration);
+    GlobalScope globalScope = new GlobalScope(modelPath, language, resolverConfiguration);
     
     ASTAutomaton ast = parseModel("src/test/resources/automaton/cocos/invalid/NotExistingTransitionSource.aut");
     

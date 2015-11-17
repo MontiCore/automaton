@@ -9,8 +9,6 @@ package automaton;
 import java.io.IOException;
 import java.util.Optional;
 
-import org.antlr.v4.runtime.RecognitionException;
-
 import automaton._ast.ASTAutomaton;
 import automaton._cocos.AutomatonCoCoChecker;
 import automaton._parser.AutomatonParser;
@@ -29,6 +27,7 @@ import de.monticore.symboltable.ResolverConfiguration;
 import de.monticore.symboltable.Scope;
 import de.monticore.symboltable.Symbol;
 import de.se_rwth.commons.logging.Log;
+import org.antlr.v4.runtime.RecognitionException;
 
 /**
  * Main class for the Automaton DSL tool.
@@ -92,7 +91,6 @@ public class AutomatonTool {
    * Parse the model contained in the specified file.
    * 
    * @param model - file to parse
-   * @param parser
    * @return
    */
   public static ASTAutomaton parse(String model) {
@@ -122,8 +120,7 @@ public class AutomatonTool {
     final ResolverConfiguration resolverConfiguration = new ResolverConfiguration();
     resolverConfiguration.addTopScopeResolvers(lang.getResolvers());
     
-    GlobalScope globalScope = new GlobalScope(new ModelPath(), lang.getModelLoader(),
-        resolverConfiguration);
+    GlobalScope globalScope = new GlobalScope(new ModelPath(), lang, resolverConfiguration);
     
     Optional<AutomatonSymbolTableCreator> symbolTable = lang.getSymbolTableCreator(
         resolverConfiguration, globalScope);

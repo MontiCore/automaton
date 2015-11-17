@@ -37,8 +37,7 @@ public class AutomatonSymbolTableCreatorTest {
     final ModelPath modelPath =
         new ModelPath(Paths.get("src/test/resources/automaton/symboltable"));
     
-    globalScope = new GlobalScope(modelPath, automatonLanguage.getModelLoader(),
-        resolverConfiguration);
+    globalScope = new GlobalScope(modelPath, automatonLanguage, resolverConfiguration);
   }
   
   @Test
