@@ -1,8 +1,11 @@
 package automaton._ast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ASTState extends ASTStateTOP {
   
-  protected ASTStateList reachableStates = AutomatonNodeFactory.createASTStateList();
+  protected List<ASTState> reachableStates = new ArrayList<ASTState>();
   
   protected ASTState() {
     super();
@@ -10,8 +13,8 @@ public class ASTState extends ASTStateTOP {
   
   protected ASTState(
       String name,
-      ASTStateList states,
-      ASTTransitionList transitions,
+      List<ASTState> states,
+      List<ASTTransition> transitions,
       boolean r_final,
       boolean initial) {
     super(name, states, transitions, r_final, initial);
@@ -21,11 +24,11 @@ public class ASTState extends ASTStateTOP {
     return reachableStates.contains(s);
   }
   
-  public ASTStateList getReachableStates() {
+  public List<ASTState> getReachableStates() {
     return this.reachableStates;
   }
   
-  public void setReachableStates(ASTStateList reachableStates) {
+  public void setReachableStates(List<ASTState> reachableStates) {
     this.reachableStates = reachableStates;
   }
   
