@@ -15,7 +15,7 @@ public class AutomatonSymbol extends AutomatonSymbolTOP {
 
   @Override
   protected AutomatonScope createSpannedScope() {
-    return new AutomatonScope(Optional.empty());
+    return new AutomatonScope();
   }
 
   public Optional<StateSymbol> getState(final String name) {
