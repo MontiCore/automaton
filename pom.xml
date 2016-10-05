@@ -12,7 +12,7 @@
 
     <!-- .. Libraries ..................................................... -->
 
-    <monticore.version>4.4.2-SNAPSHOT</monticore.version>
+    <monticore.version>4.5.0</monticore.version>
 
     <guava.version>18.0</guava.version>
     <jsr305.version>3.0.0</jsr305.version>
@@ -22,7 +22,7 @@
     <emf.common.version>2.5.0</emf.common.version>
     <emf.ecore.version>2.5.0</emf.ecore.version>
     <emf.ecore.xmi.version>2.5.0</emf.ecore.xmi.version>
-    
+
 
     <!-- .. Plugins ....................................................... -->
 
@@ -164,23 +164,23 @@
   </build>
 
   <dependencies>
-   <!-- EMF dependencies -->
-      <dependency>
-        <groupId>org.mod4j.org.eclipse.emf</groupId>
-        <artifactId>ecore</artifactId>
-        <version>${emf.ecore.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.mod4j.org.eclipse.emf.ecore</groupId>
-        <artifactId>xmi</artifactId>
-        <version>${emf.ecore.xmi.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.mod4j.org.eclipse.emf</groupId>
-        <artifactId>common</artifactId>
-        <version>${emf.common.version}</version>
-      </dependency>
-      
+    <!-- EMF dependencies -->
+    <dependency>
+      <groupId>org.mod4j.org.eclipse.emf</groupId>
+      <artifactId>ecore</artifactId>
+      <version>${emf.ecore.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.mod4j.org.eclipse.emf.ecore</groupId>
+      <artifactId>xmi</artifactId>
+      <version>${emf.ecore.xmi.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.mod4j.org.eclipse.emf</groupId>
+      <artifactId>common</artifactId>
+      <version>${emf.common.version}</version>
+    </dependency>
+
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
@@ -205,11 +205,11 @@
       <artifactId>monticore-runtime</artifactId>
       <version>${monticore.version}</version>
     </dependency>
-    
+
     <dependency>
       <groupId>de.monticore</groupId>
       <artifactId>monticore-emf-runtime</artifactId>
-        <version>${monticore.version}</version>
+      <version>${monticore.version}</version>
     </dependency>
 
     <dependency>
@@ -218,6 +218,19 @@
       <version>${monticore.version}</version>
     </dependency>
 
+    <dependency>
+      <groupId>de.monticore</groupId>
+      <artifactId>de.monticore.java</artifactId>
+      <version>4.3.5</version>
+    </dependency>
+
+     <dependency>
+      <groupId>de.monticore</groupId>
+      <artifactId>de.monticore.java</artifactId>
+      <version>4.3.5</version>
+      <classifier>${grammars.classifier}</classifier>
+    </dependency>
+ 
     <dependency>
       <groupId>de.monticore</groupId>
       <artifactId>monticore-grammar</artifactId>
