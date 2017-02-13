@@ -13,6 +13,11 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Optional;
 
+import org.antlr.v4.runtime.RecognitionException;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 import automaton._ast.ASTAutomaton;
 import automaton._ast.ASTTransition;
 import automaton._cocos.AutomatonCoCoChecker;
@@ -24,15 +29,11 @@ import de.monticore.ModelingLanguage;
 import de.monticore.cocos.helper.Assert;
 import de.monticore.io.paths.ModelPath;
 import de.monticore.symboltable.GlobalScope;
-import de.monticore.symboltable.ResolverConfiguration;
+import de.monticore.symboltable.ResolvingConfiguration;
 import de.monticore.symboltable.Scope;
 import de.se_rwth.commons.SourcePosition;
 import de.se_rwth.commons.logging.Finding;
 import de.se_rwth.commons.logging.Log;
-import org.antlr.v4.runtime.RecognitionException;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
 
 public class TransitionSourceExistsTest extends AbstractTest {
   
@@ -50,7 +51,7 @@ public class TransitionSourceExistsTest extends AbstractTest {
   public void testValid() throws IOException {
     ModelPath modelPath = new ModelPath(Paths.get("src/test/resources/automaton/cocos/valid"));
     ModelingLanguage language = new AutomatonLanguage();
-    ResolverConfiguration resolverConfiguration = new ResolverConfiguration();
+    ResolvingConfiguration resolverConfiguration = new ResolvingConfiguration();
     resolverConfiguration.addTopScopeResolvers(language.getResolvers());
     Scope globalScope = new GlobalScope(modelPath, language, resolverConfiguration);
     
@@ -68,7 +69,7 @@ public class TransitionSourceExistsTest extends AbstractTest {
   public void testNotExistingTransitionSource() throws IOException {
     ModelPath modelPath = new ModelPath(Paths.get("src/test/resources/automaton/cocos/invalid"));
     AutomatonLanguage language = new AutomatonLanguage();
-    ResolverConfiguration resolverConfiguration = new ResolverConfiguration();
+    ResolvingConfiguration resolverConfiguration = new ResolvingConfiguration();
     resolverConfiguration.addTopScopeResolvers(language.getResolvers());
     GlobalScope globalScope = new GlobalScope(modelPath, language, resolverConfiguration);
     

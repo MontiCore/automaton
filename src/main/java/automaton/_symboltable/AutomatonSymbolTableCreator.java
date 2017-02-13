@@ -15,18 +15,17 @@ import automaton._ast.ASTState;
 import automaton._ast.ASTTransition;
 import de.monticore.symboltable.ArtifactScope;
 import de.monticore.symboltable.MutableScope;
-import de.monticore.symboltable.ResolverConfiguration;
+import de.monticore.symboltable.ResolvingConfiguration;
 import de.monticore.symboltable.Scope;
 
 public class AutomatonSymbolTableCreator extends AutomatonSymbolTableCreatorTOP {
   
   public AutomatonSymbolTableCreator(
-      final ResolverConfiguration resolverConfig,
+      final ResolvingConfiguration resolverConfig,
       final MutableScope enclosingScope) {
     super(resolverConfig, enclosingScope);
   }
 
-  @Override
   public Scope createFromAST(ASTAutomaton rootNode) {
       requireNonNull(rootNode);
 

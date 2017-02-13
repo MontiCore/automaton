@@ -13,15 +13,16 @@ import static org.junit.Assert.assertTrue;
 
 import java.nio.file.Paths;
 
+import org.junit.Before;
+import org.junit.Test;
+
 import automaton._symboltable.AutomatonLanguage;
 import automaton._symboltable.AutomatonSymbol;
 import automaton._symboltable.StateSymbol;
 import de.monticore.io.paths.ModelPath;
 import de.monticore.symboltable.GlobalScope;
-import de.monticore.symboltable.ResolverConfiguration;
+import de.monticore.symboltable.ResolvingConfiguration;
 import de.monticore.symboltable.Scope;
-import org.junit.Before;
-import org.junit.Test;
 
 public class AutomatonSymbolTableCreatorTest {
   
@@ -31,7 +32,7 @@ public class AutomatonSymbolTableCreatorTest {
   public void setup() {
     final AutomatonLanguage automatonLanguage = new AutomatonLanguage();
     
-    final ResolverConfiguration resolverConfiguration = new ResolverConfiguration();
+    final ResolvingConfiguration resolverConfiguration = new ResolvingConfiguration();
     resolverConfiguration.addTopScopeResolvers(automatonLanguage.getResolvers());
     
     final ModelPath modelPath =
