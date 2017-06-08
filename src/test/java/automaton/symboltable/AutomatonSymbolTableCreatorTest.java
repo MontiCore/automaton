@@ -6,10 +6,8 @@
 package automaton.symboltable;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
 
 import java.nio.file.Paths;
 
@@ -57,8 +55,6 @@ public class AutomatonSymbolTableCreatorTest {
     final StateSymbol noGameState = automatonSymbol.getState("NoGame").orElse(null);
     assertNotNull(noGameState);
     assertEquals("NoGame", noGameState.getName());
-    assertTrue(noGameState.isInitial());
-    assertFalse(noGameState.isFinal());
     assertSame(noGameState, noGameState.getAstNode().get().getSymbol().get());
     assertSame(noGameState.getEnclosingScope(), noGameState.getAstNode().get().getEnclosingScope()
         .get());
@@ -66,14 +62,10 @@ public class AutomatonSymbolTableCreatorTest {
     final StateSymbol pingState = automatonSymbol.getState("Ping").orElse(null);
     assertNotNull(pingState);
     assertEquals("Ping", pingState.getName());
-    assertFalse(pingState.isInitial());
-    assertFalse(pingState.isFinal());
-    
+     
     final StateSymbol pongState = automatonSymbol.getState("Pong").orElse(null);
     assertNotNull(pongState);
     assertEquals("Pong", pongState.getName());
-    assertFalse(pongState.isInitial());
-    assertFalse(pongState.isFinal());
     
   }
   

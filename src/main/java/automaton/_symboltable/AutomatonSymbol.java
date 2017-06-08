@@ -5,7 +5,9 @@
  */
 package automaton._symboltable;
 
+import java.util.Collection;
 import java.util.Optional;
+import static de.monticore.symboltable.Symbols.sortSymbolsByPosition;
 
 public class AutomatonSymbol extends AutomatonSymbolTOP {
 
@@ -22,4 +24,7 @@ public class AutomatonSymbol extends AutomatonSymbolTOP {
     return getSpannedScope().resolveLocally(name, StateSymbol.KIND);
   }
 
+  public Collection<StateSymbol> getStates() {
+    return sortSymbolsByPosition(getSpannedScope().resolveLocally(StateSymbol.KIND));
+  }
 }
