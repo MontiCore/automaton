@@ -48,8 +48,6 @@ public class AutomatonTool {
       Log.error("Please specify only one single path to the input model.");
       return;
     }
-    Log.info("Automaton DSL Tool", AutomatonTool.class.getName());
-    Log.info("------------------", AutomatonTool.class.getName());
     String model = args[0];
     
     // setup the language infrastructure
@@ -119,7 +117,7 @@ public class AutomatonTool {
    */
   public static Scope createSymbolTable(AutomatonLanguage lang, ASTAutomaton ast) {
     final ResolvingConfiguration resolverConfiguration = new ResolvingConfiguration();
-    resolverConfiguration.addTopScopeResolvers(lang.getResolvers());
+    resolverConfiguration.addDefaultFilters(lang.getResolvers());
     
     GlobalScope globalScope = new GlobalScope(new ModelPath(), lang, resolverConfiguration);
     
