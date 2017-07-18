@@ -1,6 +1,6 @@
 package automaton;
 /*
- * Copyright (c) 2015 RWTH Aachen. All rights reserved.
+ * Copyright (c) 2017 RWTH Aachen. All rights reserved.
  *
  * http://www.se-rwth.de/
  */
