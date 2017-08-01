@@ -168,25 +168,25 @@
 
   <dependencies>
     <!-- EMF dependencies -->
-    <!--  
+    <!--
     <dependency>
       <groupId>org.mod4j.org.eclipse.emf</groupId>
       <artifactId>ecore</artifactId>
       <version>${emf.ecore.version}</version>
     </dependency>
-    
+
     <dependency>
       <groupId>org.mod4j.org.eclipse.emf.ecore</groupId>
       <artifactId>xmi</artifactId>
       <version>${emf.ecore.xmi.version}</version>
     </dependency>
-    
+
     <dependency>
       <groupId>org.mod4j.org.eclipse.emf</groupId>
       <artifactId>common</artifactId>
       <version>${emf.common.version}</version>
     </dependency>
-    
+
     <dependency>
       <groupId>de.monticore</groupId>
       <artifactId>monticore-emf-runtime</artifactId>
@@ -290,5 +290,19 @@
       <url>dav:http://nexus.se.rwth-aachen.de/content/sites/se-sites/monticore/automaton/${project.version}/</url>
     </site>
   </distributionManagement>
+
+  <repositories>
+    <repository>
+      <id>se-nexus</id>
+      <url>https://nexus.se.rwth-aachen.de/content/groups/public/</url>
+    </repository>
+  </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>se-nexus</id>
+      <url>https://nexus.se.rwth-aachen.de/content/groups/public/</url>
+    </pluginRepository>
+  </pluginRepositories>
 
 </project>
