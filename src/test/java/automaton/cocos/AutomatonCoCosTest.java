@@ -47,7 +47,7 @@ public class AutomatonCoCosTest extends AbstractTest {
     
     Collection<Finding> expectedErrors = Arrays.asList(
         Finding.warning("0xAUT02 State name 'notCapital' should start with a capital letter."
-            , new SourcePosition(3, 2))
+            , new SourcePosition(22, 2))
         );
     Assert.assertErrors(expectedErrors, Log.getFindings());
   }
@@ -61,7 +61,7 @@ public class AutomatonCoCosTest extends AbstractTest {
     
     Collection<Finding> expectedErrors = Arrays.asList(
         Finding.warning("0xAUT02 State name 'notCapital' should start with a capital letter."
-            , new SourcePosition(3, 2))
+            , new SourcePosition(22, 2))
         );
     
     Assert.assertErrors(expectedErrors, Log.getFindings());
