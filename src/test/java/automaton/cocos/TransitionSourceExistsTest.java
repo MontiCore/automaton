@@ -79,7 +79,7 @@ public class TransitionSourceExistsTest extends AbstractTest {
         resolverConfiguration, globalScope);
     stc.get().createFromAST(ast);
     
-    ASTTransition transition = ast.getTransitions().get(0);
+    ASTTransition transition = ast.getTransitionList().get(0);
     
     TransitionSourceExists coco = new TransitionSourceExists();
     coco.check(transition);

@@ -56,8 +56,8 @@ public class PrettyPrinter implements AutomatonVisitor {
   @Override
   public void traverse(ASTAutomaton node) {
     // guarantee ordering: states before transitions
-    node.getStates().stream().forEach(s -> s.accept(getRealThis()));
-    node.getTransitions().stream().forEach(t -> t.accept(getRealThis()));
+    node.getStateList().stream().forEach(s -> s.accept(getRealThis()));
+    node.getTransitionList().stream().forEach(t -> t.accept(getRealThis()));
   }
   
   @Override
