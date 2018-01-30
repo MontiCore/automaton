@@ -33,9 +33,8 @@ public class AutomatonParserTest extends AbstractTest {
   public void testState() throws RecognitionException, IOException {
     AutomatonParser parser = new AutomatonParser();
     Optional<ASTState> state = parser.parseState(
-        new StringReader("state Ping;"));
+            new StringReader("state Ping;"));
     assertFalse(parser.hasErrors());
     assertTrue(state.isPresent());
   }
-  
 }
