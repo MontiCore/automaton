@@ -31,7 +31,7 @@ public class AutomatonSymbolTableCreatorTest {
     final AutomatonLanguage automatonLanguage = new AutomatonLanguage();
     
     final ResolvingConfiguration resolverConfiguration = new ResolvingConfiguration();
-    resolverConfiguration.addDefaultFilters(automatonLanguage.getResolvers());
+    resolverConfiguration.addDefaultFilters(automatonLanguage.getResolvingFilters());
     
     final ModelPath modelPath =
         new ModelPath(Paths.get("src/test/resources/automaton/symboltable"));

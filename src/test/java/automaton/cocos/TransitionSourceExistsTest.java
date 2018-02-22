@@ -52,7 +52,7 @@ public class TransitionSourceExistsTest extends AbstractTest {
     ModelPath modelPath = new ModelPath(Paths.get("src/test/resources/automaton/cocos/valid"));
     ModelingLanguage language = new AutomatonLanguage();
     ResolvingConfiguration resolverConfiguration = new ResolvingConfiguration();
-    resolverConfiguration.addDefaultFilters(language.getResolvers());
+    resolverConfiguration.addDefaultFilters(language.getResolvingFilters());
     Scope globalScope = new GlobalScope(modelPath, language, resolverConfiguration);
     
     Optional<AutomatonSymbol> automatonSymbol = globalScope.resolve("A", AutomatonSymbol.KIND);
@@ -70,7 +70,7 @@ public class TransitionSourceExistsTest extends AbstractTest {
     ModelPath modelPath = new ModelPath(Paths.get("src/test/resources/automaton/cocos/invalid"));
     AutomatonLanguage language = new AutomatonLanguage();
     ResolvingConfiguration resolverConfiguration = new ResolvingConfiguration();
-    resolverConfiguration.addDefaultFilters(language.getResolvers());
+    resolverConfiguration.addDefaultFilters(language.getResolvingFilters());
     GlobalScope globalScope = new GlobalScope(modelPath, language, resolverConfiguration);
     
     ASTAutomaton ast = parseModel("src/test/resources/automaton/cocos/invalid/NotExistingTransitionSource.aut");

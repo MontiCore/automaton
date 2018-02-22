@@ -116,7 +116,7 @@ public class AutomatonTool {
    */
   public static Scope createSymbolTable(AutomatonLanguage lang, ASTAutomaton ast) {
     final ResolvingConfiguration resolverConfiguration = new ResolvingConfiguration();
-    resolverConfiguration.addDefaultFilters(lang.getResolvers());
+    resolverConfiguration.addDefaultFilters(lang.getResolvingFilters());
     
     GlobalScope globalScope = new GlobalScope(new ModelPath(), lang, resolverConfiguration);
     
