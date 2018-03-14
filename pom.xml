@@ -12,8 +12,8 @@
 
     <!-- .. Libraries ..................................................... -->
 
-    <monticore.version>4.5.6-SNAPSHOT</monticore.version>
-
+    <monticore.version>5.0.0</monticore.version>
+    
     <guava.version>18.0</guava.version>
     <jsr305.version>3.0.0</jsr305.version>
     <junit.version>4.11</junit.version>
@@ -167,33 +167,7 @@
   </build>
 
   <dependencies>
-    <!-- EMF dependencies -->
-    <!--
-    <dependency>
-      <groupId>org.mod4j.org.eclipse.emf</groupId>
-      <artifactId>ecore</artifactId>
-      <version>${emf.ecore.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.mod4j.org.eclipse.emf.ecore</groupId>
-      <artifactId>xmi</artifactId>
-      <version>${emf.ecore.xmi.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.mod4j.org.eclipse.emf</groupId>
-      <artifactId>common</artifactId>
-      <version>${emf.common.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>de.monticore</groupId>
-      <artifactId>monticore-emf-runtime</artifactId>
-      <version>${monticore.version}</version>
-    </dependency>
-    -->
-    <dependency>
+   <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
       <version>${guava.version}</version>
