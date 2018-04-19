@@ -5,6 +5,7 @@
  */
 package automaton.cocos;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
@@ -42,7 +43,7 @@ public class AtLeastOneInitialAndFinalStateTest extends AbstractTest {
     AtLeastOneInitialAndFinalState coco = new AtLeastOneInitialAndFinalState();
     coco.check(automaton);
     
-    assertTrue(Log.getFindings().isEmpty());
+    assertFalse(Log.getFindings().isEmpty());
   }
   
   @Test
