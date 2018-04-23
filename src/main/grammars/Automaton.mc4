@@ -18,7 +18,7 @@
  */
 
 
-grammar Automaton extends de.monticore.lexicals.Lexicals 
+grammar Automaton extends de.monticore.lexicals.Lexicals {
 
 /** A ASTAutomaton represents a finite automaton
     @attribute name Name of the automaton
