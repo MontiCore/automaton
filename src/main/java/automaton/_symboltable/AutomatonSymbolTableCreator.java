@@ -26,7 +26,7 @@ public class AutomatonSymbolTableCreator extends AutomatonSymbolTableCreatorTOP 
     super(resolverConfig, enclosingScope);
   }
 
-  public Scope createFromAST(ASTAutomaton rootNode) {
+  public ArtifactScope createFromAST(ASTAutomaton rootNode) {
       requireNonNull(rootNode);
 
       final ArtifactScope artifactScope = new ArtifactScope(Optional.empty(), "", new ArrayList<>());

@@ -9,6 +9,7 @@ package automaton;
 import java.io.IOException;
 import java.util.Optional;
 
+import de.monticore.symboltable.*;
 import org.antlr.v4.runtime.RecognitionException;
 
 import automaton._ast.ASTAutomaton;
@@ -24,10 +25,6 @@ import automaton.cocos.TransitionSourceExists;
 import automaton.prettyprint.PrettyPrinter;
 import automaton.visitors.CountStates;
 import de.monticore.io.paths.ModelPath;
-import de.monticore.symboltable.GlobalScope;
-import de.monticore.symboltable.ResolvingConfiguration;
-import de.monticore.symboltable.Scope;
-import de.monticore.symboltable.Symbol;
 import de.se_rwth.commons.logging.Log;
 
 /**
@@ -57,7 +54,11 @@ public class AutomatonTool {
     Log.info(model + " parsed successfully!", AutomatonTool.class.getName());
     
     // setup the symbol table
-    Scope modelTopScope = createSymbolTable(lang, ast);
+    ArtifactScope modelTopScope = createSymbolTable(lang, ast);
+
+    if (lang.getSymbolTableDeserializer().isPresent()) {
+      lang.getSymbolTableDeserializer().get().store(modelTopScope);
+    }
     // can be used for resolving things in the model
     Optional<Symbol> aSymbol = modelTopScope.resolve("Ping", StateSymbol.KIND);
     if (aSymbol.isPresent()) {
@@ -114,7 +115,7 @@ public class AutomatonTool {
    * @param ast
    * @return
    */
-  public static Scope createSymbolTable(AutomatonLanguage lang, ASTAutomaton ast) {
+  public static ArtifactScope createSymbolTable(AutomatonLanguage lang, ASTAutomaton ast) {
     final ResolvingConfiguration resolverConfiguration = new ResolvingConfiguration();
     resolverConfiguration.addDefaultFilters(lang.getResolvingFilters());
     
