@@ -12,7 +12,7 @@
 
     <!-- .. Libraries ..................................................... -->
 
-    <monticore.version>5.0.2-SNAPSHOT</monticore.version>
+    <monticore.version>5.0.3-SNAPSHOT</monticore.version>
     
     <guava.version>18.0</guava.version>
     <jsr305.version>3.0.0</jsr305.version>
@@ -186,6 +186,12 @@
     </dependency>
 
     <!-- MontiCore Dependencies -->
+    <dependency>
+      <groupId>de.monticore</groupId>
+      <artifactId>monticore-generator</artifactId>
+      <version>${monticore.version}</version>
+    </dependency>
+
     <dependency>
       <groupId>de.monticore</groupId>
       <artifactId>monticore-runtime</artifactId>
