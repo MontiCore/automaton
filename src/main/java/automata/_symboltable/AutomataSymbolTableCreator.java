@@ -3,23 +3,23 @@
  *
  * http://www.se-rwth.de/
  */
-package automaton._symboltable;
+package automata._symboltable;
 
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.Optional;
 
-import automaton._ast.ASTAutomaton;
-import automaton._ast.ASTState;
-import automaton._ast.ASTTransition;
+import automata._ast.ASTAutomaton;
+import automata._ast.ASTState;
+import automata._ast.ASTTransition;
 import de.monticore.symboltable.ArtifactScope;
 import de.monticore.symboltable.ResolvingConfiguration;
 import de.monticore.symboltable.Scope;
 
-public class AutomatonSymbolTableCreator extends AutomatonSymbolTableCreatorTOP {
+public class AutomataSymbolTableCreator extends AutomataSymbolTableCreatorTOP {
   
-  public AutomatonSymbolTableCreator(
+  public AutomataSymbolTableCreator(
       final ResolvingConfiguration resolverConfig,
       final Scope enclosingScope) {
     super(resolverConfig, enclosingScope);
