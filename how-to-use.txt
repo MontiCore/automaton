@@ -1,7 +1,7 @@
 
 #
 # This is an informal description of how to use the
-# automaton example from a commandline (under Windows)
+# automata example from a commandline (under Windows)
 # It mimicks the commands from the website
 #		http://www.monticore.de/gettingstarted/
 #
@@ -21,15 +21,15 @@ mv monticore-cli-4*.jar monticore-cli.jar
 java -jar monticore-cli.jar src/main/grammars/Automaton.mc4 -hcp hwc/
 
 # 
-Step 2: Compiling the automaton DSL
+Step 2: Compiling the automata DSL
 #
 javac -cp monticore-cli.jar -sourcepath "src/main/java;out/;hwc/" \
-  src/main/java/automaton/AutomatonTool.java
+  src/main/java/automata/AutomatonTool.java
 
 #
-# Step 3: Running the automaton DSL tool
+# Step 3: Running the automata DSL tool
 #
 java -cp "src/main/java;out/;hwc/;monticore-cli.jar" \
-   automaton.AutomatonTool src/test/resources/automaton/parser/PingPong.aut
+   automata.AutomataTool src/test/resources/automata/parser/PingPong.aut
 
 
