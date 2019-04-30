@@ -21,7 +21,7 @@
 automata PingPong {
   state NoGame <<initial>>;
   state Ping;
-  state Pong <<final>>;
+  state Pong;
 
   NoGame - startGame > Ping;
 

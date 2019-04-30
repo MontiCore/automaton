@@ -17,17 +17,7 @@
  * ******************************************************************************
  */
 
-// The ping pong game
-automata PingPong {
-  state NoGame <<initial>>;
-  state Ping;
-  state Pong <<final>>;
-
-  NoGame - startGame > Ping;
-
-  Ping - stopGame > NoGame;
-  Pong - stopGame > NoGame;
-
-  Ping - returnBall > Pong;
-  Pong - returnBall > Ping;
+automata C {
+  state S  <<initial>> <<final>>;
+  state notCapital;
 }

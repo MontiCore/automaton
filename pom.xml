@@ -125,7 +125,7 @@
         <artifactId>maven-release-plugin</artifactId>
         <version>${release.plugin}</version>
         <configuration>
-          <tagNameFormat>automaton-@{project.version}</tagNameFormat>
+          <tagNameFormat>automata-@{project.version}</tagNameFormat>
         </configuration>
       </plugin>
 
@@ -154,7 +154,7 @@
               </formats>
               <descriptor>src/main/assemblies/example-assembly.xml</descriptor>
             </configuration>
-            <id>automaton-example-assembly</id>
+            <id>automata-example-assembly</id>
             <phase>package</phase>
             <goals>
               <goal>single</goal>
