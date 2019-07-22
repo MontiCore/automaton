@@ -7,22 +7,18 @@ package automata.cocos;
 
 import automata._ast.ASTTransition;
 import automata._cocos.AutomataASTTransitionCoCo;
+import automata._symboltable.IAutomataScope;
 import automata._symboltable.StateSymbol;
-import de.monticore.symboltable.Scope;
 import de.se_rwth.commons.logging.Log;
 
 import java.util.Optional;
-
-import static com.google.common.base.Preconditions.checkArgument;
 
 public class TransitionSourceExists implements AutomataASTTransitionCoCo {
   
   @Override
   public void check(ASTTransition node) {
-    checkArgument(node.isPresentEnclosingScope());
-    
-    Scope enclosingScope = node.getEnclosingScope();
-    Optional<StateSymbol> sourceState = enclosingScope.resolve(node.getFrom(), StateSymbol.KIND);
+    IAutomataScope enclosingScope = node.getEnclosingScope2();
+    Optional<StateSymbol> sourceState = enclosingScope.resolveState(node.getFrom());
     
     if (!sourceState.isPresent()) {
       // Issue error...

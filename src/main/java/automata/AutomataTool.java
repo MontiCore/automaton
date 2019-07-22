@@ -9,17 +9,15 @@ package automata;
 import java.io.IOException;
 import java.util.Optional;
 
-import automata._symboltable.AutomataSymbolTableCreator;
-import automata.cocos.AutomataCoCos;
-import de.monticore.symboltable.*;
+import automata._symboltable.*;
 import org.antlr.v4.runtime.RecognitionException;
 
 import automata._ast.ASTAutomaton;
 import automata._cocos.AutomataCoCoChecker;
 import automata._parser.AutomataParser;
-import automata._symboltable.AutomataLanguage;
-import automata._symboltable.StateSymbol;
+import automata._symboltable.serialization.AutomataScopeDeSer;
 import automata.cocos.AtLeastOneInitialAndFinalState;
+import automata.cocos.AutomataCoCos;
 import automata.cocos.StateNameStartsWithCapitalLetter;
 import automata.cocos.TransitionSourceExists;
 import automata.prettyprint.PrettyPrinter;
@@ -28,15 +26,17 @@ import de.monticore.io.paths.ModelPath;
 import de.se_rwth.commons.logging.Log;
 
 /**
- * Main class for the automata DSL tool.
+ * Main class for the Automaton DSL tool.
  *
  * @author (last commit) $Author$
  */
 public class AutomataTool {
   
+  public static final String DEFAULT_SYMBOL_LOCATION = "target";
+
   /**
    * Use the single argument for specifying the single input automata file.
-   * 
+   *
    * @param args
    */
   public static void main(String[] args) {
@@ -48,19 +48,20 @@ public class AutomataTool {
     
     // setup the language infrastructure
     final AutomataLanguage lang = new AutomataLanguage();
-    
+    final AutomataScopeDeSer deser = new AutomataScopeDeSer();
+
     // parse the model and create the AST representation
     final ASTAutomaton ast = parse(model);
     Log.info(model + " parsed successfully!", AutomataTool.class.getName());
     
     // setup the symbol table
-    ArtifactScope modelTopScope = createSymbolTable(lang, ast);
+    AutomataArtifactScope modelTopScope = createSymbolTable(lang, ast);
 
-    if (lang.getSymbolTableDeserializer().isPresent()) {
-      lang.getSymbolTableDeserializer().get().store(modelTopScope);
-    }
+    // store artifact scope
+    deser.store(modelTopScope,lang, DEFAULT_SYMBOL_LOCATION);
+
     // can be used for resolving things in the model
-    Optional<Symbol> aSymbol = modelTopScope.resolve("Ping", StateSymbol.KIND);
+    Optional<StateSymbol> aSymbol = modelTopScope.resolveState("Ping");
     if (aSymbol.isPresent()) {
       Log.info("Resolved state symbol \"Ping\"; FQN = " + aSymbol.get().toString(),
           AutomataTool.class.getName());
@@ -88,7 +89,7 @@ public class AutomataTool {
   
   /**
    * Parse the model contained in the specified file.
-   * 
+   *
    * @param model - file to parse
    * @return
    */
@@ -110,27 +111,24 @@ public class AutomataTool {
   
   /**
    * Create the symbol table from the parsed AST.
-   * 
+   *
    * @param lang
    * @param ast
    * @return
    */
-  public static ArtifactScope createSymbolTable(AutomataLanguage lang, ASTAutomaton ast) {
-    final ResolvingConfiguration resolverConfiguration = new ResolvingConfiguration();
-    resolverConfiguration.addDefaultFilters(lang.getResolvingFilters());
+  public static AutomataArtifactScope createSymbolTable(AutomataLanguage lang, ASTAutomaton ast) {
     
-    GlobalScope globalScope = new GlobalScope(new ModelPath(), lang, resolverConfiguration);
+    AutomataGlobalScope globalScope = new AutomataGlobalScope(new ModelPath(), lang);
     
-    Optional<AutomataSymbolTableCreator> symbolTable = lang.getSymbolTableCreator(
-        resolverConfiguration, globalScope);
-    return symbolTable.get().createFromAST(ast);
+    AutomataSymbolTableCreatorDelegator symbolTable = lang.getSymbolTableCreator(globalScope);
+    return symbolTable.createFromAST(ast);
   }
   
   /**
    * Run the default context conditions {@link AtLeastOneInitialAndFinalState},
    * {@link TransitionSourceExists}, and
    * {@link StateNameStartsWithCapitalLetter}.
-   * 
+   *
    * @param ast
    */
   public static void runDefaultCoCos(ASTAutomaton ast) {

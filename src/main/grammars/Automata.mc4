@@ -18,7 +18,7 @@
  */
 
 
-grammar Automata extends de.monticore.lexicals.Lexicals {
+grammar Automata extends de.monticore.MCBasics {
 
 /** A ASTAutomaton represents a finite automata
     @attribute name Name of the automata

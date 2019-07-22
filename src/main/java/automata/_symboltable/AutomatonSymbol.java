@@ -5,26 +5,46 @@
  */
 package automata._symboltable;
 
+import de.monticore.symboltable.ISymbol;
+
 import java.util.Collection;
 import java.util.Optional;
-import static de.monticore.symboltable.Symbols.sortSymbolsByPosition;
 
 public class AutomatonSymbol extends AutomatonSymbolTOP {
 
+  protected String template;
+
   public AutomatonSymbol(final String name) {
     super(name);
+    template = "";
   }
 
-  @Override
-  protected AutomataScope createSpannedScope() {
-    return new AutomataScope();
-  }
+  /**
+   * Factory method for creating the scope spanned by this symbol.
+   *
+   * @return the (newly) created scope spanned by this symbol.
+   */
 
   public Optional<StateSymbol> getState(final String name) {
-    return getSpannedScope().resolveLocally(name, StateSymbol.KIND);
+    return getSpannedScope().resolveStateLocally(name);
   }
 
   public Collection<StateSymbol> getStates() {
-    return sortSymbolsByPosition(getSpannedScope().resolveLocally(StateSymbol.KIND));
+    return ISymbol.sortSymbolsByPosition(getSpannedScope().getLocalStateSymbols());
   }
+
+  /**
+   * @return template
+   */
+  public String getTemplate() {
+    return this.template;
+  }
+
+  /**
+   * @param template the template to set
+   */
+  public void setTemplate(String template) {
+    this.template = template;
+  }
+
 }
