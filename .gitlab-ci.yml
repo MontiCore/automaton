@@ -56,7 +56,7 @@ test_gradle:
       - .gradle/caches
     key: ${CI_COMMIT_REF_SLUG}-gradle
   script:
-    - "./gradlew testReport -d"
+    - "./gradlew testReport"
   artifacts:
     paths:
       - "target"
