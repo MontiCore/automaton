@@ -66,11 +66,7 @@ pages:
   stage: report
   dependencies:
     - test_gradle
-  cache:
-    paths:
-      - .gradle/wrapper
-      - .gradle/caches
-    key: ${CI_COMMIT_REF_SLUG}-gradle
+  cache: {}
   script:
     - mv target/reports/allTests public
   artifacts:
