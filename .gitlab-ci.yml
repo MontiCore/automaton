@@ -3,7 +3,7 @@ image: maven:3.5.4-jdk-8-alpine
 # These are the default stages. You don't need to explicitly define them. But you could define any stages you need.
 stages:
   - build
-  - test
+#  - test
   - report
   
 before_script:
@@ -41,26 +41,27 @@ build_gradle:
     key: ${CI_COMMIT_REF_SLUG}-gradle
   script:
     - "./gradlew assemble"
-  artifacts:
-    paths:
-      - "target"
-    expire_in: 1 week
-
-test_gradle:
-  stage: test
-  dependencies:
-    - build_gradle
-  cache:
-    paths:
-      - .gradle/wrapper
-      - .gradle/caches
-    key: ${CI_COMMIT_REF_SLUG}-gradle
-  script:
     - "./gradlew testReport"
   artifacts:
     paths:
       - "target"
     expire_in: 1 week
+
+#test_gradle:
+#  stage: test
+#  dependencies:
+#    - build_gradle
+#  cache:
+#    paths:
+#      - .gradle/wrapper
+#      - .gradle/caches
+#    key: ${CI_COMMIT_REF_SLUG}-gradle
+#  script:
+#    - "./gradlew testReport"
+#  artifacts:
+#    paths:
+#      - "target"
+#    expire_in: 1 week
 
 pages:
   stage: report
