@@ -12,7 +12,7 @@
 
     <!-- .. Libraries ..................................................... -->
 
-    <monticore.version>5.0.6.latestGrammar-SNAPSHOT</monticore.version>
+    <monticore.version>5.0.7-SNAPSHOT</monticore.version>
     
     <guava.version>23.0</guava.version>
     <jsr305.version>3.0.0</jsr305.version>
@@ -26,7 +26,7 @@
 
     <!-- .. Plugins ....................................................... -->
 
-    <mc4.maven.version>5.0.6-SNAPSHOT</mc4.maven.version>
+    <mc4.maven.version>5.0.7-SNAPSHOT</mc4.maven.version>
 
     <assembly.plugin>2.5.3</assembly.plugin>
     <compiler.plugin>3.2</compiler.plugin>
