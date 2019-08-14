@@ -17,7 +17,7 @@ public class TransitionSourceExists implements AutomataASTTransitionCoCo {
   
   @Override
   public void check(ASTTransition node) {
-    IAutomataScope enclosingScope = node.getEnclosingScope2();
+    IAutomataScope enclosingScope = node.getEnclosingScope();
     Optional<StateSymbol> sourceState = enclosingScope.resolveState(node.getFrom());
     
     if (!sourceState.isPresent()) {

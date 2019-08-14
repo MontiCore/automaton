@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 
+import de.se_rwth.commons.logging.LogStub;
 import org.antlr.v4.runtime.RecognitionException;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -32,6 +33,7 @@ public class AtLeastOneInitialAndFinalStateTest extends AbstractTest {
   
   @Before
   public void setUp() throws RecognitionException, IOException {
+    LogStub.init();
     Log.getFindings().clear();
   }
   

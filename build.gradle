@@ -2,7 +2,7 @@ import de.monticore.MCTask
 
 plugins {
     id "java"
-    id "monticore"  version "5.0.7-SNAPSHOT" // MontiCore Plugin
+    id "monticore"  version "5.3.0-SNAPSHOT" // MontiCore Plugin
     id "maven-publish"
     id "com.github.johnrengelman.shadow" version "4.0.4"
     // useful reports
@@ -11,8 +11,8 @@ plugins {
 }
 
 
-def mc_version  = '5.0.7-SNAPSHOT'
-def grammar_version = '5.0.7-SNAPSHOT'
+def mc_version  = '5.3.0-SNAPSHOT'
+def grammar_version = '5.3.0-SNAPSHOT'
 def guava_version = '18.0'
 def findbugs_version = '3.0.0'
 def antlr_version = '4.7.1'
@@ -22,7 +22,7 @@ def logback_version = '1.1.2'
 def grammarDir = 'src/main/grammars'
 
 group = "de.monticore.lang"
-version = '0.0.2-SNAPSHOT'
+version = '1.0.0-SNAPSHOT'
 description = "Automata DSL"
 sourceCompatibility = "1.8"
 

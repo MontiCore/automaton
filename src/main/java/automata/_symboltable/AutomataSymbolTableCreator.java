@@ -35,7 +35,7 @@ public class AutomataSymbolTableCreator extends AutomataSymbolTableCreatorTOP
 
   @Override  // TODO AB generate method
   public void visit(final ASTTransition transitionNode) {
-    transitionNode.setEnclosingScope2(getCurrentScope().get());
+    transitionNode.setEnclosingScope(getCurrentScope().get());
 
   }
 }
