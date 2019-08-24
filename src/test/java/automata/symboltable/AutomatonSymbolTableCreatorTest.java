@@ -1,8 +1,4 @@
-/*
- * Copyright (c) 2017, MontiCore. All rights reserved.
- *
- * http://www.se-rwth.de/
- */
+/* (c) https://github.com/MontiCore/monticore */
 package automata.symboltable;
 
 import static org.junit.Assert.assertEquals;
