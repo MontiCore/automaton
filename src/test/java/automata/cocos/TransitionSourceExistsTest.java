@@ -77,7 +77,7 @@ public class TransitionSourceExistsTest extends AbstractTest {
     
     Collection<Finding> expectedErrors = Arrays.asList(
         Finding.error("0xAUT03 The source state of the transition does not exist.",
-            new SourcePosition(23, 2))
+            new SourcePosition(6, 2))
         );
     
     Assert.assertErrors(expectedErrors, Log.getFindings());

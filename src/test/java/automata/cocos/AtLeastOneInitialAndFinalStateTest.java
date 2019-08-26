@@ -52,7 +52,7 @@ public class AtLeastOneInitialAndFinalStateTest extends AbstractTest {
     
     Collection<Finding> expectedErrors = Arrays.asList(
         Finding.error("0xA0114 An automata must have at least one initial and one final state.",
-            new SourcePosition(20, 0))
+            new SourcePosition(3, 0))
         );
     
     Assert.assertErrors(expectedErrors, Log.getFindings());
