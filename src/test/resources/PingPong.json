@@ -1,1 +1,34 @@
-{"name":"PingPong","symbols":[{"class":"automaton._symboltable.AutomatonSymbol","name":"PingPong"}],"subScopes":[{"class":"automaton._symboltable.AutomatonScope","name":"PingPong","isShadowingScope":true,"symbols":[{"class":"automaton._symboltable.StateSymbol","name":"NoGame"},{"class":"automaton._symboltable.StateSymbol","name":"Ping"},{"class":"automaton._symboltable.StateSymbol","name":"Pong"}],"spanningSymbol":{"class":"automaton._symboltable.AutomatonKind","name":"PingPong"}}]}
+{
+	"name": "PingPong",
+	"symbols": [
+		{
+			"kind": "automaton._symboltable.AutomatonSymbol",
+			"name": "PingPong"
+		}
+	],
+	"subScopes": [
+		{
+			"kind": "automaton._symboltable.AutomatonScope",
+			"name": "PingPong",
+			"isShadowingScope": true,
+			"symbols": [
+				{
+					"kind": "automaton._symboltable.StateSymbol",
+					"name": "NoGame"
+				},
+				{
+					"kind": "automaton._symboltable.StateSymbol",
+					"name": "Ping"
+				},
+				{
+					"kind": "automaton._symboltable.StateSymbol",
+					"name": "Pong"
+				}
+			],
+			"spanningSymbol": {
+				"kind": "automaton._symboltable.AutomatonKind",
+				"name": "PingPong"
+			}
+		}
+	]
+}
