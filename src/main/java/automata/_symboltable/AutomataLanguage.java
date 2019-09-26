@@ -31,7 +31,7 @@ public class AutomataLanguage extends AutomataLanguageTOP {
 
 
   public String getQualifiedModelNameFromScope(AutomataArtifactScope scope) {
-    String fileName = scope.getName().orElse("symbols")+"."+getSymbolFileExtension();
+    String fileName = scope.getNameOpt().orElse("symbols")+"."+getSymbolFileExtension();
     return Paths.get(scope.getPackageName(), fileName).toString();
   }
 

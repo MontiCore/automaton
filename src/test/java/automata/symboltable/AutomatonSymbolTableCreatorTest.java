@@ -1,27 +1,17 @@
 /* (c) https://github.com/MontiCore/monticore */
 package automata.symboltable;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
-
-import java.nio.file.Paths;
-
+import automata.AutomataTool;
+import automata._ast.ASTAutomaton;
+import automata._symboltable.*;
+import de.monticore.io.paths.ModelPath;
+import de.se_rwth.commons.logging.Log;
 import org.junit.Before;
 import org.junit.Test;
 
-import automata.AutomataTool;
-import automata._ast.ASTAutomaton;
-import automata._symboltable.AutomataGlobalScope;
-import automata._symboltable.AutomataLanguage;
-import automata._symboltable.AutomataScope;
-import automata._symboltable.AutomataSymbolTableCreator;
-import automata._symboltable.AutomatonSymbol;
-import automata._symboltable.IAutomataScope;
-import automata._symboltable.StateSymbol;
-import de.monticore.io.paths.ModelPath;
-import de.se_rwth.commons.logging.Log;
+import java.nio.file.Paths;
+
+import static org.junit.Assert.*;
 
 public class AutomatonSymbolTableCreatorTest {
 
@@ -47,15 +37,15 @@ public class AutomatonSymbolTableCreatorTest {
     assertEquals("PingPong", automatonSymbol.getName());
     assertEquals("PingPong", automatonSymbol.getFullName());
     assertEquals(3, automatonSymbol.getStates().size());
-    assertSame(automatonSymbol, automatonSymbol.getAstNode().get().getSymbol());
-    assertSame(automatonSymbol.getEnclosingScope(), automatonSymbol.getAstNode().get()
+    assertSame(automatonSymbol, automatonSymbol.getAstNode().getSymbol());
+    assertSame(automatonSymbol.getEnclosingScope(), automatonSymbol.getAstNode()
             .getEnclosingScope());
 
     final StateSymbol noGameState = automatonSymbol.getState("NoGame").orElse(null);
     assertNotNull(noGameState);
     assertEquals("NoGame", noGameState.getName());
-    assertSame(noGameState, noGameState.getAstNode().get().getSymbol());
-    assertSame(noGameState.getEnclosingScope(), noGameState.getAstNode().get().getEnclosingScope());
+    assertSame(noGameState, noGameState.getAstNode().getSymbol());
+    assertSame(noGameState.getEnclosingScope(), noGameState.getAstNode().getEnclosingScope());
 
     final StateSymbol pingState = automatonSymbol.getState("Ping").orElse(null);
     assertNotNull(pingState);
