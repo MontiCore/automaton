@@ -1,8 +1,21 @@
 /* (c) https://github.com/MontiCore/monticore */
 package automata.cocos;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import automata._ast.ASTAutomaton;
+import automata._ast.ASTTransition;
+import automata._cocos.AutomataCoCoChecker;
+import automata._symboltable.*;
+import automata.lang.AbstractTest;
+import de.monticore.cocos.helper.Assert;
+import de.monticore.io.paths.ModelPath;
+import de.se_rwth.commons.SourcePosition;
+import de.se_rwth.commons.logging.Finding;
+import de.se_rwth.commons.logging.Log;
+import de.se_rwth.commons.logging.LogStub;
+import org.antlr.v4.runtime.RecognitionException;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -10,22 +23,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Optional;
 
-import automata._symboltable.*;
-import de.se_rwth.commons.logging.LogStub;
-import org.antlr.v4.runtime.RecognitionException;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-import automata._ast.ASTAutomaton;
-import automata._ast.ASTTransition;
-import automata._cocos.AutomataCoCoChecker;
-import automata.lang.AbstractTest;
-import de.monticore.cocos.helper.Assert;
-import de.monticore.io.paths.ModelPath;
-import de.se_rwth.commons.SourcePosition;
-import de.se_rwth.commons.logging.Finding;
-import de.se_rwth.commons.logging.Log;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class TransitionSourceExistsTest extends AbstractTest {
   
@@ -48,7 +47,7 @@ public class TransitionSourceExistsTest extends AbstractTest {
 
     Optional<AutomatonSymbol> automatonSymbol = globalScope.resolveAutomaton("A");
     assertTrue(automatonSymbol.isPresent());
-    ASTAutomaton automaton = (ASTAutomaton) automatonSymbol.get().getAstNode().get();
+    ASTAutomaton automaton = (ASTAutomaton) automatonSymbol.get().getAstNodeOpt().get();
     
     AutomataCoCoChecker checker = new AutomataCoCos().getCheckerForAllCoCos();
     checker.checkAll(automaton);
