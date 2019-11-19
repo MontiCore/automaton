@@ -49,7 +49,7 @@ public class AutomatonSymbolSerializationTest {
     System.out.println(serialized);
     assertTrue(serialized.length() > 0);
 
-    IAutomataScope deserialized = deser.deserialize(serialized);
+    IAutomataScope deserialized = deser.deserialize(serialized, scope);
     assertNotNull(deserialized);
     assertEquals(1, deserialized.getLocalAutomatonSymbols().size());
     AutomatonSymbol autSymbol = (AutomatonSymbol) deserialized.getLocalAutomatonSymbols()
