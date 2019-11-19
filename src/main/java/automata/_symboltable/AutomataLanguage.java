@@ -10,7 +10,7 @@ import java.util.Set;
 
 public class AutomataLanguage extends AutomataLanguageTOP {
   public static final String FILE_ENDING = "aut";
-  
+
   public AutomataLanguage() {
     super("Automaton Language", FILE_ENDING);
   }
@@ -31,7 +31,7 @@ public class AutomataLanguage extends AutomataLanguageTOP {
 
 
   public String getQualifiedModelNameFromScope(AutomataArtifactScope scope) {
-    String fileName = scope.getNameOpt().orElse("symbols")+"."+getSymbolFileExtension();
+    String fileName = (scope.isPresentName() ? scope.getName() : "symbols") + "." + getSymbolFileExtension();
     return Paths.get(scope.getPackageName(), fileName).toString();
   }
 
