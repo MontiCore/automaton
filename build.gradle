@@ -12,8 +12,8 @@ plugins {
 }
 
 
-def mc_version  = '5.5.0-SNAPSHOT'
-def grammar_version = '5.5.0-SNAPSHOT'
+def mc_version  = '6.0.0'
+def grammar_version = '6.0.0'
 def guava_version = '18.0'
 def findbugs_version = '3.0.0'
 def antlr_version = '4.7.1'
