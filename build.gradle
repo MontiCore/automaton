@@ -3,17 +3,18 @@ import de.monticore.MCTask
 
 plugins {
     id "java"
-    id "monticore"  version "5.5.0-SNAPSHOT" // MontiCore Plugin
+    id "monticore"  version "6.1.0-SNAPSHOT" // MontiCore Plugin
     id "maven-publish"
     id "com.github.johnrengelman.shadow" version "4.0.4"
     // useful reports
-    id 'cz.malohlava.visteg' version '1.0.5'
+    // todo: reactivate this plugin when new version compatible to gradle 6.0.1 is available
+//    id 'cz.malohlava.visteg' version '1.0.5'
     id 'jacoco'
 }
 
 
-def mc_version  = '6.0.0'
-def grammar_version = '6.0.0'
+def mc_version  = '6.1.0-SNAPSHOT'
+def grammar_version = '6.1.0-SNAPSHOT'
 def guava_version = '18.0'
 def findbugs_version = '3.0.0'
 def antlr_version = '4.7.1'
@@ -42,6 +43,16 @@ dependencies {
     testImplementation (group:'de.monticore', name:'monticore-runtime', version:grammar_version,
                        classifier:"tests", changing: true) { force = true }
     testImplementation group:'ch.qos.logback', name:'logback-classic', version:logback_version
+}
+
+// has to be placed directly under the dependency definition, since otherwise the grammar configurations are not found
+repositories {
+    maven {
+        credentials.username mavenUser
+        credentials.password mavenPassword
+        url repo
+    }
+    mavenLocal()
 }
 
 // configure non-standard source sets
@@ -126,22 +137,14 @@ publishing {
     }
 }
 
-repositories {
-    maven {
-        credentials.username mavenUser
-        credentials.password mavenPassword
-        url repo
-    }
-    mavenLocal()
-}
-
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
 
-visteg {
-    destination    = 'target/reports/visteg.dot'
-}
+// todo: reactivate this plugin when new version compatible to gradle 6.0.1 is available
+//visteg {
+//    destination    = 'target/reports/visteg.dot'
+//}
 
 task testReport(type: TestReport) {
     destinationDir = file("$buildDir/reports/allTests")
