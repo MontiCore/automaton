@@ -53,9 +53,6 @@ public class AutomataTool {
     // setup the symbol table
     AutomataArtifactScope modelTopScope = createSymbolTable(lang, ast);
 
-    // store artifact scope
-    deser.store(modelTopScope,lang, DEFAULT_SYMBOL_LOCATION);
-
     // can be used for resolving things in the model
     Optional<StateSymbol> aSymbol = modelTopScope.resolveState("Ping");
     if (aSymbol.isPresent()) {
@@ -70,6 +67,9 @@ public class AutomataTool {
     AutomataCoCoChecker customCoCos = new AutomataCoCoChecker();
     customCoCos.addCoCo(new StateNameStartsWithCapitalLetter());
     customCoCos.checkAll(ast);
+    
+    // store artifact scope
+    deser.store(modelTopScope,lang, DEFAULT_SYMBOL_LOCATION);
     
     // analyze the model with a visitor
     CountStates cs = new CountStates();
