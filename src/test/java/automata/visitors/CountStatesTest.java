@@ -11,7 +11,6 @@ import automata._ast.ASTAutomaton;
 /**
  * Test for {@link CountStates}.
  *
- * @author Robert Heim
  */
 public class CountStatesTest extends AbstractTest {
   

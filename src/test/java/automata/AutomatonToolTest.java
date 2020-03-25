@@ -8,7 +8,6 @@ import org.junit.Test;
 /**
  * TODO: Write me!
  *
- * @author (last commit) $Author$
  */
 public class AutomatonToolTest {
   
