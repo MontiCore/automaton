@@ -9,6 +9,7 @@ import java.io.File;
 import java.nio.file.Paths;
 import java.util.Optional;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import automata.AutomataTool;
@@ -38,13 +39,14 @@ public class AutomatonSymbolSerializationTest {
     scope = stcreator.createFromAST(ast);
   }
   
-  @Test
+  @Test @Ignore
   public void testserializationOfAutomatonScope() {
     setup("automata/symboltable/PingPong.aut");
     final AutomatonSymbol automatonSymbol = scope.resolveAutomaton("PingPong").orElse(null);
     assertNotNull(automatonSymbol);
 
     AutomataScopeDeSer deser = new AutomataScopeDeSer();
+    deser.setSymbolFileExtension("autsym");
     String serialized = deser.serialize(scope);
     System.out.println(serialized);
     assertTrue(serialized.length() > 0);
