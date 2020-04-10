@@ -3,6 +3,8 @@ package automata;
 
 
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Optional;
 
 import automata._symboltable.*;
@@ -24,11 +26,10 @@ import de.se_rwth.commons.logging.Log;
 /**
  * Main class for the Automaton DSL tool.
  *
- * @author (last commit) $Author$
  */
 public class AutomataTool {
   
-  public static final String DEFAULT_SYMBOL_LOCATION = "target";
+  public static final Path DEFAULT_SYMBOL_LOCATION = Paths.get("target");
 
   /**
    * Use the single argument for specifying the single input automata file.
@@ -53,9 +54,6 @@ public class AutomataTool {
     // setup the symbol table
     AutomataArtifactScope modelTopScope = createSymbolTable(lang, ast);
 
-    // store artifact scope
-    deser.store(modelTopScope,lang, DEFAULT_SYMBOL_LOCATION);
-
     // can be used for resolving things in the model
     Optional<StateSymbol> aSymbol = modelTopScope.resolveState("Ping");
     if (aSymbol.isPresent()) {
@@ -70,6 +68,10 @@ public class AutomataTool {
     AutomataCoCoChecker customCoCos = new AutomataCoCoChecker();
     customCoCos.addCoCo(new StateNameStartsWithCapitalLetter());
     customCoCos.checkAll(ast);
+    
+    // store artifact scope
+    deser.setSymbolFileExtension("autsym");
+    deser.store(modelTopScope,DEFAULT_SYMBOL_LOCATION);
     
     // analyze the model with a visitor
     CountStates cs = new CountStates();

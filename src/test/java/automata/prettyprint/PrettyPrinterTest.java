@@ -13,7 +13,6 @@ import static org.junit.Assert.assertEquals;
 /**
  * Test for {@link PrettyPrinter}.
  *
- * @author Robert Heim
  */
 public class PrettyPrinterTest extends AbstractTest {
   @Test

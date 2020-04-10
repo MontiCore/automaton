@@ -10,7 +10,6 @@ import automata._visitor.AutomataVisitor;
  * Pretty prints automatons. Use {@link #print(ASTAutomaton)} to start a pretty
  * print and get the result by using {@link #getResult()}.
  *
- * @author Robert Heim
  */
 public class PrettyPrinter implements AutomataVisitor {
   private String result = "";

@@ -18,7 +18,6 @@ import automata._parser.AutomataParser;
 /**
  * Provides some helpers for tests.
  *
- * @author Robert Heim
  */
 abstract public class AbstractTest {
   

@@ -7,7 +7,6 @@ import automata._visitor.AutomataVisitor;
 /**
  * Counts the states of an automata.
  *
- * @author Robert Heim
  */
 public class CountStates implements AutomataVisitor {
   private int count = 0;

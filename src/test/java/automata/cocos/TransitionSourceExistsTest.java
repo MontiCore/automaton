@@ -47,7 +47,8 @@ public class TransitionSourceExistsTest extends AbstractTest {
 
     Optional<AutomatonSymbol> automatonSymbol = globalScope.resolveAutomaton("A");
     assertTrue(automatonSymbol.isPresent());
-    ASTAutomaton automaton = (ASTAutomaton) automatonSymbol.get().getAstNodeOpt().get();
+    assertTrue(automatonSymbol.get().isPresentAstNode());
+    ASTAutomaton automaton = automatonSymbol.get().getAstNode();
     
     AutomataCoCoChecker checker = new AutomataCoCos().getCheckerForAllCoCos();
     checker.checkAll(automaton);
