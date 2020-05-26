@@ -1,29 +1,18 @@
 /* (c) https://github.com/MontiCore/monticore */
 package automata.symboltable;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import automata.AutomataTool;
+import automata._ast.ASTAutomaton;
+import automata._symboltable.*;
+import de.monticore.io.paths.ModelPath;
+import org.junit.Ignore;
+import org.junit.Test;
 
 import java.io.File;
 import java.nio.file.Paths;
 import java.util.Optional;
 
-import org.junit.Ignore;
-import org.junit.Test;
-
-import automata.AutomataTool;
-import automata._ast.ASTAutomaton;
-import automata._symboltable.AutomataArtifactScope;
-import automata._symboltable.AutomataGlobalScope;
-import automata._symboltable.AutomataLanguage;
-import automata._symboltable.AutomataScope;
-import automata._symboltable.AutomataSymbolTableCreator;
-import automata._symboltable.AutomatonSymbol;
-import automata._symboltable.IAutomataScope;
-import automata._symboltable.serialization.AutomataScopeDeSer;
-import de.monticore.io.paths.ModelPath;
-import de.se_rwth.commons.logging.Log;
+import static org.junit.Assert.*;
 
 public class AutomatonSymbolSerializationTest {
 
@@ -51,7 +40,7 @@ public class AutomatonSymbolSerializationTest {
     System.out.println(serialized);
     assertTrue(serialized.length() > 0);
 
-    IAutomataScope deserialized = deser.deserialize(serialized, scope);
+    IAutomataScope deserialized = deser.deserialize(serialized);
     assertNotNull(deserialized);
     assertEquals(1, deserialized.getLocalAutomatonSymbols().size());
     AutomatonSymbol autSymbol = (AutomatonSymbol) deserialized.getLocalAutomatonSymbols()
