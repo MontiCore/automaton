@@ -15,7 +15,7 @@ plugins {
 
 def mc_version  = '6.2.0-SNAPSHOT'
 def grammar_version = '6.2.0-SNAPSHOT'
-def guava_version = '18.0'
+def guava_version = '25.1-jre'
 def findbugs_version = '3.0.0'
 def antlr_version = '4.7.1'
 def junit_version = '4.11'
