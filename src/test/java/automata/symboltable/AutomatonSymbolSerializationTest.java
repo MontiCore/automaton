@@ -13,24 +13,9 @@ import org.junit.Test;
 
 import automata.AutomataTool;
 import automata._ast.ASTAutomaton;
-import automata._symboltable.AutomataArtifactScope;
-import automata._symboltable.AutomataGlobalScope;
-import automata._symboltable.AutomataLanguage;
-import automata._symboltable.AutomataScope;
-import automata._symboltable.AutomataSymbolTableCreator;
-import automata._symboltable.AutomatonSymbol;
-import automata._symboltable.IAutomataScope;
-import automata._symboltable.AutomataScopeDeSer;
 import automata._symboltable.*;
 import de.monticore.io.paths.ModelPath;
-import org.junit.Ignore;
-import org.junit.Test;
 
-import java.io.File;
-import java.nio.file.Paths;
-import java.util.Optional;
-
-import static org.junit.Assert.*;
 
 public class AutomatonSymbolSerializationTest {
 
@@ -70,7 +55,7 @@ public class AutomatonSymbolSerializationTest {
   @Test
   public void testLoadSymbol() {
     ModelPath mp = new ModelPath(Paths.get("src/test/resources"));
-    AutomataGlobalScope gs = new AutomataGlobalScope(mp, new AutomataLanguage());
+    AutomataGlobalScope gs = new AutomataGlobalScope(mp, "aut");
     Optional<AutomatonSymbol> resolvedAutomaton = gs
         .resolveAutomaton("automata.serialization.Ping2Pong2");
     assertTrue(resolvedAutomaton.isPresent());
@@ -83,9 +68,8 @@ public class AutomatonSymbolSerializationTest {
     // Note: usually, the stored symbols will be in a file located in the folder structure that
     // matches the package structure. However, the automata language does not defines packages for
     // automata.
-    String symbolFileExtension = new AutomataLanguage().getSymbolFileExtension();
     assertTrue(
-        new File(AutomataTool.DEFAULT_SYMBOL_LOCATION + "/A."+symbolFileExtension).exists());
+        new File(AutomataTool.DEFAULT_SYMBOL_LOCATION + "/A.autsym").exists());
   }
   
 }

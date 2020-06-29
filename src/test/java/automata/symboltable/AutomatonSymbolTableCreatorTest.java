@@ -19,12 +19,10 @@ public class AutomatonSymbolTableCreatorTest {
 
   @Before
   public void setup() {
-    final AutomataLanguage automataLanguage = new AutomataLanguage();
-
     final ModelPath modelPath =
             new ModelPath(Paths.get("src/test/resources/automata/symboltable"));
 
-    globalScope = new AutomataGlobalScope(modelPath, automataLanguage);
+    globalScope = new AutomataGlobalScope(modelPath, "aut");
     Log.enableFailQuick(false);
   }
 
@@ -61,9 +59,7 @@ public class AutomatonSymbolTableCreatorTest {
   public void testAutomatonSymbolTableCreation2(){
     ASTAutomaton ast = AutomataTool
             .parse("src/test/resources/automata/symboltable/PingPong.aut");
-    final AutomataLanguage automataLanguage = new AutomataLanguage();
-
-    AutomataScope myglobal = new AutomataGlobalScope(new ModelPath(Paths.get("src/main/resources/example")),automataLanguage);
+    AutomataScope myglobal = new AutomataGlobalScope(new ModelPath(Paths.get("src/main/resources/example")),"aut");
     AutomataSymbolTableCreator stcreator = new AutomataSymbolTableCreator(myglobal);
     IAutomataScope artifact = stcreator.createFromAST(ast);
     IAutomataScope s = artifact.getSubScopes().stream().findAny().get();

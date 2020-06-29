@@ -1,6 +1,7 @@
 /* (c) https://github.com/MontiCore/monticore */
 package automata.cocos;
 
+import automata.AutomataMill;
 import automata._ast.ASTAutomaton;
 import automata._ast.ASTTransition;
 import automata._cocos.AutomataCoCoChecker;
@@ -42,8 +43,7 @@ public class TransitionSourceExistsTest extends AbstractTest {
   @Test
   public void testValid() throws IOException {
     ModelPath modelPath = new ModelPath(Paths.get("src/test/resources/automata/cocos/valid"));
-    AutomataLanguage language = new AutomataLanguage();
-    IAutomataScope globalScope = new AutomataGlobalScope(modelPath, language);
+    IAutomataScope globalScope = new AutomataGlobalScope(modelPath, "aut");
 
     Optional<AutomatonSymbol> automatonSymbol = globalScope.resolveAutomaton("A");
     assertTrue(automatonSymbol.isPresent());
@@ -61,14 +61,13 @@ public class TransitionSourceExistsTest extends AbstractTest {
   @Test
   public void testNotExistingTransitionSource() throws IOException {
     ModelPath modelPath = new ModelPath(Paths.get("src/test/resources/automata/cocos/invalid"));
-    AutomataLanguage language = new AutomataLanguage();
-    AutomataGlobalScope globalScope = new AutomataGlobalScope(modelPath, language);
-    
     ASTAutomaton ast = parseModel("src/test/resources/automata/cocos/invalid/NotExistingTransitionSource.aut");
-    
-    AutomataSymbolTableCreatorDelegator stc = language.getSymbolTableCreator(
-         globalScope);
-    stc.createFromAST(ast);
+
+    AutomataMill
+        .automataSymbolTableCreatorBuilder()
+        .addToScopeStack(new AutomataGlobalScope(modelPath, "aut"))
+        .build()
+        .createFromAST(ast);
     
     ASTTransition transition = ast.getTransitionList().get(0);
     

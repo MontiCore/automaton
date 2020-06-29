@@ -42,8 +42,7 @@ public class AutomataTool {
     }
     String model = args[0];
     
-    // setup the language infrastructure
-    final AutomataLanguage lang = new AutomataLanguage();
+    // setup the deser infrastructure
     final AutomataScopeDeSer deser = new AutomataScopeDeSer();
 
     // parse the model and create the AST representation
@@ -51,7 +50,7 @@ public class AutomataTool {
     Log.info(model + " parsed successfully!", AutomataTool.class.getName());
     
     // setup the symbol table
-    AutomataArtifactScope modelTopScope = createSymbolTable(lang, ast);
+    AutomataArtifactScope modelTopScope = createSymbolTable(ast);
 
     // can be used for resolving things in the model
     Optional<StateSymbol> aSymbol = modelTopScope.resolveState("Ping");
@@ -109,16 +108,15 @@ public class AutomataTool {
   /**
    * Create the symbol table from the parsed AST.
    *
-   * @param lang
    * @param ast
    * @return
    */
-  public static AutomataArtifactScope createSymbolTable(AutomataLanguage lang, ASTAutomaton ast) {
-    
-    AutomataGlobalScope globalScope = new AutomataGlobalScope(new ModelPath(), lang);
-    
-    AutomataSymbolTableCreatorDelegator symbolTable = lang.getSymbolTableCreator(globalScope);
-    return symbolTable.createFromAST(ast);
+  public static AutomataArtifactScope createSymbolTable(ASTAutomaton ast) {
+    return AutomataMill
+        .automataSymbolTableCreatorBuilder()
+        .addToScopeStack(new AutomataGlobalScope(new ModelPath(), "aut"))
+        .build()
+        .createFromAST(ast);
   }
   
   /**
