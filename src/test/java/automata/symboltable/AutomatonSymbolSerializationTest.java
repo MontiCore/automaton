@@ -9,7 +9,6 @@ import java.io.File;
 import java.nio.file.Paths;
 import java.util.Optional;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import automata.AutomataTool;
@@ -21,9 +20,8 @@ import automata._symboltable.AutomataScope;
 import automata._symboltable.AutomataSymbolTableCreator;
 import automata._symboltable.AutomatonSymbol;
 import automata._symboltable.IAutomataScope;
-import automata._symboltable.serialization.AutomataScopeDeSer;
+import automata._symboltable.AutomataScopeDeSer;
 import de.monticore.io.paths.ModelPath;
-import de.se_rwth.commons.logging.Log;
 
 public class AutomatonSymbolSerializationTest {
 
@@ -39,7 +37,7 @@ public class AutomatonSymbolSerializationTest {
     scope = stcreator.createFromAST(ast);
   }
   
-  @Test @Ignore
+  @Test
   public void testserializationOfAutomatonScope() {
     setup("automata/symboltable/PingPong.aut");
     final AutomatonSymbol automatonSymbol = scope.resolveAutomaton("PingPong").orElse(null);
@@ -51,7 +49,7 @@ public class AutomatonSymbolSerializationTest {
     System.out.println(serialized);
     assertTrue(serialized.length() > 0);
 
-    IAutomataScope deserialized = deser.deserialize(serialized, scope);
+    IAutomataScope deserialized = deser.deserialize(serialized);
     assertNotNull(deserialized);
     assertEquals(1, deserialized.getLocalAutomatonSymbols().size());
     AutomatonSymbol autSymbol = (AutomatonSymbol) deserialized.getLocalAutomatonSymbols()
