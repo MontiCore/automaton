@@ -16,8 +16,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class PrettyPrinterTest extends AbstractTest {
   @Test
-  public void test() throws IOException
-  {
+  public void test() {
     ASTAutomaton automaton = parseModel("src/test/resources/automata/prettyprinter/valid/A.aut");
     PrettyPrinter pp = new PrettyPrinter();
     pp.handle(automaton);

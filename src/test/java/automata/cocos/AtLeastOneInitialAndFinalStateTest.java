@@ -28,7 +28,7 @@ public class AtLeastOneInitialAndFinalStateTest extends AbstractTest {
   }
   
   @Before
-  public void setUp() throws RecognitionException, IOException {
+  public void setUp() throws RecognitionException {
     LogStub.init();
     Log.getFindings().clear();
   }
@@ -44,7 +44,7 @@ public class AtLeastOneInitialAndFinalStateTest extends AbstractTest {
   }
   
   @Test
-  public void testMissingInitialState() throws IOException {
+  public void testMissingInitialState() {
     ASTAutomaton automaton = parseModel("src/test/resources/automata/cocos/invalid/MissingInitialState.aut");
     
     AtLeastOneInitialAndFinalState coco = new AtLeastOneInitialAndFinalState();

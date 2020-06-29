@@ -35,13 +35,13 @@ public class TransitionSourceExistsTest extends AbstractTest {
   }
   
   @Before
-  public void setUp() throws RecognitionException, IOException {
+  public void setUp() throws RecognitionException {
     LogStub.init();
     Log.getFindings().clear();
   }
   
   @Test
-  public void testValid() throws IOException {
+  public void testValid() {
     ModelPath modelPath = new ModelPath(Paths.get("src/test/resources/automata/cocos/valid"));
     IAutomataScope globalScope = new AutomataGlobalScope(modelPath, "aut");
 
@@ -59,7 +59,7 @@ public class TransitionSourceExistsTest extends AbstractTest {
   }
   
   @Test
-  public void testNotExistingTransitionSource() throws IOException {
+  public void testNotExistingTransitionSource() {
     ModelPath modelPath = new ModelPath(Paths.get("src/test/resources/automata/cocos/invalid"));
     ASTAutomaton ast = parseModel("src/test/resources/automata/cocos/invalid/NotExistingTransitionSource.aut");
 

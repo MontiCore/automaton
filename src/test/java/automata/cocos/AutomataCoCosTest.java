@@ -25,12 +25,12 @@ public class AutomataCoCosTest extends AbstractTest {
   }
   
   @Before
-  public void setUp() throws RecognitionException, IOException {
+  public void setUp() throws RecognitionException {
     Log.getFindings().clear();
   }
   
   @Test
-  public void testWithChecker() throws IOException {
+  public void testWithChecker(){
     ASTAutomaton ast = // ...
     parseModel("src/test/resources/automata/cocos/invalid/StateDoesNotStartWithCapitalLetter.aut");
     
