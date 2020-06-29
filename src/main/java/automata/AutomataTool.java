@@ -13,7 +13,6 @@ import org.antlr.v4.runtime.RecognitionException;
 import automata._ast.ASTAutomaton;
 import automata._cocos.AutomataCoCoChecker;
 import automata._parser.AutomataParser;
-import automata._symboltable.AutomataScopeDeSer;
 import automata.cocos.AtLeastOneInitialAndFinalState;
 import automata.cocos.AutomataCoCos;
 import automata.cocos.StateNameStartsWithCapitalLetter;

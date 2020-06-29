@@ -21,7 +21,16 @@ import automata._symboltable.AutomataSymbolTableCreator;
 import automata._symboltable.AutomatonSymbol;
 import automata._symboltable.IAutomataScope;
 import automata._symboltable.AutomataScopeDeSer;
+import automata._symboltable.*;
 import de.monticore.io.paths.ModelPath;
+import org.junit.Ignore;
+import org.junit.Test;
+
+import java.io.File;
+import java.nio.file.Paths;
+import java.util.Optional;
+
+import static org.junit.Assert.*;
 
 public class AutomatonSymbolSerializationTest {
 
