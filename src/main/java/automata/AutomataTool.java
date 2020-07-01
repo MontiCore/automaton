@@ -44,6 +44,7 @@ public class AutomataTool {
     
     // setup the deser infrastructure
     final AutomataScopeDeSer deser = new AutomataScopeDeSer();
+    deser.setSymbolFileExtension("autsym");
 
     // parse the model and create the AST representation
     final ASTAutomaton ast = parse(model);
@@ -68,7 +69,6 @@ public class AutomataTool {
     customCoCos.checkAll(ast);
     
     // store artifact scope
-    deser.setSymbolFileExtension("autsym");
     deser.store(modelTopScope,DEFAULT_SYMBOL_LOCATION);
     
     // analyze the model with a visitor
