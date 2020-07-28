@@ -19,7 +19,7 @@ import de.monticore.io.paths.ModelPath;
 
 public class AutomatonSymbolSerializationTest {
 
-  private AutomataArtifactScope scope;
+  private IAutomataArtifactScope scope;
 
   public void setup(String model) {
     ASTAutomaton ast = AutomataTool
