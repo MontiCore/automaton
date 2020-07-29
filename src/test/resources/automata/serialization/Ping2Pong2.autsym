@@ -1,5 +1,5 @@
 {
-	"kind": "automata._symboltable.AutomataArtifactScope",
+	"kind": "automata._symboltable.IAutomataArtifactScope",
 	"name": "Ping2Pong2",
 	"exportsSymbols": true,
 	"package": "automata.serialization",
