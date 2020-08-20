@@ -69,7 +69,7 @@ public class TransitionSourceExistsTest extends AbstractTest {
         .build()
         .createFromAST(ast);
     
-    ASTTransition transition = ast.getTransitionsList().get(0);
+    ASTTransition transition = ast.getTransitionList().get(0);
     
     TransitionSourceExists coco = new TransitionSourceExists();
     coco.check(transition);
