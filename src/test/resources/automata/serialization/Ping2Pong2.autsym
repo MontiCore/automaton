@@ -1,84 +1,31 @@
 {
-	"kind": "automata._symboltable.IAutomataArtifactScope",
 	"name": "Ping2Pong2",
-	"exportsSymbols": true,
 	"package": "automata.serialization",
 	"template": "templates/automatascope.ftl",
 	"numberOfSubScopes": 1,
-	"automatonSymbols": [
+	"kindHierarchy": [],
+	"symbols": [
 		{
 			"kind": "automata._symboltable.AutomatonSymbol",
 			"name": "Ping2Pong2",
-			"template": "templates/automatonsymbol.ftl"
-		}
-	],
-	"subScopes": [
-		{
-			"kind": "automata._symboltable.AutomataScope",
-			"name": "PingPong",
-			"isShadowingScope": false,
-			"exportsSymbols": true,
-			"spanningSymbol": {
-				"kind": "automata._symboltable.AutomatonSymbol",
-				"name": "Ping2Pong2"
-			},
-			"template": "templates/automatascope.ftl",
-			"numberOfSubScopes": 3,
-			"stateSymbols": [
-				{
-					"kind": "automata._symboltable.StateSymbol",
-					"name": "NoGame",
-					"template": "templates/statesymbol.ftl"
-				},
-				{
-					"kind": "automata._symboltable.StateSymbol",
-					"name": "Ping",
-					"template": "templates/statesymbol.ftl"
-				},
-				{
-					"kind": "automata._symboltable.StateSymbol",
-					"name": "Pong",
-					"template": "templates/statesymbol.ftl"
-				}
-			],
-			"subScopes": [
-				{
-					"kind": "automata._symboltable.AutomataScope",
-					"name": "NoGame",
-					"isShadowingScope": false,
-					"exportsSymbols": true,
-					"spanningSymbol": {
+			"template": "templates/automatonsymbol.ftl",
+			"spannedScope": {
+				"isShadowingScope": false,
+				"symbols": [
+					{
 						"kind": "automata._symboltable.StateSymbol",
 						"name": "NoGame"
 					},
-					"template": "templates/automatascope.ftl",
-					"numberOfSubScopes": 0
-				},
-				{
-					"kind": "automata._symboltable.AutomataScope",
-					"name": "Ping",
-					"isShadowingScope": false,
-					"exportsSymbols": true,
-					"spanningSymbol": {
+					{
 						"kind": "automata._symboltable.StateSymbol",
 						"name": "Ping"
 					},
-					"template": "templates/automatascope.ftl",
-					"numberOfSubScopes": 0
-				},
-				{
-					"kind": "automata._symboltable.AutomataScope",
-					"name": "Pong",
-					"isShadowingScope": false,
-					"exportsSymbols": true,
-					"spanningSymbol": {
+					{
 						"kind": "automata._symboltable.StateSymbol",
 						"name": "Pong"
-					},
-					"template": "templates/automatascope.ftl",
-					"numberOfSubScopes": 0
-				}
-			]
+					}
+				]
+			}
 		}
 	]
 }

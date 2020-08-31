@@ -24,7 +24,7 @@ public class AutomatonSymbolSerializationTest {
     ASTAutomaton ast = AutomataTool.parse("src/test/resources/" + model);
 
     ModelPath mp = new ModelPath(Paths.get("src/test/resources/" + model).getParent());
-    AutomataGlobalScope globalScope = AutomataMill.automataGlobalScopeBuilder()
+    IAutomataGlobalScope globalScope = AutomataMill.automataGlobalScopeBuilder()
         .setModelPath(mp).setModelFileExtension("aut").build();
     scope = AutomataMill.automataSymbolTableCreatorBuilder()
         .addToScopeStack(globalScope).build().createFromAST(ast);
@@ -80,7 +80,7 @@ public class AutomatonSymbolSerializationTest {
 
     AutomataScopeDeSer deSer = new AutomataScopeDeSer();
     deSer.setSymbolFileExtension("autsym");
-    AutomataArtifactScope artifactScope = deSer.load(symbolPath);
+    IAutomataArtifactScope artifactScope = deSer.load(symbolPath);
     assertEquals("Door",artifactScope.getName());
     assertEquals("",artifactScope.getPackageName());
     assertEquals(1, artifactScope.getSymbolsSize());
