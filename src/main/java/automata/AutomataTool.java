@@ -51,7 +51,7 @@ public class AutomataTool {
     Log.info(model + " parsed successfully!", AutomataTool.class.getName());
     
     // setup the symbol table
-    AutomataArtifactScope modelTopScope = createSymbolTable(ast);
+    IAutomataArtifactScope modelTopScope = createSymbolTable(ast);
 
     // can be used for resolving things in the model
     Optional<StateSymbol> aSymbol = modelTopScope.resolveState("Ping");
@@ -111,7 +111,7 @@ public class AutomataTool {
    * @param ast
    * @return
    */
-  public static AutomataArtifactScope createSymbolTable(ASTAutomaton ast) {
+  public static IAutomataArtifactScope createSymbolTable(ASTAutomaton ast) {
     return AutomataMill
         .automataSymbolTableCreatorBuilder()
         .addToScopeStack(new AutomataGlobalScope(new ModelPath(), "aut"))

@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 
 public class AutomatonSymbolSerializationTest {
 
-  private AutomataArtifactScope scope;
+  private IAutomataArtifactScope scope;
 
   public void setup(String model) {
     Log.enableFailQuick(false);

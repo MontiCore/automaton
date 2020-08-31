@@ -20,7 +20,7 @@ public class PrettyPrinter implements AutomataVisitor {
   
   /**
    * Prints the automata
-   * 
+   *
    * @param automaton
    */
   public void print(ASTAutomaton automaton) {
@@ -29,7 +29,7 @@ public class PrettyPrinter implements AutomataVisitor {
   
   /**
    * Gets the printed result.
-   * 
+   *
    * @return the result of the pretty print.
    */
   public String getResult() {
