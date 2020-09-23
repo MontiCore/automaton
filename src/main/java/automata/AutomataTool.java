@@ -28,8 +28,6 @@ import de.se_rwth.commons.logging.Log;
  */
 public class AutomataTool {
   
-  public static final Path DEFAULT_SYMBOL_LOCATION = Paths.get("target");
-
   /**
    * Use the single argument for specifying the single input automata file.
    *
@@ -44,7 +42,6 @@ public class AutomataTool {
     
     // setup the deser infrastructure
     final AutomataScopeDeSer deser = new AutomataScopeDeSer();
-    deser.setSymbolFileExtension("autsym");
 
     // parse the model and create the AST representation
     final ASTAutomaton ast = parse(model);
@@ -69,7 +66,13 @@ public class AutomataTool {
     customCoCos.checkAll(ast);
     
     // store artifact scope
-    deser.store(modelTopScope,DEFAULT_SYMBOL_LOCATION);
+    String qualifiedModelName = model.replace("src/main/resources", "");
+    qualifiedModelName = qualifiedModelName.replace("src/test/resources", "");
+    String outputFileName = Paths.get(model).getFileName()+"sym";
+    String packagePath = Paths.get(qualifiedModelName).getParent().toString();
+    String storagePath = Paths.get("target/symbols", packagePath,
+        outputFileName).toString();
+    deser.store(modelTopScope,storagePath);
     
     // analyze the model with a visitor
     CountStates cs = new CountStates();

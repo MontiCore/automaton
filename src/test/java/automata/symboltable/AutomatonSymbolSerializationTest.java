@@ -37,7 +37,6 @@ public class AutomatonSymbolSerializationTest {
     assertNotNull(automatonSymbol);
 
     AutomataScopeDeSer deser = new AutomataScopeDeSer();
-    deser.setSymbolFileExtension("autsym");
     String serialized = deser.serialize(scope);
     System.out.println(serialized);
     assertTrue(serialized.length() > 0);
@@ -55,6 +54,7 @@ public class AutomatonSymbolSerializationTest {
   public void testLoadSymbol() {
     ModelPath mp = new ModelPath(Paths.get("src/test/resources"));
     AutomataGlobalScope gs = new AutomataGlobalScope(mp, "aut");
+    gs.setSymbolFileExtension("autsym");
     Optional<AutomatonSymbol> resolvedAutomaton = gs
         .resolveAutomaton("automata.serialization.Ping2Pong2");
     assertTrue(resolvedAutomaton.isPresent());
@@ -68,18 +68,17 @@ public class AutomatonSymbolSerializationTest {
     // matches the package structure. However, the automata language does not defines packages for
     // automata.
     assertTrue(
-        new File(AutomataTool.DEFAULT_SYMBOL_LOCATION + "/A.autsym").exists());
+        new File("target/symbols/automata/cocos/valid/A.autsym").exists());
   }
 
   @Test
   public void testDoorModel() {
     String path = "automata/symboltable/Door.aut";
-    String symbolPath = AutomataTool.DEFAULT_SYMBOL_LOCATION + "/Door.autsym";
+    String symbolPath = "target/symbols/automata/symboltable/Door.autsym";
     AutomataTool.main(new String[] { "src/test/resources/" + path });
     assertTrue(new File(symbolPath).exists());
 
     AutomataScopeDeSer deSer = new AutomataScopeDeSer();
-    deSer.setSymbolFileExtension("autsym");
     IAutomataArtifactScope artifactScope = deSer.load(symbolPath);
     assertEquals("Door",artifactScope.getName());
     assertEquals("",artifactScope.getPackageName());
