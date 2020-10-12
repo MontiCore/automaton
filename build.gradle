@@ -3,7 +3,7 @@ import de.monticore.MCTask
 
 plugins {
     id "java"
-    id "monticore"  version "6.4.0-SNAPSHOT" // MontiCore Plugin
+    id "monticore"  version "6.5.0-SNAPSHOT" // MontiCore Plugin
     id "maven-publish"
     id "com.github.johnrengelman.shadow" version "4.0.4"
     // useful reports
@@ -13,7 +13,7 @@ plugins {
 }
 
 
-def mc_version  = '6.4.0-SNAPSHOT'
+def mc_version  = '6.5.0-SNAPSHOT'
 def grammar_version = '6.4.0-SNAPSHOT'
 def guava_version = '25.1-jre'
 def findbugs_version = '3.0.0'
