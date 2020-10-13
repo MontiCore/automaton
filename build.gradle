@@ -18,7 +18,7 @@ def grammar_version = '6.4.0-SNAPSHOT'
 def guava_version = '25.1-jre'
 def findbugs_version = '3.0.0'
 def antlr_version = '4.7.1'
-def junit_version = '4.11'
+def junit_version = '4.13.1'
 def logback_version = '1.1.2'
 
 def grammarDir = 'src/main/grammars'
