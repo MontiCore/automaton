@@ -19,6 +19,7 @@
     <junit.version>4.13.1</junit.version>
     <antlr.version>4.7.1</antlr.version>
     <logback.version>1.1.2</logback.version>
+    <se-commons.version>1.7.11-SNAPSHOT</se-commons.version>
     <emf.common.version>2.5.0</emf.common.version>
     <emf.ecore.version>2.5.0</emf.ecore.version>
     <emf.ecore.xmi.version>2.5.0</emf.ecore.xmi.version>
@@ -185,6 +186,17 @@
       <groupId>org.antlr</groupId>
       <artifactId>antlr4-runtime</artifactId>
       <version>${antlr.version}</version>
+    </dependency>
+  
+    <dependency>
+      <groupId>de.se_rwth.commons</groupId>
+      <artifactId>se-commons-utilities</artifactId>
+      <version>${se-commons.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>de.se_rwth.commons</groupId>
+      <artifactId>se-commons-logging</artifactId>
+      <version>${se-commons.version}</version>
     </dependency>
     
     <!-- MontiCore Dependencies -->
