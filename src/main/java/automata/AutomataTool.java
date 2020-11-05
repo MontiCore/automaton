@@ -115,11 +115,11 @@ public class AutomataTool {
    * @return
    */
   public static IAutomataArtifactScope createSymbolTable(ASTAutomaton ast) {
-    return AutomataMill
-        .automataSymbolTableCreatorBuilder()
-        .addToScopeStack(new AutomataGlobalScope(new ModelPath(), "aut"))
-        .build()
-        .createFromAST(ast);
+    IAutomataGlobalScope gs = AutomataMill.automataGlobalScope();
+    gs.setModelFileExtension("aut");
+    AutomataSymbolTableCreator symTabCreator = AutomataMill.automataSymbolTableCreator();
+
+    return symTabCreator.createFromAST(ast);
   }
   
   /**
