@@ -26,8 +26,10 @@ public class AutomatonSymbolSerializationTest {
     ModelPath mp = new ModelPath(Paths.get("src/test/resources/" + model).getParent());
     IAutomataGlobalScope globalScope = AutomataMill.automataGlobalScopeBuilder()
         .setModelPath(mp).setModelFileExtension("aut").build();
-    scope = AutomataMill.automataSymbolTableCreatorBuilder()
-        .addToScopeStack(globalScope).build().createFromAST(ast);
+    AutomataSymbolTableCreator symbolTable = AutomataMill
+            .automataSymbolTableCreator();
+    symbolTable.putOnStack(globalScope);
+    scope =  symbolTable.createFromAST(ast);
   }
 
   @Test
@@ -53,8 +55,10 @@ public class AutomatonSymbolSerializationTest {
   @Test
   public void testLoadSymbol() {
     ModelPath mp = new ModelPath(Paths.get("src/test/resources"));
-    AutomataGlobalScope gs = new AutomataGlobalScope(mp, "aut");
-    gs.setSymbolFileExtension("autsym");
+    IAutomataGlobalScope gs = AutomataMill.automataGlobalScope();
+    gs.clear();
+    gs.setModelFileExtension("aut");
+    gs.setModelPath(mp);
     Optional<AutomatonSymbol> resolvedAutomaton = gs
         .resolveAutomaton("automata.serialization.Ping2Pong2");
     assertTrue(resolvedAutomaton.isPresent());

@@ -5,7 +5,9 @@ import automata.AutomataMill;
 import automata._ast.ASTAutomaton;
 import automata._ast.ASTTransition;
 import automata._cocos.AutomataCoCoChecker;
-import automata._symboltable.*;
+import automata._symboltable.AutomataSymbolTableCreator;
+import automata._symboltable.AutomatonSymbol;
+import automata._symboltable.IAutomataGlobalScope;
 import automata.lang.AbstractTest;
 import de.monticore.cocos.helper.Assert;
 import de.monticore.io.paths.ModelPath;
@@ -18,7 +20,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collection;
@@ -33,42 +34,44 @@ public class TransitionSourceExistsTest extends AbstractTest {
   public static void init() {
     Log.enableFailQuick(false);
   }
-  
+
+  private IAutomataGlobalScope globalScope;
+
   @Before
   public void setUp() throws RecognitionException {
     LogStub.init();
     Log.getFindings().clear();
+    globalScope = AutomataMill.automataGlobalScope();
+    globalScope.clear();
+    globalScope.setModelFileExtension("aut");
   }
   
   @Test
   public void testValid() {
-    ModelPath modelPath = new ModelPath(Paths.get("src/test/resources/automata/cocos/valid"));
-    IAutomataScope globalScope = new AutomataGlobalScope(modelPath, "aut");
+    globalScope.setModelPath(new ModelPath(Paths.get("src/test/resources/automata/cocos/valid")));
 
-    Optional<AutomatonSymbol> automatonSymbol = globalScope.resolveAutomaton("A");
-    assertTrue(automatonSymbol.isPresent());
-    assertTrue(automatonSymbol.get().isPresentAstNode());
-    ASTAutomaton automaton = automatonSymbol.get().getAstNode();
+    ASTAutomaton ast = parseModel("src/test/resources/automata/cocos/valid/A.aut");
+    AutomataSymbolTableCreator symbolTable = AutomataMill
+            .automataSymbolTableCreator();
+    symbolTable.putOnStack(globalScope);
+    symbolTable.createFromAST(ast);
     
     AutomataCoCoChecker checker = new AutomataCoCos().getCheckerForAllCoCos();
-    checker.checkAll(automaton);
+    checker.checkAll(ast);
     
     //The error log would be empty if automaton A was created from AST before being resolved
-    assertEquals(1,Log.getFindings().size());
-    assertTrue(Log.getFindings().stream().findFirst().get().isWarning());
+    assertEquals(0,Log.getErrorCount());
   }
   
   @Test
   public void testNotExistingTransitionSource() {
-    ModelPath modelPath = new ModelPath(Paths.get("src/test/resources/automata/cocos/invalid"));
+    globalScope.setModelPath(new ModelPath(Paths.get("src/test/resources/automata/cocos/invalid")));
     ASTAutomaton ast = parseModel("src/test/resources/automata/cocos/invalid/NotExistingTransitionSource.aut");
+    AutomataSymbolTableCreator symbolTable = AutomataMill
+            .automataSymbolTableCreator();
+    symbolTable.putOnStack(globalScope);
+    symbolTable.createFromAST(ast);
 
-    AutomataMill
-        .automataSymbolTableCreatorBuilder()
-        .addToScopeStack(new AutomataGlobalScope(modelPath, "aut"))
-        .build()
-        .createFromAST(ast);
-    
     ASTTransition transition = ast.getTransitionList().get(0);
     
     TransitionSourceExists coco = new TransitionSourceExists();

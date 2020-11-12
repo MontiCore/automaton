@@ -116,10 +116,13 @@ public class AutomataTool {
    */
   public static IAutomataArtifactScope createSymbolTable(ASTAutomaton ast) {
     IAutomataGlobalScope gs = AutomataMill.automataGlobalScope();
+    gs.clear();
     gs.setModelFileExtension("aut");
     AutomataSymbolTableCreator symTabCreator = AutomataMill.automataSymbolTableCreator();
 
-    return symTabCreator.createFromAST(ast);
+    IAutomataArtifactScope scope = symTabCreator.createFromAST(ast);
+    gs.addSubScope(scope);
+    return scope;
   }
   
   /**

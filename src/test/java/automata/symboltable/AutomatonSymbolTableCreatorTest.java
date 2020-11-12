@@ -1,12 +1,14 @@
 /* (c) https://github.com/MontiCore/monticore */
 package automata.symboltable;
 
+import automata.AutomataMill;
 import automata.AutomataTool;
 import automata._ast.ASTAutomaton;
 import automata._symboltable.*;
 import de.monticore.io.paths.ModelPath;
 import de.se_rwth.commons.logging.Log;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.nio.file.Paths;
@@ -15,17 +17,23 @@ import static org.junit.Assert.*;
 
 public class AutomatonSymbolTableCreatorTest {
 
-  private IAutomataScope globalScope;
+  private IAutomataGlobalScope globalScope;
 
   @Before
   public void setup() {
     final ModelPath modelPath =
             new ModelPath(Paths.get("src/test/resources/automata/symboltable"));
 
-    globalScope = new AutomataGlobalScope(modelPath, "aut");
+    globalScope = AutomataMill.automataGlobalScope();
+    globalScope.clear();
+    globalScope.setModelFileExtension("aut");
+    globalScope.setModelPath(modelPath);
+    
     Log.enableFailQuick(false);
   }
 
+  @Ignore
+  // TODO: MB Wenn das Laden von Modellen erlaubt wird, kann man den Test wieder einschalten
   @Test
   public void testAutomatonSymbolTableCreation() {
     final AutomatonSymbol automatonSymbol =
@@ -59,8 +67,7 @@ public class AutomatonSymbolTableCreatorTest {
   public void testAutomatonSymbolTableCreation2(){
     ASTAutomaton ast = AutomataTool
             .parse("src/test/resources/automata/symboltable/PingPong.aut");
-    AutomataScope myglobal = new AutomataGlobalScope(new ModelPath(Paths.get("src/main/resources/example")),"aut");
-    AutomataSymbolTableCreator stcreator = new AutomataSymbolTableCreator(myglobal);
+    AutomataSymbolTableCreatorDelegator stcreator = AutomataMill.automataSymbolTableCreatorDelegator();
     IAutomataScope artifact = stcreator.createFromAST(ast);
     IAutomataScope s = artifact.getSubScopes().stream().findAny().get();
     assertTrue(s.resolveState("NoGame").isPresent());
@@ -68,8 +75,8 @@ public class AutomatonSymbolTableCreatorTest {
     assertTrue(artifact.resolveAutomaton("PingPong").isPresent());
     assertTrue(artifact.resolveState("PingPong.NoGame").isPresent());
 
-    assertTrue(myglobal.resolveAutomaton("PingPong").isPresent());
-    assertTrue(myglobal.resolveState("PingPong.NoGame").isPresent());
+    assertTrue(globalScope.resolveAutomaton("PingPong").isPresent());
+    assertTrue(globalScope.resolveState("PingPong.NoGame").isPresent());
 
     assertTrue(s.resolveState("PingPong.NoGame").isPresent());
 
