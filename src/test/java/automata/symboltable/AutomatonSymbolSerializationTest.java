@@ -24,8 +24,9 @@ public class AutomatonSymbolSerializationTest {
     ASTAutomaton ast = AutomataTool.parse("src/test/resources/" + model);
 
     ModelPath mp = new ModelPath(Paths.get("src/test/resources/" + model).getParent());
-    IAutomataGlobalScope globalScope = AutomataMill.automataGlobalScopeBuilder()
-        .setModelPath(mp).setModelFileExtension("aut").build();
+    IAutomataGlobalScope globalScope = AutomataMill.automataGlobalScope();
+    globalScope.setModelPath(mp);
+    globalScope.setModelFileExtension("aut");
     AutomataSymbolTableCreator symbolTable = AutomataMill
             .automataSymbolTableCreator();
     symbolTable.putOnStack(globalScope);
