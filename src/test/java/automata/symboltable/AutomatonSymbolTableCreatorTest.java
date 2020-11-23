@@ -24,9 +24,9 @@ public class AutomatonSymbolTableCreatorTest {
     final ModelPath modelPath =
             new ModelPath(Paths.get("src/test/resources/automata/symboltable"));
 
-    globalScope = AutomataMill.automataGlobalScope();
+    globalScope = AutomataMill.globalScope();
     globalScope.clear();
-    globalScope.setModelFileExtension("aut");
+    globalScope.setFileExt("aut");
     globalScope.setModelPath(modelPath);
     
     Log.enableFailQuick(false);

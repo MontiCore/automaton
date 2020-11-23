@@ -41,9 +41,9 @@ public class TransitionSourceExistsTest extends AbstractTest {
   public void setUp() throws RecognitionException {
     LogStub.init();
     Log.getFindings().clear();
-    globalScope = AutomataMill.automataGlobalScope();
+    globalScope = AutomataMill.globalScope();
     globalScope.clear();
-    globalScope.setModelFileExtension("aut");
+    globalScope.setFileExt("aut");
   }
   
   @Test

@@ -2,25 +2,22 @@
 package automata;
 
 
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Optional;
-
-import automata._symboltable.*;
-import org.antlr.v4.runtime.RecognitionException;
-
 import automata._ast.ASTAutomaton;
 import automata._cocos.AutomataCoCoChecker;
 import automata._parser.AutomataParser;
+import automata._symboltable.*;
 import automata.cocos.AtLeastOneInitialAndFinalState;
 import automata.cocos.AutomataCoCos;
 import automata.cocos.StateNameStartsWithCapitalLetter;
 import automata.cocos.TransitionSourceExists;
 import automata.prettyprint.PrettyPrinter;
 import automata.visitors.CountStates;
-import de.monticore.io.paths.ModelPath;
 import de.se_rwth.commons.logging.Log;
+import org.antlr.v4.runtime.RecognitionException;
+
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.util.Optional;
 
 /**
  * Main class for the Automaton DSL tool.
@@ -41,7 +38,7 @@ public class AutomataTool {
     String model = args[0];
     
     // setup the deser infrastructure
-    final AutomataScopeDeSer deser = new AutomataScopeDeSer();
+    final AutomataSymbols2Json deser = new AutomataSymbols2Json();
 
     // parse the model and create the AST representation
     final ASTAutomaton ast = parse(model);
@@ -115,9 +112,9 @@ public class AutomataTool {
    * @return
    */
   public static IAutomataArtifactScope createSymbolTable(ASTAutomaton ast) {
-    IAutomataGlobalScope gs = AutomataMill.automataGlobalScope();
+    IAutomataGlobalScope gs = AutomataMill.globalScope();
     gs.clear();
-    gs.setModelFileExtension("aut");
+    gs.setFileExt("aut");
     AutomataSymbolTableCreator symTabCreator = AutomataMill.automataSymbolTableCreator();
 
     IAutomataArtifactScope scope = symTabCreator.createFromAST(ast);

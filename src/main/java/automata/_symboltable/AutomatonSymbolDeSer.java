@@ -7,7 +7,7 @@ import de.monticore.symboltable.serialization.json.JsonObject;
 public class AutomatonSymbolDeSer extends AutomatonSymbolDeSerTOP {
 
   @Override protected void deserializeAddons(AutomatonSymbol symbol,
-      JsonObject symbolJson, IAutomataScope enclosingScope) {
+      JsonObject symbolJson) {
     String template = symbolJson.getStringMember("template");
     symbol.setTemplate(template);
   }

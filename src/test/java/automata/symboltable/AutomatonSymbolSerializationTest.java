@@ -24,9 +24,9 @@ public class AutomatonSymbolSerializationTest {
     ASTAutomaton ast = AutomataTool.parse("src/test/resources/" + model);
 
     ModelPath mp = new ModelPath(Paths.get("src/test/resources/" + model).getParent());
-    IAutomataGlobalScope globalScope = AutomataMill.automataGlobalScope();
+    IAutomataGlobalScope globalScope = AutomataMill.globalScope();
     globalScope.setModelPath(mp);
-    globalScope.setModelFileExtension("aut");
+    globalScope.setFileExt("aut");
     AutomataSymbolTableCreator symbolTable = AutomataMill
             .automataSymbolTableCreator();
     symbolTable.putOnStack(globalScope);
@@ -56,9 +56,9 @@ public class AutomatonSymbolSerializationTest {
   @Test
   public void testLoadSymbol() {
     ModelPath mp = new ModelPath(Paths.get("src/test/resources"));
-    IAutomataGlobalScope gs = AutomataMill.automataGlobalScope();
+    IAutomataGlobalScope gs = AutomataMill.globalScope();
     gs.clear();
-    gs.setModelFileExtension("aut");
+    gs.setFileExt("aut");
     gs.setModelPath(mp);
     Optional<AutomatonSymbol> resolvedAutomaton = gs
         .resolveAutomaton("automata.serialization.Ping2Pong2");
@@ -83,8 +83,8 @@ public class AutomatonSymbolSerializationTest {
     AutomataTool.main(new String[] { "src/test/resources/" + path });
     assertTrue(new File(symbolPath).exists());
 
-    AutomataScopeDeSer deSer = new AutomataScopeDeSer();
-    IAutomataArtifactScope artifactScope = deSer.load(symbolPath);
+    AutomataSymbols2Json symbols2Json = new AutomataSymbols2Json();
+    IAutomataArtifactScope artifactScope = symbols2Json.load(symbolPath);
     assertEquals("Door",artifactScope.getName());
     assertEquals("",artifactScope.getPackageName());
     assertEquals(1, artifactScope.getSymbolsSize());

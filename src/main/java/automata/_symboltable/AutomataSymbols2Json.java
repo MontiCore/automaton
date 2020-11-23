@@ -4,12 +4,12 @@ package automata._symboltable;
 
 import de.monticore.symboltable.serialization.JsonPrinter;
 
-public class AutomataSymbolTablePrinter extends AutomataSymbolTablePrinterTOP {
+public class AutomataSymbols2Json extends AutomataSymbols2JsonTOP {
 
-  public AutomataSymbolTablePrinter() {
+  public AutomataSymbols2Json() {
   }
 
-  public AutomataSymbolTablePrinter(JsonPrinter printer) {
+  public AutomataSymbols2Json(JsonPrinter printer) {
     super(printer);
   }
 
