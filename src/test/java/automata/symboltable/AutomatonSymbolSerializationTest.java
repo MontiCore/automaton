@@ -5,6 +5,8 @@ import automata.AutomataMill;
 import automata.AutomataTool;
 import automata._ast.ASTAutomaton;
 import automata._symboltable.*;
+import automata._visitor.AutomataTraverser;
+import automata._visitor.AutomataTraverserImplementation;
 import de.monticore.io.paths.ModelPath;
 import de.se_rwth.commons.logging.Log;
 import org.junit.Test;
@@ -27,9 +29,12 @@ public class AutomatonSymbolSerializationTest {
     IAutomataGlobalScope globalScope = AutomataMill.globalScope();
     globalScope.setModelPath(mp);
     globalScope.setFileExt("aut");
-    AutomataSymbolTableCreator symbolTable = AutomataMill.automataSymbolTableCreator();
-    symbolTable.putOnStack(globalScope);
-    scope = symbolTable.createFromAST(ast);
+    AutomataScopesGenitor genitor = AutomataMill.scopesGenitor();
+    AutomataTraverser traverser = new AutomataTraverserImplementation();
+    traverser.setAutomataHandler(genitor);
+    traverser.addAutomataVisitor(genitor);
+    genitor.putOnStack(globalScope);
+    scope = genitor.createFromAST(ast);
   }
 
   @Test

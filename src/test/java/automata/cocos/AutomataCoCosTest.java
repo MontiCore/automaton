@@ -13,9 +13,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 
 public class AutomataCoCosTest extends AbstractTest {
   
@@ -40,10 +39,9 @@ public class AutomataCoCosTest extends AbstractTest {
     
     checker.checkAll(ast);
     
-    Collection<Finding> expectedErrors = Arrays.asList(
-        Finding.warning("0xAUT02 State name 'notCapital' should start with a capital letter."
-            , new SourcePosition(5, 2))
-        );
+    Collection<Finding> expectedErrors = Collections.singletonList(
+      Finding.warning("0xAUT02 State name 'notCapital' should start with a capital letter.",
+        new SourcePosition(5, 2)));
     Assert.assertErrors(expectedErrors, Log.getFindings());
   }
   
@@ -54,10 +52,9 @@ public class AutomataCoCosTest extends AbstractTest {
     AutomataCoCoChecker checker = new AutomataCoCos().getCheckerForAllCoCos();
     checker.checkAll(automaton);
     
-    Collection<Finding> expectedErrors = Arrays.asList(
-        Finding.warning("0xAUT02 State name 'notCapital' should start with a capital letter."
-            , new SourcePosition(5, 2))
-        );
+    Collection<Finding> expectedErrors = Collections.singletonList(
+      Finding.warning("0xAUT02 State name 'notCapital' should start with a capital letter.",
+        new SourcePosition(5, 2)));
     
     Assert.assertErrors(expectedErrors, Log.getFindings());
   }

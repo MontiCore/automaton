@@ -11,6 +11,7 @@ import static org.junit.Assert.assertEquals;
  * Test for {@link PrettyPrinter}.
  */
 public class PrettyPrinterTest extends AbstractTest {
+
   @Test
   public void test() {
     ASTAutomaton automaton = parseModel("src/test/resources/automata/prettyprinter/valid/A.aut");

@@ -6,7 +6,6 @@ import automata._ast.ASTAutomaton;
 import automata._ast.ASTTransition;
 import automata._cocos.AutomataCoCoChecker;
 import automata._symboltable.AutomataScopesGenitor;
-import automata._symboltable.AutomataSymbolTableCreator;
 import automata._symboltable.IAutomataGlobalScope;
 import automata._visitor.AutomataTraverser;
 import automata._visitor.AutomataTraverserImplementation;
@@ -23,11 +22,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class TransitionStatesExistTest extends AbstractTest {
   
@@ -82,10 +80,9 @@ public class TransitionStatesExistTest extends AbstractTest {
     TransitionStatesExist coco = new TransitionStatesExist();
     coco.check(transition);
     
-    Collection<Finding> expectedErrors = Arrays.asList(
-        Finding.error("0xAUT03 The source state of the transition does not exist.",
-            new SourcePosition(6, 2))
-        );
+    Collection<Finding> expectedErrors = Collections.singletonList(
+      Finding.error("0xAUT03 The source state of the transition does not exist.",
+        new SourcePosition(6, 2)));
     
     Assert.assertErrors(expectedErrors, Log.getFindings());
   }
