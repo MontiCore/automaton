@@ -27,10 +27,9 @@ public class AutomatonSymbolSerializationTest {
     IAutomataGlobalScope globalScope = AutomataMill.globalScope();
     globalScope.setModelPath(mp);
     globalScope.setFileExt("aut");
-    AutomataSymbolTableCreator symbolTable = AutomataMill
-            .automataSymbolTableCreator();
+    AutomataSymbolTableCreator symbolTable = AutomataMill.automataSymbolTableCreator();
     symbolTable.putOnStack(globalScope);
-    scope =  symbolTable.createFromAST(ast);
+    scope = symbolTable.createFromAST(ast);
   }
 
   @Test
@@ -47,8 +46,7 @@ public class AutomatonSymbolSerializationTest {
     IAutomataScope deserialized = deser.deserialize(serialized);
     assertNotNull(deserialized);
     assertEquals(1, deserialized.getLocalAutomatonSymbols().size());
-    AutomatonSymbol autSymbol = (AutomatonSymbol) deserialized.getLocalAutomatonSymbols()
-        .toArray()[0];
+    AutomatonSymbol autSymbol = (AutomatonSymbol) deserialized.getLocalAutomatonSymbols().toArray()[0];
     assertEquals("PingPong", autSymbol.getName());
     assertEquals(1, deserialized.getSubScopes().size());
   }
@@ -60,8 +58,7 @@ public class AutomatonSymbolSerializationTest {
     gs.clear();
     gs.setFileExt("aut");
     gs.setModelPath(mp);
-    Optional<AutomatonSymbol> resolvedAutomaton = gs
-        .resolveAutomaton("automata.serialization.Ping2Pong2");
+    Optional<AutomatonSymbol> resolvedAutomaton = gs.resolveAutomaton("automata.serialization.Ping2Pong2");
     assertTrue(resolvedAutomaton.isPresent());
   }
 
@@ -72,8 +69,7 @@ public class AutomatonSymbolSerializationTest {
     // Note: usually, the stored symbols will be in a file located in the folder structure that
     // matches the package structure. However, the automata language does not defines packages for
     // automata.
-    assertTrue(
-        new File("target/symbols/automata/cocos/valid/A.autsym").exists());
+    assertTrue(new File("target/symbols/automata/cocos/valid/A.autsym").exists());
   }
 
   @Test
@@ -85,8 +81,8 @@ public class AutomatonSymbolSerializationTest {
 
     AutomataSymbols2Json symbols2Json = new AutomataSymbols2Json();
     IAutomataArtifactScope artifactScope = symbols2Json.load(symbolPath);
-    assertEquals("Door",artifactScope.getName());
-    assertEquals("",artifactScope.getPackageName());
+    assertEquals("Door", artifactScope.getName());
+    assertEquals("", artifactScope.getPackageName());
     assertEquals(1, artifactScope.getSymbolsSize());
     assertEquals(1, artifactScope.getSubScopes().size());
     assertTrue(null == artifactScope.getEnclosingScope());
@@ -97,29 +93,29 @@ public class AutomatonSymbolSerializationTest {
     assertEquals(artifactScope, automatonSymbol.getEnclosingScope());
 
     IAutomataScope automatonScope = automatonSymbol.getSpannedScope();
-    assertEquals("Door",automatonScope.getName());
+    assertEquals("Door", automatonScope.getName());
     assertEquals(2, automatonScope.getSymbolsSize());
     assertEquals(2, automatonScope.getSubScopes().size());
     assertEquals(artifactScope, automatonSymbol.getEnclosingScope());
 
     StateSymbol close = automatonScope.getLocalStateSymbols().get(0);
-    assertEquals("Close",close.getName());
+    assertEquals("Close", close.getName());
     assertTrue(null != close.getSpannedScope());
     assertEquals(automatonScope, close.getEnclosingScope());
 
     StateSymbol open = automatonScope.getLocalStateSymbols().get(1);
-    assertEquals("Open",open.getName());
+    assertEquals("Open", open.getName());
     assertTrue(null != open.getSpannedScope());
     assertEquals(automatonScope, open.getEnclosingScope());
 
     IAutomataScope closeScope = close.getSpannedScope();
-    assertEquals("Close",closeScope.getName());
+    assertEquals("Close", closeScope.getName());
     assertEquals(3, closeScope.getSymbolsSize());
     assertEquals(3, closeScope.getSubScopes().size());
     assertEquals(automatonScope, closeScope.getEnclosingScope());
 
     IAutomataScope openScope = open.getSpannedScope();
-    assertEquals("Open",openScope.getName());
+    assertEquals("Open", openScope.getName());
     assertEquals(0, openScope.getSymbolsSize());
     assertEquals(0, openScope.getSubScopes().size());
     assertEquals(automatonScope, openScope.getEnclosingScope());

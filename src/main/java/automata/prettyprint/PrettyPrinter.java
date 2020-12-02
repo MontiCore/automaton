@@ -10,9 +10,8 @@ import automata._visitor.AutomataTraverserImplementation;
 import de.monticore.prettyprint.IndentPrinter;
 
 /**
- * Pretty prints automatons. Use {@link #print(ASTAutomaton)} to start a pretty
+ * Pretty prints automatons. Use {@link #handle(ASTAutomaton)} to start a pretty
  * print and get the result by using {@link #getResult()}.
- *
  */
 public class PrettyPrinter implements AutomataHandler {
   private final IndentPrinter printer;
@@ -29,15 +28,6 @@ public class PrettyPrinter implements AutomataHandler {
     this.traverser = traverser;
   }
 
-  /**
-   * Prints the automaton.
-   *
-   * @param automaton The input automaton.
-   */
-  public void print(ASTAutomaton automaton) {
-    handle(automaton);
-  }
-  
   /**
    * Gets the printed result.
    *
@@ -64,14 +54,14 @@ public class PrettyPrinter implements AutomataHandler {
     getPrinter().unindent();
     getPrinter().println("}");
   }
-  
+
   @Override
   public void traverse(ASTAutomaton node) {
     // guarantee ordering: states before transitions
     node.getStateList().forEach(s -> s.accept(getTraverser()));
     node.getTransitionList().forEach(t -> t.accept(getTraverser()));
   }
-  
+
   @Override
   public void handle(ASTState node) {
     getPrinter().print("state " + node.getName());
@@ -84,7 +74,7 @@ public class PrettyPrinter implements AutomataHandler {
     getPrinter().println(";");
     getTraverser().traverse(node);
   }
-  
+
   @Override
   public void handle(ASTTransition node) {
     getPrinter().print(node.getFrom());

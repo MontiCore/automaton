@@ -10,24 +10,22 @@ import de.se_rwth.commons.logging.Log;
 import java.util.Optional;
 
 public class TransitionStatesExist implements AutomataASTTransitionCoCo {
-  
+
   @Override
   public void check(ASTTransition node) {
     IAutomataScope enclosingScope = node.getEnclosingScope();
     Optional<StateSymbol> sourceState = enclosingScope.resolveState(node.getFrom());
-    
+
     if (!sourceState.isPresent()) {
       // Issue error...
-      Log.error("0xAUT03 The source state of the transition does not exist.",
-          node.get_SourcePositionStart());
+      Log.error("0xAUT03 The source state of the transition does not exist.", node.get_SourcePositionStart());
     }
 
     Optional<StateSymbol> targetState = enclosingScope.resolveState(node.getTo());
 
     if (!targetState.isPresent()) {
       // Issue error...
-      Log.error("0xAUT04 The target state of the transition does not exist.",
-        node.get_SourcePositionStart());
+      Log.error("0xAUT04 The target state of the transition does not exist.", node.get_SourcePositionStart());
     }
   }
 }
