@@ -15,17 +15,12 @@ import de.monticore.prettyprint.IndentPrinter;
  */
 public class PrettyPrinter implements AutomataHandler {
   private final IndentPrinter printer;
-  AutomataTraverser traverser;
+  private AutomataTraverser traverser;
 
   public PrettyPrinter() {
     this.printer = new IndentPrinter();
     this.traverser = new AutomataTraverserImplementation();
     traverser.setAutomataHandler(this);
-  }
-
-  public PrettyPrinter(IndentPrinter printer, AutomataTraverser traverser) {
-    this.printer = printer;
-    this.traverser = traverser;
   }
 
   /**
