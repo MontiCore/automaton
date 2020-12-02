@@ -9,7 +9,7 @@ import de.se_rwth.commons.logging.Log;
 
 import java.util.Optional;
 
-public class TransitionSourceExists implements AutomataASTTransitionCoCo {
+public class TransitionStatesExist implements AutomataASTTransitionCoCo {
   
   @Override
   public void check(ASTTransition node) {
@@ -20,6 +20,14 @@ public class TransitionSourceExists implements AutomataASTTransitionCoCo {
       // Issue error...
       Log.error("0xAUT03 The source state of the transition does not exist.",
           node.get_SourcePositionStart());
+    }
+
+    Optional<StateSymbol> targetState = enclosingScope.resolveState(node.getTo());
+
+    if (!targetState.isPresent()) {
+      // Issue error...
+      Log.error("0xAUT04 The target state of the transition does not exist.",
+        node.get_SourcePositionStart());
     }
   }
 }

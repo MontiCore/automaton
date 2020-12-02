@@ -9,8 +9,7 @@ public class AutomataCoCos {
     final AutomataCoCoChecker checker = new AutomataCoCoChecker();
     checker.addCoCo(new AtLeastOneInitialAndFinalState());
     checker.addCoCo(new StateNameStartsWithCapitalLetter());
-    // TODO PN uncomment
-    // checker.addCoCo(new TransitionSourceExists());
+    checker.addCoCo(new TransitionStatesExist());
     
     return checker;
   }

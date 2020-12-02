@@ -9,7 +9,7 @@ import automata._symboltable.*;
 import automata.cocos.AtLeastOneInitialAndFinalState;
 import automata.cocos.AutomataCoCos;
 import automata.cocos.StateNameStartsWithCapitalLetter;
-import automata.cocos.TransitionSourceExists;
+import automata.cocos.TransitionStatesExist;
 import automata.prettyprint.PrettyPrinter;
 import automata.visitors.CountStates;
 import de.se_rwth.commons.logging.Log;
@@ -124,7 +124,7 @@ public class AutomataTool {
   
   /**
    * Run the default context conditions {@link AtLeastOneInitialAndFinalState},
-   * {@link TransitionSourceExists}, and
+   * {@link TransitionStatesExist}, and
    * {@link StateNameStartsWithCapitalLetter}.
    *
    * @param ast

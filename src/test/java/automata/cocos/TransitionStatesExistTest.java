@@ -5,9 +5,11 @@ import automata.AutomataMill;
 import automata._ast.ASTAutomaton;
 import automata._ast.ASTTransition;
 import automata._cocos.AutomataCoCoChecker;
+import automata._symboltable.AutomataScopesGenitor;
 import automata._symboltable.AutomataSymbolTableCreator;
-import automata._symboltable.AutomatonSymbol;
 import automata._symboltable.IAutomataGlobalScope;
+import automata._visitor.AutomataTraverser;
+import automata._visitor.AutomataTraverserImplementation;
 import automata.lang.AbstractTest;
 import de.monticore.cocos.helper.Assert;
 import de.monticore.io.paths.ModelPath;
@@ -23,12 +25,11 @@ import org.junit.Test;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class TransitionSourceExistsTest extends AbstractTest {
+public class TransitionStatesExistTest extends AbstractTest {
   
   @BeforeClass
   public static void init() {
@@ -51,10 +52,12 @@ public class TransitionSourceExistsTest extends AbstractTest {
     globalScope.setModelPath(new ModelPath(Paths.get("src/test/resources/automata/cocos/valid")));
 
     ASTAutomaton ast = parseModel("src/test/resources/automata/cocos/valid/A.aut");
-    AutomataSymbolTableCreator symbolTable = AutomataMill
-            .automataSymbolTableCreator();
-    symbolTable.putOnStack(globalScope);
-    symbolTable.createFromAST(ast);
+    AutomataScopesGenitor genitor = AutomataMill.scopesGenitor();
+    AutomataTraverser traverser = new AutomataTraverserImplementation();
+    traverser.setAutomataHandler(genitor);
+    traverser.addAutomataVisitor(genitor);
+    genitor.putOnStack(globalScope);
+    genitor.createFromAST(ast);
     
     AutomataCoCoChecker checker = new AutomataCoCos().getCheckerForAllCoCos();
     checker.checkAll(ast);
@@ -67,14 +70,16 @@ public class TransitionSourceExistsTest extends AbstractTest {
   public void testNotExistingTransitionSource() {
     globalScope.setModelPath(new ModelPath(Paths.get("src/test/resources/automata/cocos/invalid")));
     ASTAutomaton ast = parseModel("src/test/resources/automata/cocos/invalid/NotExistingTransitionSource.aut");
-    AutomataSymbolTableCreator symbolTable = AutomataMill
-            .automataSymbolTableCreator();
-    symbolTable.putOnStack(globalScope);
-    symbolTable.createFromAST(ast);
+    AutomataScopesGenitor genitor = AutomataMill.scopesGenitor();
+    AutomataTraverser traverser = new AutomataTraverserImplementation();
+    traverser.setAutomataHandler(genitor);
+    traverser.addAutomataVisitor(genitor);
+    genitor.putOnStack(globalScope);
+    genitor.createFromAST(ast);
 
     ASTTransition transition = ast.getTransitionList().get(0);
     
-    TransitionSourceExists coco = new TransitionSourceExists();
+    TransitionStatesExist coco = new TransitionStatesExist();
     coco.check(transition);
     
     Collection<Finding> expectedErrors = Arrays.asList(
