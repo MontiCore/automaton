@@ -32,7 +32,7 @@ public class AutomatonSymbolSerializationTest {
     AutomataScopesGenitor genitor = AutomataMill.scopesGenitor();
     AutomataTraverser traverser = AutomataMill.traverser();
     traverser.setAutomataHandler(genitor);
-    traverser.addAutomataVisitor(genitor);
+    traverser.add4Automata(genitor);
     genitor.putOnStack(globalScope);
     scope = genitor.createFromAST(ast);
   }

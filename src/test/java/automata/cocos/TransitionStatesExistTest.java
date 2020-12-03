@@ -53,7 +53,7 @@ public class TransitionStatesExistTest extends AbstractTest {
     AutomataScopesGenitor genitor = AutomataMill.scopesGenitor();
     AutomataTraverser traverser = AutomataMill.traverser();
     traverser.setAutomataHandler(genitor);
-    traverser.addAutomataVisitor(genitor);
+    traverser.add4Automata(genitor);
     genitor.putOnStack(globalScope);
     genitor.createFromAST(ast);
     
@@ -71,7 +71,7 @@ public class TransitionStatesExistTest extends AbstractTest {
     AutomataScopesGenitor genitor = AutomataMill.scopesGenitor();
     AutomataTraverser traverser = AutomataMill.traverser();
     traverser.setAutomataHandler(genitor);
-    traverser.addAutomataVisitor(genitor);
+    traverser.add4Automata(genitor);
     genitor.putOnStack(globalScope);
     genitor.createFromAST(ast);
 
