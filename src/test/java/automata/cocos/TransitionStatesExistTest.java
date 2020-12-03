@@ -51,7 +51,7 @@ public class TransitionStatesExistTest extends AbstractTest {
 
     ASTAutomaton ast = parseModel("src/test/resources/automata/cocos/valid/A.aut");
     AutomataScopesGenitor genitor = AutomataMill.scopesGenitor();
-    AutomataTraverser traverser = new AutomataTraverserImplementation();
+    AutomataTraverser traverser = AutomataMill.traverser();
     traverser.setAutomataHandler(genitor);
     traverser.addAutomataVisitor(genitor);
     genitor.putOnStack(globalScope);
@@ -69,7 +69,7 @@ public class TransitionStatesExistTest extends AbstractTest {
     globalScope.setModelPath(new ModelPath(Paths.get("src/test/resources/automata/cocos/invalid")));
     ASTAutomaton ast = parseModel("src/test/resources/automata/cocos/invalid/NotExistingTransitionSource.aut");
     AutomataScopesGenitor genitor = AutomataMill.scopesGenitor();
-    AutomataTraverser traverser = new AutomataTraverserImplementation();
+    AutomataTraverser traverser = AutomataMill.traverser();
     traverser.setAutomataHandler(genitor);
     traverser.addAutomataVisitor(genitor);
     genitor.putOnStack(globalScope);

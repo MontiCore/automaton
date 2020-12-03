@@ -30,7 +30,7 @@ public class AutomatonSymbolSerializationTest {
     globalScope.setModelPath(mp);
     globalScope.setFileExt("aut");
     AutomataScopesGenitor genitor = AutomataMill.scopesGenitor();
-    AutomataTraverser traverser = new AutomataTraverserImplementation();
+    AutomataTraverser traverser = AutomataMill.traverser();
     traverser.setAutomataHandler(genitor);
     traverser.addAutomataVisitor(genitor);
     genitor.putOnStack(globalScope);

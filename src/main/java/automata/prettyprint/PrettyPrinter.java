@@ -1,6 +1,7 @@
 /* (c) https://github.com/MontiCore/monticore */
 package automata.prettyprint;
 
+import automata.AutomataMill;
 import automata._ast.ASTAutomaton;
 import automata._ast.ASTState;
 import automata._ast.ASTTransition;
@@ -19,7 +20,7 @@ public class PrettyPrinter implements AutomataHandler {
 
   public PrettyPrinter() {
     this.printer = new IndentPrinter();
-    this.traverser = new AutomataTraverserImplementation();
+    this.traverser = AutomataMill.traverser();
     traverser.setAutomataHandler(this);
   }
 

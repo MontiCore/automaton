@@ -40,7 +40,7 @@ public class AutomatonSymbolTableCreatorTest {
     ASTAutomaton ast = AutomataTool
             .parse("src/test/resources/automata/symboltable/PingPong.aut");
     AutomataScopesGenitor genitor = AutomataMill.scopesGenitor();
-    AutomataTraverser traverser = new AutomataTraverserImplementation();
+    AutomataTraverser traverser = AutomataMill.traverser();
     traverser.setAutomataHandler(genitor);
     traverser.addAutomataVisitor(genitor);
     genitor.putOnStack(globalScope);
