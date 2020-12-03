@@ -6,7 +6,6 @@ import automata.AutomataTool;
 import automata._ast.ASTAutomaton;
 import automata._symboltable.*;
 import automata._visitor.AutomataTraverser;
-import automata._visitor.AutomataTraverserImplementation;
 import de.monticore.io.paths.ModelPath;
 import de.se_rwth.commons.logging.Log;
 import org.junit.Test;

@@ -8,7 +8,6 @@ import automata._symboltable.AutomataScopesGenitor;
 import automata._symboltable.IAutomataGlobalScope;
 import automata._symboltable.IAutomataScope;
 import automata._visitor.AutomataTraverser;
-import automata._visitor.AutomataTraverserImplementation;
 import de.monticore.io.paths.ModelPath;
 import de.se_rwth.commons.logging.Log;
 import org.junit.Before;
