@@ -7,7 +7,6 @@ import automata._ast.ASTState;
 import automata._ast.ASTTransition;
 import automata._visitor.AutomataHandler;
 import automata._visitor.AutomataTraverser;
-import automata._visitor.AutomataTraverserImplementation;
 import de.monticore.prettyprint.IndentPrinter;
 
 /**
