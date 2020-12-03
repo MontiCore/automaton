@@ -6,6 +6,7 @@ import automata._ast.ASTAutomaton;
 import automata._cocos.AutomataCoCoChecker;
 import automata._parser.AutomataParser;
 import automata._symboltable.*;
+import automata._visitor.AutomataTraverser;
 import automata.cocos.AtLeastOneInitialAndFinalState;
 import automata.cocos.AutomataCoCos;
 import automata.cocos.StateNameStartsWithCapitalLetter;
@@ -114,10 +115,14 @@ public class AutomataTool {
   public static IAutomataArtifactScope createSymbolTable(ASTAutomaton ast) {
     IAutomataGlobalScope gs = AutomataMill.globalScope();
     gs.clear();
-    gs.setFileExt("aut");
-    AutomataSymbolTableCreator symTabCreator = AutomataMill.automataSymbolTableCreator();
 
-    IAutomataArtifactScope scope = symTabCreator.createFromAST(ast);
+    AutomataScopesGenitor genitor = AutomataMill.scopesGenitor();
+    AutomataTraverser traverser = AutomataMill.traverser();
+    traverser.setAutomataHandler(genitor);
+    traverser.add4Automata(genitor);
+    genitor.putOnStack(gs);
+
+    IAutomataArtifactScope scope = genitor.createFromAST(ast);
     gs.addSubScope(scope);
     return scope;
   }
