@@ -73,13 +73,13 @@ public class AutomatonSymbolSerializationTest {
     // Note: usually, the stored symbols will be in a file located in the folder structure that
     // matches the package structure. However, the automata language does not defines packages for
     // automata.
-    assertTrue(new File("target/symbols/automata/cocos/valid/A.autsym").exists());
+    assertTrue(new File("target/symbols/A.autsym").exists());
   }
 
   @Test
   public void testDoorModel() {
     String path = "automata/symboltable/Door.aut";
-    String symbolPath = "target/symbols/automata/symboltable/Door.autsym";
+    String symbolPath = "target/symbols/Door.autsym";
     AutomataTool.main(new String[] { "src/test/resources/" + path });
     assertTrue(new File(symbolPath).exists());
 
