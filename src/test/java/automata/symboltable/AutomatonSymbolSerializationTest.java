@@ -60,7 +60,6 @@ public class AutomatonSymbolSerializationTest {
     ModelPath mp = new ModelPath(Paths.get("src/test/resources"));
     IAutomataGlobalScope gs = AutomataMill.globalScope();
     gs.clear();
-    gs.setFileExt("aut");
     gs.setModelPath(mp);
     Optional<AutomatonSymbol> resolvedAutomaton = gs.resolveAutomaton("automata.serialization.Ping2Pong2");
     assertTrue(resolvedAutomaton.isPresent());
