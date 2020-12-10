@@ -70,7 +70,9 @@ public class AutomataTool {
 
     // analyze the model with a visitor
     CountStates cs = new CountStates();
-    cs.handle(ast);
+    AutomataTraverser t = AutomataMill.traverser();
+    t.add4Automata(cs);
+    ast.accept(t);
     Log.info("The model contains " + cs.getCount() + " states.", AutomataTool.class.getName());
 
     // execute a pretty printer

@@ -2,6 +2,9 @@
 package automata.visitors;
 
 import static org.junit.Assert.assertEquals;
+
+import automata.AutomataMill;
+import automata._visitor.AutomataTraverser;
 import automata.lang.AbstractTest;
 
 import org.junit.Test;
@@ -18,7 +21,9 @@ public class CountStatesTest extends AbstractTest {
   public void test() {
     ASTAutomaton automaton = parseModel("src/test/resources/automata/visitors/valid/A.aut");
     CountStates cs = new CountStates();
-    cs.handle(automaton);
+    AutomataTraverser t = AutomataMill.traverser();
+    t.add4Automata(cs);
+    automaton.accept(t);
     assertEquals(3, cs.getCount());
   }
 }
