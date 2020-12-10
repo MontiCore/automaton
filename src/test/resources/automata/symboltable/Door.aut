@@ -1,7 +1,7 @@
 /* (c) https://github.com/MontiCore/monticore */
 
 // Model of a door
-automata Door {
+automaton Door {
   state Close <<initial>> <<final>> {
     state Closing <<initial>>;
     state Closed;

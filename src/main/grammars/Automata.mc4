@@ -9,7 +9,7 @@ grammar Automata extends de.monticore.MCBasics {
     @attribute transitions List of transitions
 */
 symbol scope Automaton =
-  "automata" Name "{" (State | Transition)* "}" ;
+  "automaton" Name "{" (State | Transition)* "}" ;
 
 /** A ASTState represents a state of a finite automata
     @attribute name Name of state
@@ -18,7 +18,7 @@ symbol scope Automaton =
     @attribute states List of sub states
     @attribute transitions List of transitions
 */
-symbol scope State =
+symbol State =
   "state" Name
 
   (("<<" ["initial"] ">>" ) | ("<<" ["final"] ">>" ))*

@@ -1,6 +1,6 @@
 /* (c) https://github.com/MontiCore/monticore */
 
-automata A {
+automaton A {
   state S1  <<initial>> <<final>>;
   state S2;
   state S3;

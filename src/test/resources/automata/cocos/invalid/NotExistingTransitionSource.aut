@@ -1,6 +1,6 @@
 /* (c) https://github.com/MontiCore/monticore */
 
-automata MissingInitialState {
+automaton MissingInitialState {
   state s;
 
   a - t > s;

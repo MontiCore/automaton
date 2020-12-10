@@ -96,31 +96,30 @@ public class AutomatonSymbolSerializationTest {
 
     IAutomataScope automatonScope = automatonSymbol.getSpannedScope();
     assertEquals("Door", automatonScope.getName());
-    assertEquals(2, automatonScope.getSymbolsSize());
-    assertEquals(2, automatonScope.getSubScopes().size());
+    assertEquals(5, automatonScope.getSymbolsSize());
+    assertEquals(0, automatonScope.getSubScopes().size());
     assertEquals(artifactScope, automatonSymbol.getEnclosingScope());
 
     StateSymbol close = automatonScope.getLocalStateSymbols().get(0);
     assertEquals("Close", close.getName());
-    assertTrue(null != close.getSpannedScope());
     assertEquals(automatonScope, close.getEnclosingScope());
 
-    StateSymbol open = automatonScope.getLocalStateSymbols().get(1);
+    StateSymbol closing = automatonScope.getLocalStateSymbols().get(1);
+    assertEquals("Closing", closing.getName());
+    assertEquals(automatonScope, closing.getEnclosingScope());
+  
+    StateSymbol closed = automatonScope.getLocalStateSymbols().get(2);
+    assertEquals("Closed", closed.getName());
+    assertEquals(automatonScope, closed.getEnclosingScope());
+  
+    StateSymbol opening = automatonScope.getLocalStateSymbols().get(3);
+    assertEquals("Opening", opening.getName());
+    assertEquals(automatonScope, opening.getEnclosingScope());
+  
+    StateSymbol open = automatonScope.getLocalStateSymbols().get(4);
     assertEquals("Open", open.getName());
-    assertTrue(null != open.getSpannedScope());
     assertEquals(automatonScope, open.getEnclosingScope());
 
-    IAutomataScope closeScope = close.getSpannedScope();
-    assertEquals("Close", closeScope.getName());
-    assertEquals(3, closeScope.getSymbolsSize());
-    assertEquals(3, closeScope.getSubScopes().size());
-    assertEquals(automatonScope, closeScope.getEnclosingScope());
-
-    IAutomataScope openScope = open.getSpannedScope();
-    assertEquals("Open", openScope.getName());
-    assertEquals(0, openScope.getSymbolsSize());
-    assertEquals(0, openScope.getSubScopes().size());
-    assertEquals(automatonScope, openScope.getEnclosingScope());
   }
 
 }
