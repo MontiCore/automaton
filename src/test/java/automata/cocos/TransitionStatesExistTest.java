@@ -42,7 +42,6 @@ public class TransitionStatesExistTest extends AbstractTest {
     Log.getFindings().clear();
     globalScope = AutomataMill.globalScope();
     globalScope.clear();
-    globalScope.setFileExt("aut");
   }
   
   @Test

@@ -27,7 +27,6 @@ public class AutomatonSymbolSerializationTest {
     ModelPath mp = new ModelPath(Paths.get("src/test/resources/" + model).getParent());
     IAutomataGlobalScope globalScope = AutomataMill.globalScope();
     globalScope.setModelPath(mp);
-    globalScope.setFileExt("aut");
     AutomataScopesGenitor genitor = AutomataMill.scopesGenitor();
     AutomataTraverser traverser = AutomataMill.traverser();
     traverser.setAutomataHandler(genitor);

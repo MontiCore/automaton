@@ -28,7 +28,6 @@ public class AutomatonSymbolTableCreatorTest {
 
     globalScope = AutomataMill.globalScope();
     globalScope.clear();
-    globalScope.setFileExt("aut");
     globalScope.setModelPath(modelPath);
     
     Log.enableFailQuick(false);
