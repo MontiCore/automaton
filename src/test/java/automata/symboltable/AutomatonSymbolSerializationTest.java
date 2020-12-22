@@ -41,7 +41,7 @@ public class AutomatonSymbolSerializationTest {
     final AutomatonSymbol automatonSymbol = scope.resolveAutomaton("PingPong").orElse(null);
     assertNotNull(automatonSymbol);
 
-    AutomataScopeDeSer deser = new AutomataScopeDeSer();
+    AutomataDeSer deser = new AutomataDeSer();
     String serialized = deser.serialize(scope);
     System.out.println(serialized);
     assertTrue(serialized.length() > 0);
