@@ -148,3 +148,8 @@ task testReport(type: TestReport) {
     // Include the results from the 'test' task
     reportOn tasks.withType(Test)
 }
+
+
+task buildAll(type: GradleBuild) {
+  tasks = [ 'build' ]
+}
