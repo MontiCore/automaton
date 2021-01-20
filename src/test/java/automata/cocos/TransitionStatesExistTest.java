@@ -80,7 +80,7 @@ public class TransitionStatesExistTest extends AbstractTest {
     coco.check(transition);
     
     Collection<Finding> expectedErrors = Collections.singletonList(
-      Finding.error("0xAUT03 The source state of the transition does not exist.",
+      Finding.error("0xB4003 The source state of the transition does not exist.",
         new SourcePosition(6, 2)));
     
     Assert.assertErrors(expectedErrors, Log.getFindings());

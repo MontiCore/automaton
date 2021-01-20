@@ -49,7 +49,7 @@ public class AtLeastOneInitialAndFinalStateTest extends AbstractTest {
     coco.check(automaton);
 
     Collection<Finding> expectedErrors = Collections.singletonList(
-      Finding.error("0xA0114 An automata must have at least one initial and one final state.",
+      Finding.error("0xB4114 An automata must have at least one initial and one final state.",
         new SourcePosition(3, 0)));
 
     Assert.assertErrors(expectedErrors, Log.getFindings());

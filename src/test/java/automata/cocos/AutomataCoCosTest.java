@@ -40,7 +40,7 @@ public class AutomataCoCosTest extends AbstractTest {
     checker.checkAll(ast);
     
     Collection<Finding> expectedErrors = Collections.singletonList(
-      Finding.warning("0xAUT02 State name 'notCapital' should start with a capital letter.",
+      Finding.warning("0xB4002 State name 'notCapital' should start with a capital letter.",
         new SourcePosition(5, 2)));
     Assert.assertErrors(expectedErrors, Log.getFindings());
   }
@@ -53,7 +53,7 @@ public class AutomataCoCosTest extends AbstractTest {
     checker.checkAll(automaton);
     
     Collection<Finding> expectedErrors = Collections.singletonList(
-      Finding.warning("0xAUT02 State name 'notCapital' should start with a capital letter.",
+      Finding.warning("0xB4002 State name 'notCapital' should start with a capital letter.",
         new SourcePosition(5, 2)));
     
     Assert.assertErrors(expectedErrors, Log.getFindings());
