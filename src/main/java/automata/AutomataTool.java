@@ -39,9 +39,6 @@ public class AutomataTool {
     }
     String model = args[0];
 
-    // setup the deser infrastructure
-    final AutomataSymbols2Json s2j = new AutomataSymbols2Json();
-
     // parse the model and create the AST representation
     final ASTAutomaton ast = parse(model);
     Log.info(model + " parsed successfully!", AutomataTool.class.getName());
@@ -65,6 +62,7 @@ public class AutomataTool {
     customCoCos.checkAll(ast);
 
     // store artifact scope
+    final AutomataSymbols2Json s2j = new AutomataSymbols2Json();
     String symFile = "target/symbols/" + getPathFromPackage(modelTopScope.getFullName()) + ".autsym";
     s2j.store(modelTopScope, symFile);
 
