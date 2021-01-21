@@ -5,7 +5,7 @@ plugins {
     id "java"
     id "monticore"  version "$mc_version" // MontiCore Plugin
     id "maven-publish"
-    id "com.github.johnrengelman.shadow" version "4.0.4"
+    id "com.github.johnrengelman.shadow" version "6.0.0"
     // useful reports
     // todo: reactivate this plugin when new version compatible to gradle 6.0.1 is available
 //    id 'cz.malohlava.visteg' version '1.0.5'
@@ -84,15 +84,9 @@ compileJava {
     dependsOn project.collect { it.tasks.withType(MCTask) }
 }
 
-task sourcesJar(type: Jar) {
-    archiveClassifier = 'sources'
-    from(sourceSets.main.allJava)
-}
-
-// build javadoc jar in addition
-task javadocJar(type: Jar) {
-    from javadoc
-    archiveClassifier =  "javadoc"
+java {
+  withSourcesJar()
+  withJavadocJar()
 }
 // generated java doc contains errors, disable for now
 javadoc.failOnError(false)
@@ -119,9 +113,6 @@ publishing {
         mavenJava(MavenPublication) {
             artifactId = "$project.name"
             from components.java
-            artifact sourcesJar
-            artifact javadocJar
-            artifact shadowJar
             artifact grammarJar
         }
     }

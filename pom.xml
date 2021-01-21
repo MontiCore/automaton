@@ -200,11 +200,6 @@
     </dependency>
     
     <!-- MontiCore Dependencies -->
-    <dependency>
-      <groupId>de.monticore</groupId>
-      <artifactId>monticore-generator</artifactId>
-      <version>${monticore.version}</version>
-    </dependency>
     
     <dependency>
       <groupId>de.monticore</groupId>
