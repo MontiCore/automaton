@@ -89,7 +89,7 @@ public class AutomataTool {
   public static ASTAutomaton parse(String model) {
     try {
       AutomataParser parser = new AutomataParser() ;
-      Optional<ASTAutomaton> optAutomaton = parser.parse(model);
+      Optional<ASTAutomaton> optAutomaton = AutomataMill.parser().parse(model);
 
       if (!parser.hasErrors() && optAutomaton.isPresent()) {
         return optAutomaton.get();
