@@ -30,7 +30,7 @@ dependencies {
   implementation "de.monticore:monticore-runtime:$mc_version"
   implementation "de.monticore:monticore-grammar:$mc_version"
   grammar ("de.monticore:monticore-grammar:$mc_version"){ capabilities {
-            requireCapability("$group:monticore-grammar-grammars")}
+            requireCapability("de.monticore:monticore-grammar-grammars")}
           }
   implementation "de.se_rwth.commons:se-commons-logging:$se_commons_version"
   implementation "de.se_rwth.commons:se-commons-utilities:$se_commons_version"
@@ -39,7 +39,7 @@ dependencies {
   testImplementation "de.monticore:monticore-generator:$mc_version"
   testImplementation group:'junit', name:'junit', version:junit_version
   testImplementation ("de.monticore:monticore-runtime:$mc_version"){ capabilities {
-    requireCapability("$group:monticore-runtime-tests")}
+    requireCapability("de.monticore:monticore-runtime-tests")}
   }
   testImplementation group:'ch.qos.logback', name:'logback-classic', version:logback_version
 }
