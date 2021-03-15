@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 /**
- * TODO: Write me!
+ * A very short test for the main function
  *
  */
 public class AutomatonToolTest {
