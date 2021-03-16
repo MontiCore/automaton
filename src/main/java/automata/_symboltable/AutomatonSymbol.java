@@ -18,6 +18,7 @@ public class AutomatonSymbol extends AutomatonSymbolTOP {
   /**
    * Factory method for creating the scope spanned by this symbol.
    *
+   * @param name The name of the state.
    * @return the (newly) created scope spanned by this symbol.
    */
 
