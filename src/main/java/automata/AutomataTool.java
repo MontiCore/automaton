@@ -30,7 +30,7 @@ public class AutomataTool {
   /**
    * Use the single argument for specifying the single input automata file.
    *
-   * @param args
+   * @param args Input arguments.
    */
   public static void main(String[] args) {
     if (args.length != 1) {
@@ -84,7 +84,7 @@ public class AutomataTool {
    * Parse the model contained in the specified file.
    *
    * @param model - file to parse
-   * @return
+   * @return AST of the model.
    */
   public static ASTAutomaton parse(String model) {
     try {
@@ -105,8 +105,8 @@ public class AutomataTool {
   /**
    * Create the symbol table from the parsed AST.
    *
-   * @param ast
-   * @return
+   * @param ast Input AST.
+   * @return The symbol table created from the AST.
    */
   public static IAutomataArtifactScope createSymbolTable(ASTAutomaton ast) {
     IAutomataGlobalScope gs = AutomataMill.globalScope();
@@ -128,7 +128,7 @@ public class AutomataTool {
    * {@link TransitionStatesExist}, and
    * {@link StateNameStartsWithCapitalLetter}.
    *
-   * @param ast
+   * @param ast The input AST.
    */
   public static void runDefaultCoCos(ASTAutomaton ast) {
     new AutomataCoCos().getCheckerForAllCoCos().checkAll(ast);
