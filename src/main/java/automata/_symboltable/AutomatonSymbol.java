@@ -21,7 +21,6 @@ public class AutomatonSymbol extends AutomatonSymbolTOP {
    * @param name The name of the state.
    * @return the (newly) created scope spanned by this symbol.
    */
-
   public Optional<StateSymbol> getState(final String name) {
     return getSpannedScope().resolveStateLocally(name);
   }
