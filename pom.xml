@@ -91,7 +91,7 @@
         <executions>
           <execution>
             <configuration>
-              <script>de/monticore/monticore_noemf.groovy</script>
+              <script>de/monticore/monticore_standard.groovy</script>
               <!--<script>${basedir}/src/main/resources/nosymtab.groovy</script>-->
             </configuration>
             <goals>
