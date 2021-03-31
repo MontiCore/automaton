@@ -1,5 +1,5 @@
 # (c) https://github.com/MontiCore/monticore  
-image: maven:3.5.4-jdk-8-alpine
+image: registry.git.rwth-aachen.de/monticore/container-registry/gradle:6.8.2-jdk8
 
 # These are the default stages. You don't need to explicitly define them. But you could define any stages you need.
 stages:
@@ -8,7 +8,6 @@ stages:
   - report
   
 before_script:
-  - chmod +x gradlew
   - export GRADLE_USER_HOME=`pwd`/.gradle
 
 variables:
@@ -31,8 +30,8 @@ build:
 build_gradle:
   stage: build
   script:
-    - "./gradlew assemble"
-    - "./gradlew testReport"
+    - "gradle assemble"
+    - "gradle testReport"
   artifacts:
     paths:
       - "target"
@@ -48,7 +47,7 @@ build_gradle:
 #      - .gradle/caches
 #    key: ${CI_COMMIT_REF_SLUG}-gradle
 #  script:
-#    - "./gradlew testReport"
+#    - "gradle testReport"
 #  artifacts:
 #    paths:
 #      - "target"
