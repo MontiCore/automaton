@@ -13,7 +13,7 @@ plugins {
 }
 
 
-def guava_version = '25.1-jre'
+def guava_version = '30.0-jre'
 def findbugs_version = '3.0.0'
 def antlr_version = '4.7.1'
 def junit_version = '4.13.1'
