@@ -41,12 +41,12 @@ public class AutomatonSymbolSerializationTest {
     final AutomatonSymbol automatonSymbol = scope.resolveAutomaton("PingPong").orElse(null);
     assertNotNull(automatonSymbol);
 
-    AutomataDeSer deser = new AutomataDeSer();
-    String serialized = deser.serialize(scope);
+    AutomataSymbols2Json symbols2Json = new AutomataSymbols2Json();
+    String serialized = symbols2Json.serialize(scope);
     System.out.println(serialized);
     assertTrue(serialized.length() > 0);
 
-    IAutomataScope deserialized = deser.deserialize(serialized);
+    IAutomataScope deserialized = symbols2Json.deserialize(serialized);
     assertNotNull(deserialized);
     assertEquals(1, deserialized.getLocalAutomatonSymbols().size());
     AutomatonSymbol autSymbol = (AutomatonSymbol) deserialized.getLocalAutomatonSymbols().toArray()[0];
