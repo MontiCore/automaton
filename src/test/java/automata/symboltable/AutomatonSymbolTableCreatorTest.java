@@ -8,7 +8,7 @@ import automata._symboltable.AutomataScopesGenitor;
 import automata._symboltable.IAutomataGlobalScope;
 import automata._symboltable.IAutomataScope;
 import automata._visitor.AutomataTraverser;
-import de.monticore.io.paths.ModelPath;
+import de.monticore.io.paths.MCPath;
 import de.se_rwth.commons.logging.Log;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,12 +23,12 @@ public class AutomatonSymbolTableCreatorTest {
 
   @Before
   public void setup() {
-    final ModelPath modelPath =
-            new ModelPath(Paths.get("src/test/resources/automata/symboltable"));
+    final MCPath symbolPath =
+            new MCPath(Paths.get("src/test/resources/automata/symboltable"));
 
     globalScope = AutomataMill.globalScope();
     globalScope.clear();
-    globalScope.setModelPath(modelPath);
+    globalScope.setSymbolPath(symbolPath);
     
     Log.enableFailQuick(false);
   }

@@ -8,10 +8,9 @@ import automata._cocos.AutomataCoCoChecker;
 import automata._symboltable.AutomataScopesGenitor;
 import automata._symboltable.IAutomataGlobalScope;
 import automata._visitor.AutomataTraverser;
-import automata._visitor.AutomataTraverserImplementation;
 import automata.lang.AbstractTest;
 import de.monticore.cocos.helper.Assert;
-import de.monticore.io.paths.ModelPath;
+import de.monticore.io.paths.MCPath;
 import de.se_rwth.commons.SourcePosition;
 import de.se_rwth.commons.logging.Finding;
 import de.se_rwth.commons.logging.Log;
@@ -46,7 +45,7 @@ public class TransitionStatesExistTest extends AbstractTest {
   
   @Test
   public void testValid() {
-    globalScope.setModelPath(new ModelPath(Paths.get("src/test/resources/automata/cocos/valid")));
+    globalScope.setSymbolPath(new MCPath(Paths.get("src/test/resources/automata/cocos/valid")));
 
     ASTAutomaton ast = parseModel("src/test/resources/automata/cocos/valid/A.aut");
     AutomataScopesGenitor genitor = AutomataMill.scopesGenitor();
@@ -65,7 +64,7 @@ public class TransitionStatesExistTest extends AbstractTest {
   
   @Test
   public void testNotExistingTransitionSource() {
-    globalScope.setModelPath(new ModelPath(Paths.get("src/test/resources/automata/cocos/invalid")));
+    globalScope.setSymbolPath(new MCPath(Paths.get("src/test/resources/automata/cocos/invalid")));
     ASTAutomaton ast = parseModel("src/test/resources/automata/cocos/invalid/NotExistingTransitionSource.aut");
     AutomataScopesGenitor genitor = AutomataMill.scopesGenitor();
     AutomataTraverser traverser = AutomataMill.traverser();

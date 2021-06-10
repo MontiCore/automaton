@@ -6,7 +6,7 @@ import automata.AutomataTool;
 import automata._ast.ASTAutomaton;
 import automata._symboltable.*;
 import automata._visitor.AutomataTraverser;
-import de.monticore.io.paths.ModelPath;
+import de.monticore.io.paths.MCPath;
 import de.se_rwth.commons.logging.Log;
 import org.junit.Test;
 
@@ -24,9 +24,9 @@ public class AutomatonSymbolSerializationTest {
     Log.enableFailQuick(false);
     ASTAutomaton ast = AutomataTool.parse("src/test/resources/" + model);
 
-    ModelPath mp = new ModelPath(Paths.get("src/test/resources/" + model).getParent());
+    MCPath mp = new MCPath(Paths.get("src/test/resources/" + model).getParent());
     IAutomataGlobalScope globalScope = AutomataMill.globalScope();
-    globalScope.setModelPath(mp);
+    globalScope.setSymbolPath(mp);
     AutomataScopesGenitor genitor = AutomataMill.scopesGenitor();
     AutomataTraverser traverser = AutomataMill.traverser();
     traverser.setAutomataHandler(genitor);
@@ -56,10 +56,10 @@ public class AutomatonSymbolSerializationTest {
 
   @Test
   public void testLoadSymbol() {
-    ModelPath mp = new ModelPath(Paths.get("src/test/resources"));
+    MCPath mp = new MCPath(Paths.get("src/test/resources"));
     IAutomataGlobalScope gs = AutomataMill.globalScope();
     gs.clear();
-    gs.setModelPath(mp);
+    gs.setSymbolPath(mp);
     Optional<AutomatonSymbol> resolvedAutomaton = gs.resolveAutomaton("automata.serialization.Ping2Pong2");
     assertTrue(resolvedAutomaton.isPresent());
   }
