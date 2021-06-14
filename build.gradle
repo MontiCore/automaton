@@ -26,6 +26,13 @@ version = '1.0.0-SNAPSHOT'
 description = "Automata DSL"
 sourceCompatibility = "1.8"
 
+// configure non-standard source sets
+sourceSets {
+  main.java.srcDirs += [ "$projectDir/target/generated-sources/monticore/sourcecode"]
+}
+buildDir = file("$projectDir/target")
+
+
 dependencies {
   implementation "de.monticore:monticore-runtime:$mc_version"
   implementation "de.monticore:monticore-grammar:$mc_version"
@@ -56,11 +63,7 @@ repositories {
     }
 }
 
-// configure non-standard source sets
-sourceSets {
-    main.java.srcDirs += [ "$projectDir/target/generated-sources/monticore/sourcecode"]
-}
-buildDir = file("$projectDir/target")
+
 
 // one task per file
 //fileTree(grammarDir).each {
@@ -92,6 +95,9 @@ java {
   withSourcesJar()
   withJavadocJar()
 }
+
+sourcesJar.dependsOn project.collect { it.tasks.withType(MCTask)}
+
 // generated java doc contains errors, disable for now
 javadoc.failOnError(false)
 
