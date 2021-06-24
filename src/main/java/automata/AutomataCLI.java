@@ -1,10 +1,8 @@
 /* (c) https://github.com/MontiCore/monticore */
 package automata;
 
-
 import automata._ast.ASTAutomaton;
 import automata._cocos.AutomataCoCoChecker;
-import automata._parser.AutomataParser;
 import automata._symboltable.*;
 import automata._visitor.AutomataTraverser;
 import automata.cocos.AtLeastOneInitialAndFinalState;
@@ -14,26 +12,17 @@ import automata.cocos.TransitionStatesExist;
 import automata.prettyprint.PrettyPrinter;
 import automata.visitors.CountStates;
 import de.se_rwth.commons.logging.Log;
-import org.antlr.v4.runtime.RecognitionException;
 
-import java.io.IOException;
+import java.io.File;
 import java.util.Optional;
 
 import static de.se_rwth.commons.Names.getPathFromPackage;
 
-/**
- * Main class for the Automaton DSL tool.
- * @deprecated Use {@link AutomataCLI instead}
- */
-@Deprecated
-public class AutomataTool {
+public class AutomataCLI extends AutomataCLITOP {
 
-  /**
-   * Use the single argument for specifying the single input automata file.
-   *
-   * @param args Input arguments.
-   */
-  public static void main(String[] args) {
+  @Override
+  public void run(String[] args) {
+    initOptions();
     if (args.length != 1) {
       Log.error("Please specify only one single path to the input model.");
       return;
@@ -42,7 +31,7 @@ public class AutomataTool {
 
     // parse the model and create the AST representation
     final ASTAutomaton ast = parse(model);
-    Log.info(model + " parsed successfully!", AutomataTool.class.getName());
+    Log.info(model + " parsed successfully!", AutomataCLI.class.getName());
 
     // setup the symbol table
     IAutomataArtifactScope modelTopScope = createSymbolTable(ast);
@@ -51,7 +40,7 @@ public class AutomataTool {
     Optional<StateSymbol> aSymbol = modelTopScope.resolveState("Ping");
     if (aSymbol.isPresent()) {
       Log.info("Resolved state symbol \"Ping\"; FQN = " + aSymbol.get().toString(),
-          AutomataTool.class.getName());
+        AutomataCLI.class.getName());
     }
 
     // execute default context conditions
@@ -63,53 +52,28 @@ public class AutomataTool {
     customCoCos.checkAll(ast);
 
     // store artifact scope
-    final AutomataSymbols2Json s2j = new AutomataSymbols2Json();
     String symFile = "target/symbols/" + getPathFromPackage(modelTopScope.getFullName()) + ".autsym";
-    s2j.store(modelTopScope, symFile);
+    storeSymbols(modelTopScope, symFile);
 
     // analyze the model with a visitor
     CountStates cs = new CountStates();
     AutomataTraverser t = AutomataMill.traverser();
     t.add4Automata(cs);
     ast.accept(t);
-    Log.info("The model contains " + cs.getCount() + " states.", AutomataTool.class.getName());
+    Log.info("The model contains " + cs.getCount() + " states.", AutomataCLI.class.getName());
 
     // execute a pretty printer
-    PrettyPrinter pp = new PrettyPrinter();
-    pp.handle(ast);
-    Log.info("Pretty printing the parsed automata into console:", AutomataTool.class.getName());
-    System.out.println(pp.getResult());
-  }
-
-  /**
-   * Parse the model contained in the specified file.
-   *
-   * @param model - file to parse
-   * @return AST of the model.
-   */
-  public static ASTAutomaton parse(String model) {
-    try {
-      AutomataParser parser = AutomataMill.parser();
-      Optional<ASTAutomaton> optAutomaton = parser.parse(model);
-
-      if (!parser.hasErrors() && optAutomaton.isPresent()) {
-        return optAutomaton.get();
-      }
-      Log.error("Model could not be parsed.");
-    }
-    catch (RecognitionException | IOException e) {
-      Log.error("Failed to parse " + model, e);
-    }
-    return null;
+    prettyPrint(ast, null);
   }
 
   /**
    * Create the symbol table from the parsed AST.
    *
-   * @param ast Input AST.
+   * @param node Input AST.
    * @return The symbol table created from the AST.
    */
-  public static IAutomataArtifactScope createSymbolTable(ASTAutomaton ast) {
+  @Override
+  public IAutomataArtifactScope createSymbolTable(ASTAutomaton node) {
     IAutomataGlobalScope gs = AutomataMill.globalScope();
     gs.clear();
 
@@ -119,10 +83,20 @@ public class AutomataTool {
     traverser.add4Automata(genitor);
     genitor.putOnStack(gs);
 
-    IAutomataArtifactScope scope = genitor.createFromAST(ast);
+    IAutomataArtifactScope scope = genitor.createFromAST(node);
     gs.addSubScope(scope);
     return scope;
   }
+
+  @Override
+  public void prettyPrint(ASTAutomaton ast, String file) {
+    PrettyPrinter pp = new PrettyPrinter();
+    pp.handle(ast);
+    Log.info("Pretty printing the parsed automata into console:", AutomataCLI.class.getName());
+    System.out.println(pp.getResult());
+  }
+
+
 
   /**
    * Run the default context conditions {@link AtLeastOneInitialAndFinalState},
@@ -131,8 +105,8 @@ public class AutomataTool {
    *
    * @param ast The input AST.
    */
-  public static void runDefaultCoCos(ASTAutomaton ast) {
+  @Override
+  public void runDefaultCoCos(ASTAutomaton ast) {
     new AutomataCoCos().getCheckerForAllCoCos().checkAll(ast);
   }
-
 }

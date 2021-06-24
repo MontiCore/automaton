@@ -9,11 +9,11 @@ import org.junit.Test;
  * A very short test for the main function
  *
  */
-public class AutomatonToolTest {
+public class AutomataCLITest {
   
   @Test
   public void executeMain() {
-    AutomataTool.main(new String[] { "src/main/resources/example/PingPong.aut" });
+    AutomataCLI.main(new String[] { "src/main/resources/example/PingPong.aut" });
     
     assertTrue(!false);
   }
