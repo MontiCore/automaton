@@ -17,7 +17,6 @@ def guava_version = '30.0-jre'
 def findbugs_version = '3.0.0'
 def antlr_version = '4.7.1'
 def junit_version = '4.13.1'
-def logback_version = '1.1.2'
 
 def grammarDir = 'src/main/grammars'
 
@@ -48,7 +47,6 @@ dependencies {
   testImplementation ("de.monticore:monticore-runtime:$mc_version"){ capabilities {
     requireCapability("de.monticore:monticore-runtime-tests")}
   }
-  testImplementation group:'ch.qos.logback', name:'logback-classic', version:logback_version
 }
 
 // has to be placed directly under the dependency definition, since otherwise the grammar configurations are not found
