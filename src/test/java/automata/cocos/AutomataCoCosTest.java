@@ -1,6 +1,7 @@
 /* (c) https://github.com/MontiCore/monticore */
 package automata.cocos;
 
+import automata.AutomataMill;
 import automata._ast.ASTAutomaton;
 import automata._cocos.AutomataCoCoChecker;
 import automata.lang.AbstractTest;
@@ -21,6 +22,7 @@ public class AutomataCoCosTest extends AbstractTest {
   @BeforeClass
   public static void init() {
     Log.enableFailQuick(false);
+    AutomataMill.init();
   }
   
   @Before

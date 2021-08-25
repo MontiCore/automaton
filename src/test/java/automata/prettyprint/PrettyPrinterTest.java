@@ -1,8 +1,11 @@
 /* (c) https://github.com/MontiCore/monticore */
 package automata.prettyprint;
 
+import automata.AutomataMill;
 import automata._ast.ASTAutomaton;
 import automata.lang.AbstractTest;
+import de.se_rwth.commons.logging.Log;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -11,6 +14,12 @@ import static org.junit.Assert.assertEquals;
  * Test for {@link PrettyPrinter}.
  */
 public class PrettyPrinterTest extends AbstractTest {
+  
+  @BeforeClass
+  public static void init() {
+    Log.enableFailQuick(false);
+    AutomataMill.init();
+  }
 
   @Test
   public void test() {

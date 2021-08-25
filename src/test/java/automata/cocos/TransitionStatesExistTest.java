@@ -31,6 +31,7 @@ public class TransitionStatesExistTest extends AbstractTest {
   @BeforeClass
   public static void init() {
     Log.enableFailQuick(false);
+    AutomataMill.init();
   }
 
   private IAutomataGlobalScope globalScope;

@@ -8,6 +8,7 @@ import automata._symboltable.*;
 import automata._visitor.AutomataTraverser;
 import de.monticore.io.paths.MCPath;
 import de.se_rwth.commons.logging.Log;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.File;
@@ -17,6 +18,12 @@ import java.util.Optional;
 import static org.junit.Assert.*;
 
 public class AutomatonSymbolSerializationTest {
+  
+  @BeforeClass
+  public static void init() {
+    Log.enableFailQuick(false);
+    AutomataMill.init();
+  }
 
   private IAutomataArtifactScope scope;
 

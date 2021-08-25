@@ -7,6 +7,8 @@ import automata.AutomataMill;
 import automata._visitor.AutomataTraverser;
 import automata.lang.AbstractTest;
 
+import de.se_rwth.commons.logging.Log;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import automata._ast.ASTAutomaton;
@@ -16,6 +18,12 @@ import automata._ast.ASTAutomaton;
  *
  */
 public class CountStatesTest extends AbstractTest {
+  
+  @BeforeClass
+  public static void init() {
+    Log.enableFailQuick(false);
+    AutomataMill.init();
+  }
   
   @Test
   public void test() {

@@ -3,6 +3,8 @@ package automata;
 
 import static org.junit.Assert.assertTrue;
 
+import de.se_rwth.commons.logging.Log;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
@@ -10,6 +12,12 @@ import org.junit.Test;
  *
  */
 public class AutomataCLITest {
+  
+  @BeforeClass
+  public static void init() {
+    Log.enableFailQuick(false);
+    AutomataMill.init();
+  }
   
   @Test
   public void executeMain() {

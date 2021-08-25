@@ -11,6 +11,7 @@ import automata._visitor.AutomataTraverser;
 import de.monticore.io.paths.MCPath;
 import de.se_rwth.commons.logging.Log;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.nio.file.Paths;
@@ -18,6 +19,12 @@ import java.nio.file.Paths;
 import static org.junit.Assert.assertTrue;
 
 public class AutomatonSymbolTableCreatorTest {
+  
+  @BeforeClass
+  public static void init() {
+    Log.enableFailQuick(false);
+    AutomataMill.init();
+  }
 
   private IAutomataGlobalScope globalScope;
 
