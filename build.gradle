@@ -28,6 +28,13 @@ sourceCompatibility = "1.8"
 // configure non-standard source sets
 sourceSets {
   main.java.srcDirs += [ "$projectDir/target/generated-sources/monticore/sourcecode"]
+  grammars {
+    resources {
+        srcDirs([grammarDir, grammarOutDir])
+        include "**/*.mc4"
+    }
+}
+
 }
 buildDir = file("$projectDir/target")
 
