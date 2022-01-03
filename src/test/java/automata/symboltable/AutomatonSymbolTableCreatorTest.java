@@ -1,7 +1,7 @@
 /* (c) https://github.com/MontiCore/monticore */
 package automata.symboltable;
 
-import automata.AutomataCLI;
+import automata.AutomataTool;
 import automata.AutomataMill;
 import automata._ast.ASTAutomaton;
 import automata._symboltable.AutomataScopesGenitor;
@@ -42,7 +42,7 @@ public class AutomatonSymbolTableCreatorTest {
 
   @Test
   public void testAutomatonSymbolTableCreation2(){
-    ASTAutomaton ast = new AutomataCLI()
+    ASTAutomaton ast = new AutomataTool()
             .parse("src/test/resources/automata/symboltable/PingPong.aut");
     AutomataScopesGenitor genitor = AutomataMill.scopesGenitor();
     AutomataTraverser traverser = AutomataMill.traverser();

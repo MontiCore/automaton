@@ -1,7 +1,7 @@
 /* (c) https://github.com/MontiCore/monticore */
 package automata.symboltable;
 
-import automata.AutomataCLI;
+import automata.AutomataTool;
 import automata.AutomataMill;
 import automata._ast.ASTAutomaton;
 import automata._symboltable.*;
@@ -29,7 +29,7 @@ public class AutomatonSymbolSerializationTest {
 
   public void setup(String model) {
     Log.enableFailQuick(false);
-    ASTAutomaton ast = new AutomataCLI().parse("src/test/resources/" + model);
+    ASTAutomaton ast = new AutomataTool().parse("src/test/resources/" + model);
 
     MCPath mp = new MCPath(Paths.get("src/test/resources/" + model).getParent());
     IAutomataGlobalScope globalScope = AutomataMill.globalScope();
@@ -74,7 +74,7 @@ public class AutomatonSymbolSerializationTest {
   @Test
   public void testStoreSymbols() {
     String path = "automata/cocos/valid/A.aut";
-    AutomataCLI.main(new String[] { "src/test/resources/" + path });
+    AutomataTool.main(new String[] { "src/test/resources/" + path });
     // Note: usually, the stored symbols will be in a file located in the folder structure that
     // matches the package structure. However, the automata language does not defines packages for
     // automata.
@@ -85,7 +85,7 @@ public class AutomatonSymbolSerializationTest {
   public void testDoorModel() {
     String path = "automata/symboltable/Door.aut";
     String symbolPath = "target/symbols/Door.autsym";
-    AutomataCLI.main(new String[] { "src/test/resources/" + path });
+    AutomataTool.main(new String[] { "src/test/resources/" + path });
     assertTrue(new File(symbolPath).exists());
 
     AutomataSymbols2Json symbols2Json = new AutomataSymbols2Json();
