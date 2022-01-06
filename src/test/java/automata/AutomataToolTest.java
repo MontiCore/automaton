@@ -11,7 +11,7 @@ import org.junit.Test;
  * A very short test for the main function
  *
  */
-public class AutomataCLITest {
+public class AutomataToolTest {
   
   @BeforeClass
   public static void init() {
@@ -21,7 +21,7 @@ public class AutomataCLITest {
   
   @Test
   public void executeMain() {
-    AutomataCLI.main(new String[] { "src/main/resources/example/PingPong.aut" });
+    AutomataTool.main(new String[] { "src/main/resources/example/PingPong.aut" });
     
     assertTrue(!false);
   }

@@ -13,12 +13,11 @@ import automata.prettyprint.PrettyPrinter;
 import automata.visitors.CountStates;
 import de.se_rwth.commons.logging.Log;
 
-import java.io.File;
 import java.util.Optional;
 
 import static de.se_rwth.commons.Names.getPathFromPackage;
 
-public class AutomataCLI extends AutomataCLITOP {
+public class AutomataTool extends AutomataToolTOP {
 
   @Override
   public void run(String[] args) {
@@ -31,7 +30,7 @@ public class AutomataCLI extends AutomataCLITOP {
 
     // parse the model and create the AST representation
     final ASTAutomaton ast = parse(model);
-    Log.info(model + " parsed successfully!", AutomataCLI.class.getName());
+    Log.info(model + " parsed successfully!", AutomataTool.class.getName());
 
     // setup the symbol table
     IAutomataArtifactScope modelTopScope = createSymbolTable(ast);
@@ -40,7 +39,7 @@ public class AutomataCLI extends AutomataCLITOP {
     Optional<StateSymbol> aSymbol = modelTopScope.resolveState("Ping");
     if (aSymbol.isPresent()) {
       Log.info("Resolved state symbol \"Ping\"; FQN = " + aSymbol.get().toString(),
-        AutomataCLI.class.getName());
+        AutomataTool.class.getName());
     }
 
     // execute default context conditions
@@ -60,7 +59,7 @@ public class AutomataCLI extends AutomataCLITOP {
     AutomataTraverser t = AutomataMill.traverser();
     t.add4Automata(cs);
     ast.accept(t);
-    Log.info("The model contains " + cs.getCount() + " states.", AutomataCLI.class.getName());
+    Log.info("The model contains " + cs.getCount() + " states.", AutomataTool.class.getName());
 
     // execute a pretty printer
     prettyPrint(ast, null);
@@ -92,7 +91,7 @@ public class AutomataCLI extends AutomataCLITOP {
   public void prettyPrint(ASTAutomaton ast, String file) {
     PrettyPrinter pp = new PrettyPrinter();
     pp.handle(ast);
-    Log.info("Pretty printing the parsed automata into console:", AutomataCLI.class.getName());
+    Log.info("Pretty printing the parsed automata into console:", AutomataTool.class.getName());
     System.out.println(pp.getResult());
   }
 

@@ -101,7 +101,7 @@ javadoc.failOnError(false)
 
 shadowJar { // all in one jar
     manifest {
-        attributes "Main-Class": "automata.AutomataCLI"
+        attributes "Main-Class": "automata.AutomataTool"
     }
     archiveClassifier =  "cli"
 }
