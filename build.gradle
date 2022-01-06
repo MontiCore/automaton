@@ -103,7 +103,7 @@ shadowJar { // all in one jar
     manifest {
         attributes "Main-Class": "automata.AutomataTool"
     }
-    archiveClassifier =  "tool"
+    archiveClassifier =  "cli"
 }
 
 // build grammar jar as well
