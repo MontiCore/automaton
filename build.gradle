@@ -106,6 +106,8 @@ shadowJar { // all in one jar
     archiveClassifier =  "cli"
 }
 
+jar.dependsOn(shadowJar)
+
 // build grammar jar as well
 task grammarJar(type: Jar) {
     from ("$projectDir/$grammarDir"){ include "**/*.mc4" }
