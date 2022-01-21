@@ -115,7 +115,8 @@ shadowJar { // all in one jar
     manifest {
         attributes "Main-Class": "automata.AutomataTool"
     }
-    archiveClassifier =  "cli"
+    archiveClassifier =  "mc-tool"
+    archiveFileName = "MCAutomaton.${archiveExtension.get()}"
 }
 
 jar.dependsOn(shadowJar)
