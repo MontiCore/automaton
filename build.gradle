@@ -56,7 +56,6 @@ dependencies {
     implementation group: 'de.monticore.lang', name: 'cd4analysis', version: mc_version
     implementation group: 'org.antlr', name: 'antlr4-runtime', version: antlr_version
     implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.11'
-    testImplementation "de.monticore:monticore-generator:$mc_version"
     testImplementation group: 'junit', name: 'junit', version: junit_version
     testImplementation("de.monticore:monticore-runtime:$mc_version") {
         capabilities {
