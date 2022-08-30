@@ -125,12 +125,15 @@ public class AutomataTool extends AutomataToolTOP {
     new AutomataCoCos().getCheckerForAllCoCos().checkAll(ast);
   }
   
-  public void generateCD(ASTAutomaton astAutomaton) {
+  private static final String OUTPUT_DIR = "target/gen-test/";
+  
+  public void generateCD(ASTAutomaton ast) {
     
     GeneratorSetup setup = new GeneratorSetup();
     GlobalExtensionManagement glex = new GlobalExtensionManagement();
     setup.setGlex(glex);
     glex.setGlobalValue("cdPrinter", new CdUtilsPrinter());
+    setup.setOutputDirectory(new File(OUTPUT_DIR + ast.getName()));
     
     String configTemplate = "automaton2cd.Automaton2CD";
     TemplateController tc = setup.getNewTemplateController(configTemplate);
@@ -141,6 +144,6 @@ public class AutomataTool extends AutomataToolTOP {
     Automata2CDConverter converter = new Automata2CDConverter();
     configTemplateArgs = Arrays.asList(glex, converter, setup.getHandcodedPath(), generator);
     
-    hpp.processValue(tc, astAutomaton, configTemplateArgs);
+    hpp.processValue(tc, ast, configTemplateArgs);
   }
 }
