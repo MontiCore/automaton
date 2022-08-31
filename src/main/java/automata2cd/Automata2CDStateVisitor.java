@@ -56,7 +56,6 @@ public class Automata2CDStateVisitor implements AutomataVisitor2 {
     this.glex = glex;
   }
   
-  
   @Override
   public void visit(ASTAutomaton astAutomaton) {
     this.astAutomaton = astAutomaton;
@@ -69,7 +68,8 @@ public class Automata2CDStateVisitor implements AutomataVisitor2 {
     cdCompilationUnitBuilder.setCDDefinition(astcdDefinition);
   
     cdCompilationUnit = cdCompilationUnitBuilder.build();
-  
+    this.stateSuperClass = createStateSuperClass();
+    
     // Main class, names equally to the Automaton
     automataClass = CDBasisMill.cDClassBuilder().setName(astAutomaton.getName())
       .setModifier(CDBasisMill.modifierBuilder().setPublic(true).build()).build();
@@ -77,13 +77,14 @@ public class Automata2CDStateVisitor implements AutomataVisitor2 {
     
     // replace the template to add a setState method
     this.cd4C.addMethod(this.automataClass, "automaton2cd.StateSetStateMethod");
+    
+    this.cd4C.addAttribute(this.automataClass, "protected "+getStateSuperClass().getName()+" state");
   }
   
   @Override
   public void endVisit(ASTAutomaton astAutomaton) {
     // Generate the constructor of the class
-    // It inits all state attributes
-    // and the initial state
+    // It inits all state attribute and the initial state
     this.cd4C.addConstructor(this.automataClass, "automaton2cd.StateInitConstructor",
       automataClass.getName(),
       this.stateToClassMap.keySet(),
@@ -95,26 +96,23 @@ public class Automata2CDStateVisitor implements AutomataVisitor2 {
     if (state.getName().equals("state")) {
       Log.error(ERROR_CODE + "State is named \"state\", which interferes with the attribute for the currently selected state");
     }
-    if (initialState.isEmpty()) {
+    if (initialState.isEmpty() || state.isInitial()) {
       initialState = state.getName();
     }
     
     // A class extending StateClass for this state
     ASTCDClass stateClass = CDBasisMill.cDClassBuilder().setName(state.getName())
-      .setModifier(CDBasisMill.modifierBuilder().build())
+      .setModifier(CDBasisMill.modifierBuilder().PUBLIC().build())
       .setCDExtendUsage(CDBasisMill.cDExtendUsageBuilder().addSuperclass(qualifiedType("StateClass")).build())
       .build();
-    // Add the StateClassImpl to the CD and mapping
+    
+    // Add the StateClass to the CD and mapping
     this.cdCompilationUnit.getCDDefinition().addCDElement(stateClass);
     this.stateToClassMap.put(state.getName(), stateClass);
     
     // Add reference to this in the main class, in form of an attribute
-    cd4C.addAttribute(automataClass, "protected " + state.getName() + " " + StringUtils.uncapitalize(state.getName()) + ";");
-    
-    // Set the initial state
-    if (state.isInitial()) {
-      this.initialState = state.getName();
-    }
+    String name = " "+state.getName();
+    cd4C.addAttribute(automataClass, "protected"+name+StringUtils.uncapitalize(name)+";");
   }
   
   public ASTCDCompilationUnit getCdCompilationUnit() {
@@ -142,5 +140,13 @@ public class Automata2CDStateVisitor implements AutomataVisitor2 {
     return CD4CodeMill.mCQualifiedTypeBuilder()
       .setMCQualifiedName(CD4CodeMill.mCQualifiedNameBuilder().setPartsList(partsList).build()).build();
   }
-
+  
+  protected ASTCDClass createStateSuperClass() {
+    ASTCDClass astClass = CDBasisMill.cDClassBuilder()
+      .setModifier(CDBasisMill.modifierBuilder().ABSTRACT().build())
+      .setName("StateClass").build();
+    this.cdCompilationUnit.getCDDefinition().addCDElement(astClass);
+    return astClass;
+  }
+  
 }

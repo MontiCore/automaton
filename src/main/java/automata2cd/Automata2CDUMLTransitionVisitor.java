@@ -1,15 +1,15 @@
 /* (c) https://github.com/MontiCore/monticore */
 package automata2cd;
 
-import automata._symboltable.AutomatonSymbol;
+import automata._ast.ASTTransition;
 import automata._visitor.AutomataVisitor2;
 import de.monticore.cd4code.CD4CodeMill;
 import de.monticore.cdbasis.CDBasisMill;
 import de.monticore.cdbasis._ast.ASTCDClass;
-import de.monticore.prettyprint.IndentPrinter;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Map;
+import java.util.Optional;
 
 public class Automata2CDUMLTransitionVisitor extends Automata2CDTransitionVisitor implements AutomataVisitor2 {
   
@@ -20,18 +20,23 @@ public class Automata2CDUMLTransitionVisitor extends Automata2CDTransitionVisito
   }
   
   @Override
-  public void visit(AutomatonSymbol event) {
-    String stimulus = event.getName();
+  public void visit(ASTTransition node) {
+    this.transition = Optional.of(node);
+    String stimulus = node.getInput();
+    
     if (!stimuli.contains(stimulus)) {
+      
       // Add stimulus method to the Class
-      cd4C.addMethod(automataClass, "automata2cd.StateStimulusMethod", stimulus, automataClass.getName());
+      cd4C.addMethod(automataClass, "automaton2cd.StateStimulusMethod", stimulus, automataClass.getName());
       
       // Add handleStimulus(Class k) method to the StateClass
-      transitionSuperClass.addCDMember(CD4CodeMill.cDMethodBuilder().setModifier(CDBasisMill.modifierBuilder().build())
+      transitionSuperClass.addCDMember(CD4CodeMill.cDMethodBuilder()
+        .setModifier(CDBasisMill.modifierBuilder().PUBLIC().ABSTRACT().build())
         .setMCReturnType(voidReturnType)
         .setName("handle" + StringUtils.capitalize(stimulus)).addCDParameter(
           CD4CodeMill.cDParameterBuilder().setName("k").setMCType(qualifiedType(automataClass.getName())).build())
         .build());
+      
       this.stimuli.add(stimulus);
     }
     

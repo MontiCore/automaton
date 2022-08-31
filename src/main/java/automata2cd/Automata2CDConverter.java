@@ -10,6 +10,7 @@ import de.monticore.generating.templateengine.GlobalExtensionManagement;
 public class Automata2CDConverter {
   
   public Automata2CDData doConvert(ASTAutomaton astAutomaton, GlobalExtensionManagement glex) {
+    
     // Phase 1: Work on states
     Automata2CDStateVisitor phase1Visitor = new Automata2CDStateVisitor(glex);
     AutomataTraverser traverser = AutomataMill.inheritanceTraverser();
