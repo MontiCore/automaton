@@ -23,19 +23,19 @@ public abstract class Automata2CDTransitionVisitor implements AutomataVisitor2 {
   /**
    * Mapping of the state implementation classes for every state
    */
-  protected final Map<String, ASTCDClass> transitionToClassMap;
+  protected final Map<String, ASTCDClass> stateToClassMap;
   
   protected final ASTMCReturnType voidReturnType;
-  protected final ASTCDClass transitionSuperClass;
+  protected final ASTCDClass stateSuperClass;
   protected final CD4C cd4C;
   protected final Set<String> stimuli = new HashSet<>();
   
   public Automata2CDTransitionVisitor(ASTCDClass automataClass,
-                                Map<String, ASTCDClass> transitionToClassMap,
-                                ASTCDClass transitionSuperClass) {
+                                Map<String, ASTCDClass> stateToClassMap,
+                                ASTCDClass stateSuperClass) {
     this.automataClass = automataClass;
-    this.transitionToClassMap = transitionToClassMap;
-    this.transitionSuperClass = transitionSuperClass;
+    this.stateToClassMap = stateToClassMap;
+    this.stateSuperClass = stateSuperClass;
     this.cd4C = CD4C.getInstance();
     
     this.voidReturnType = CDBasisMill.mCReturnTypeBuilder().setMCVoidType(CDBasisMill.mCVoidTypeBuilder().build()).build();

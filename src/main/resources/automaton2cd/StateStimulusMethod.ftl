@@ -5,6 +5,5 @@
 -->
 ${tc.signature("stimulus", "className")}
 ${cd4c.method("public void " + stimulus?uncap_first +"()")}
-{
+
 this.state.handle${stimulus?cap_first}((${className})this);
-}

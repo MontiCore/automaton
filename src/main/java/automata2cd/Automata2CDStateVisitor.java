@@ -3,6 +3,7 @@ package automata2cd;
 
 import automata._ast.ASTAutomaton;
 import automata._ast.ASTState;
+import automata._ast.ASTTransition;
 import automata._visitor.AutomataVisitor2;
 import de.monticore.cd.methodtemplates.CD4C;
 import de.monticore.cd4code.CD4CodeMill;
@@ -11,16 +12,16 @@ import de.monticore.cdbasis._ast.ASTCDClass;
 import de.monticore.cdbasis._ast.ASTCDCompilationUnit;
 import de.monticore.cdbasis._ast.ASTCDCompilationUnitBuilder;
 import de.monticore.cdbasis._ast.ASTCDDefinition;
+import de.monticore.cdinterfaceandenum._ast.ASTCDEnum;
+import de.monticore.cdinterfaceandenum._ast.ASTCDEnumConstant;
 import de.monticore.generating.templateengine.GlobalExtensionManagement;
 import de.monticore.types.mcbasictypes._ast.ASTMCQualifiedType;
 import de.monticore.umlmodifier.UMLModifierMill;
 import de.se_rwth.commons.Splitters;
 import de.se_rwth.commons.logging.Log;
-import org.apache.commons.lang3.StringUtils;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Automata2CDStateVisitor implements AutomataVisitor2 {
   
@@ -72,13 +73,22 @@ public class Automata2CDStateVisitor implements AutomataVisitor2 {
     
     // Main class, names equally to the Automaton
     automataClass = CDBasisMill.cDClassBuilder().setName(astAutomaton.getName())
-      .setModifier(CDBasisMill.modifierBuilder().setPublic(true).build()).build();
+      .setModifier(CDBasisMill.modifierBuilder().PUBLIC().build()).build();
     astcdDefinition.addCDElement(automataClass);
     
     // replace the template to add a setState method
     this.cd4C.addMethod(this.automataClass, "automaton2cd.StateSetStateMethod");
-    
     this.cd4C.addAttribute(this.automataClass, "protected "+getStateSuperClass().getName()+" state");
+  
+    ASTCDEnum stimuli = CD4CodeMill.cDEnumBuilder()
+      .setModifier(CDBasisMill.modifierBuilder().PUBLIC().build())
+      .setName("Stimuli")
+      .addAllCDEnumConstants(createConstants(astAutomaton.getTransitionList()))
+      .build();
+    astcdDefinition.addCDElement(stimuli);
+    
+    cd4C.addMethod(automataClass, "automaton2cd.Run",
+      stimuli.getCDEnumConstantList().stream().map(ASTCDEnumConstant::getName).collect(Collectors.toList()));
   }
   
   @Override
@@ -89,6 +99,8 @@ public class Automata2CDStateVisitor implements AutomataVisitor2 {
       automataClass.getName(),
       this.stateToClassMap.keySet(),
       this.initialState);
+    automataClass.getCDAttributeList().forEach(a ->
+      this.cd4C.addMethods(this.automataClass, a, true, false));
   }
   
   @Override
@@ -106,14 +118,17 @@ public class Automata2CDStateVisitor implements AutomataVisitor2 {
       .setCDExtendUsage(CDBasisMill.cDExtendUsageBuilder().addSuperclass(qualifiedType("StateClass")).build())
       .build();
     
+    cd4C.addConstructor(stateClass, "automaton2cd.StateConstructor", state.getName(), state.isFinal());
+  
     // Add the StateClass to the CD and mapping
     this.cdCompilationUnit.getCDDefinition().addCDElement(stateClass);
     this.stateToClassMap.put(state.getName(), stateClass);
     
     // Add reference to this in the main class, in form of an attribute
     String name = " "+state.getName();
-    cd4C.addAttribute(automataClass, "protected"+name+StringUtils.uncapitalize(name)+";");
+    cd4C.addAttribute(automataClass, "protected"+name+name.substring(0,2).toLowerCase()+name.substring(2));
   }
+
   
   public ASTCDCompilationUnit getCdCompilationUnit() {
     return cdCompilationUnit;
@@ -146,7 +161,14 @@ public class Automata2CDStateVisitor implements AutomataVisitor2 {
       .setModifier(CDBasisMill.modifierBuilder().ABSTRACT().build())
       .setName("StateClass").build();
     this.cdCompilationUnit.getCDDefinition().addCDElement(astClass);
+    cd4C.addAttribute(astClass, true, false, "protected boolean isFinal");
     return astClass;
   }
   
+  protected List<ASTCDEnumConstant> createConstants(List<ASTTransition> transitionList) {
+    return transitionList.stream()
+      .map(ASTTransition::getInput).distinct()
+      .map(s -> CD4CodeMill.cD4CodeEnumConstantBuilder().setName(s).build())
+      .collect(Collectors.toList());
+  }
 }

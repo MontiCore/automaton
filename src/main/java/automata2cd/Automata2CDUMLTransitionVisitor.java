@@ -3,8 +3,6 @@ package automata2cd;
 
 import automata._ast.ASTTransition;
 import automata._visitor.AutomataVisitor2;
-import de.monticore.cd4code.CD4CodeMill;
-import de.monticore.cdbasis.CDBasisMill;
 import de.monticore.cdbasis._ast.ASTCDClass;
 import org.apache.commons.lang3.StringUtils;
 
@@ -30,12 +28,7 @@ public class Automata2CDUMLTransitionVisitor extends Automata2CDTransitionVisito
       cd4C.addMethod(automataClass, "automaton2cd.StateStimulusMethod", stimulus, automataClass.getName());
       
       // Add handleStimulus(Class k) method to the StateClass
-      transitionSuperClass.addCDMember(CD4CodeMill.cDMethodBuilder()
-        .setModifier(CDBasisMill.modifierBuilder().PUBLIC().ABSTRACT().build())
-        .setMCReturnType(voidReturnType)
-        .setName("handle" + StringUtils.capitalize(stimulus)).addCDParameter(
-          CD4CodeMill.cDParameterBuilder().setName("k").setMCType(qualifiedType(automataClass.getName())).build())
-        .build());
+      cd4C.addMethod(stateSuperClass, "automaton2cd.StateClassHandleMethod", node.getInput(), automataClass.getName());
       
       this.stimuli.add(stimulus);
     }
@@ -43,10 +36,10 @@ public class Automata2CDUMLTransitionVisitor extends Automata2CDTransitionVisito
     if (!transition.isPresent()) return;
     
     // Add handleStimulus(Class k) method to the source-state StateClass impl
-    if (!this.transitionToClassMap.containsKey(this.transition.get().getFrom())) {
+    if (!this.stateToClassMap.containsKey(this.transition.get().getFrom())) {
       throw new IllegalStateException("No source state " + this.transition.get().getFrom() + " found!");
     }
-    ASTCDClass stateImplClass = this.transitionToClassMap.get(this.transition.get().getFrom());
+    ASTCDClass stateImplClass = this.stateToClassMap.get(this.transition.get().getFrom());
     if (stateImplClass.getCDMethodList().stream()
       .anyMatch(x -> x.getName().equals("handle" + StringUtils.capitalize(stimulus)))) {
       // This might occur due to stimuli with arguments

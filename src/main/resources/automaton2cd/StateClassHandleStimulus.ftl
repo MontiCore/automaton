@@ -5,7 +5,6 @@
 -->
 ${tc.signature("stimulus", "className", "targetStateAttrName")}
 ${cd4c.method("public void handle${stimulus?cap_first}( ${className} k)")}
-{
-k.setState(k.${targetStateAttrName?uncap_first});
-}
-}
+
+k.setState(k.get${targetStateAttrName}());
+
