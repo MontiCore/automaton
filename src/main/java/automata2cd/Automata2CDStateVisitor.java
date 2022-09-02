@@ -158,7 +158,7 @@ public class Automata2CDStateVisitor implements AutomataVisitor2 {
   
   protected ASTCDClass createStateSuperClass() {
     ASTCDClass astClass = CDBasisMill.cDClassBuilder()
-      .setModifier(CDBasisMill.modifierBuilder().ABSTRACT().build())
+      .setModifier(CDBasisMill.modifierBuilder().PUBLIC().ABSTRACT().build())
       .setName("StateClass").build();
     this.cdCompilationUnit.getCDDefinition().addCDElement(astClass);
     cd4C.addAttribute(astClass, true, false, "protected boolean isFinal");

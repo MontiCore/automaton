@@ -79,7 +79,7 @@ public class AutomataTool extends AutomataToolTOP {
     // execute a pretty printer
     prettyPrint(ast, null);
     
-    generateCD(ast);
+    generateCD(ast, "target/gen-test/");
   }
   
   /**
@@ -125,15 +125,17 @@ public class AutomataTool extends AutomataToolTOP {
     new AutomataCoCos().getCheckerForAllCoCos().checkAll(ast);
   }
   
-  private static final String OUTPUT_DIR = "target/gen-test/";
-  
-  public void generateCD(ASTAutomaton ast) {
+  public void generateCD(ASTAutomaton ast, String outputDir) {
     
     GeneratorSetup setup = new GeneratorSetup();
     GlobalExtensionManagement glex = new GlobalExtensionManagement();
     setup.setGlex(glex);
     glex.setGlobalValue("cdPrinter", new CdUtilsPrinter());
-    setup.setOutputDirectory(new File(OUTPUT_DIR + ast.getName()));
+    
+    if (!outputDir.isEmpty()){
+      File targetDir = new File(outputDir);
+      setup.setOutputDirectory(targetDir);
+    }
     
     String configTemplate = "automaton2cd.Automaton2CD";
     TemplateController tc = setup.getNewTemplateController(configTemplate);

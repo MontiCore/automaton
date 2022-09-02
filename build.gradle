@@ -23,6 +23,8 @@ version = '1.0.0-SNAPSHOT'
 description = "Automata DSL"
 sourceCompatibility = "11"
 
+buildDir = file("$projectDir/target")
+
 // configure non-standard source sets
 sourceSets {
     main.java.srcDirs += ["$projectDir/target/generated-sources/monticore/sourcecode"]
@@ -32,14 +34,20 @@ sourceSets {
             include "**/*.mc4"
         }
     }
-
+    gentest {
+        java.srcDirs += ["$buildDir/generated-test-sources/monticore/sourcecode"]
+    }
 }
-buildDir = file("$projectDir/target")
 
 java {
     registerFeature('grammars') {
         usingSourceSet(sourceSets.grammars)
     }
+}
+
+configurations {
+    gentestImplementation.extendsFrom(implementation)
+    gentestImplementation.extendsFrom(testImplementation)
 }
 
 dependencies {
@@ -62,6 +70,8 @@ dependencies {
             requireCapability("de.monticore:monticore-runtime-tests")
         }
     }
+    gentestImplementation(sourceSets.main.output.classesDirs)
+    gentestImplementation(sourceSets.test.output.classesDirs)
 }
 
 // has to be placed directly under the dependency definition, since otherwise the grammar configurations are not found
@@ -97,6 +107,14 @@ task generateAutomata(type: MCTask) {
     outputDir = file "$buildDir/generated-sources/monticore/sourcecode"
     def uptoDate = incCheck("Automata.mc4")
     outputs.upToDateWhen { uptoDate }
+}
+
+task gentest(type: Test) {
+    description = "Runs Generator Tests"
+    group = "Generator"
+    testClassesDirs = sourceSets.gentest.output.classesDirs
+    classpath += sourceSets.gentest.runtimeClasspath
+    shouldRunAfter test
 }
 
 compileJava {
