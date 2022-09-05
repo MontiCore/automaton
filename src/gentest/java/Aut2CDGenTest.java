@@ -8,10 +8,15 @@ import de.se_rwth.commons.logging.LogStub;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import output.PingPong;
+import output.Stimuli;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class Aut2CDGenTest {
@@ -23,8 +28,29 @@ public class Aut2CDGenTest {
     final ASTAutomaton ast = optAST.get();
   
     AutomataTool tool = new AutomataTool();
-    tool.generateCD(ast, "src/gentest/resources/output/");
-  
+    tool.generateCD(ast, "src/gentest/java/output/");
+  }
+
+  @Test
+  public void testValidInputs() {
+    PingPong p = new PingPong();
+    List<Stimuli> list  = new ArrayList<>();
+    list.add(Stimuli.startGame);
+    list.add(Stimuli.returnBall);
+    list.add(Stimuli.stopGame);
+    list.add(Stimuli.startGame);
+    list.add(Stimuli.returnBall);
+    assertTrue(p.run(list));
+  }
+
+  @Test
+  public void testInvalidInputs() {
+    PingPong p = new PingPong();
+    List<Stimuli> list  = new ArrayList<>();
+    list.add(Stimuli.startGame);
+    list.add(Stimuli.returnBall);
+    list.add(Stimuli.stopGame);
+    assertFalse(p.run(list));
   }
   
   @Before
