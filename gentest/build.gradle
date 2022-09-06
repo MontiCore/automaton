@@ -50,7 +50,7 @@ task adoeslfkj(type: JavaExec) {
 
     mainClass = 'automata.AutomataTool'
 
-    args 'src/main/resources/PingPong.aut', 'target/foo'
+    args 'src/main/resources/PingPong.aut', 'target/foo/'
 }
 
 compileJava {}

@@ -26,6 +26,7 @@ import de.monticore.io.paths.MCPath;
 import de.se_rwth.commons.logging.Log;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -38,7 +39,7 @@ public class AutomataTool extends AutomataToolTOP {
   public void run(String[] args) {
     System.out.println("hallo");
     initOptions();
-    if (args.length >= 1) {
+    if (args.length <= 1) {
       Log.error("Please specify only one single path to the input model.");
       return;
     }
@@ -141,6 +142,9 @@ public class AutomataTool extends AutomataToolTOP {
     
     String configTemplate = "automaton2cd.Automaton2CD";
     TemplateController tc = setup.getNewTemplateController(configTemplate);
+    List<File> list = new ArrayList<>();
+    list.add(new File("src/main/resources/"));
+    setup.setAdditionalTemplatePaths(list);
     CDGenerator generator = new CDGenerator(setup);
     TemplateHookPoint hpp = new TemplateHookPoint(configTemplate);
     List<Object> configTemplateArgs;
