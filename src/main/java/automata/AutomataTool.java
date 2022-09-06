@@ -36,8 +36,9 @@ public class AutomataTool extends AutomataToolTOP {
   
   @Override
   public void run(String[] args) {
+    System.out.println("hallo");
     initOptions();
-    if (args.length != 1) {
+    if (args.length >= 1) {
       Log.error("Please specify only one single path to the input model.");
       return;
     }
@@ -79,7 +80,8 @@ public class AutomataTool extends AutomataToolTOP {
     // execute a pretty printer
     prettyPrint(ast, null);
     
-    generateCD(ast, "target/gen-test/");
+    String outDir = args.length > 1 ?args[1] :"target/gen-test/";
+    generateCD(ast, outDir);
   }
   
   /**
