@@ -3,6 +3,7 @@ package automata.symboltable;
 
 import automata.AutomataTool;
 import automata.AutomataMill;
+import automata.AutomataToolTOP;
 import automata._ast.ASTAutomaton;
 import automata._symboltable.*;
 import automata._visitor.AutomataTraverser;
@@ -85,7 +86,7 @@ public class AutomatonSymbolSerializationTest {
   public void testDoorModel() {
     String path = "automata/symboltable/Door.aut";
     String symbolPath = "target/symbols/Door.autsym";
-    AutomataTool.main(new String[] { "src/test/resources/" + path });
+    AutomataTool.main(new String[] { "src/test/resources/" + path, "-option pp"});
     assertTrue(new File(symbolPath).exists());
 
     AutomataSymbols2Json symbols2Json = new AutomataSymbols2Json();

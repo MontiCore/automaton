@@ -24,6 +24,8 @@ import de.monticore.generating.templateengine.TemplateController;
 import de.monticore.generating.templateengine.TemplateHookPoint;
 import de.monticore.io.paths.MCPath;
 import de.se_rwth.commons.logging.Log;
+import org.apache.commons.cli.*;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -37,52 +39,62 @@ public class AutomataTool extends AutomataToolTOP {
   
   @Override
   public void run(String[] args) {
-    initOptions();
-    if (args.length < 1) {
-      Log.error("Please specify only one single path to the input model.");
-      return;
+    Options options = initOptions();
+  
+    try {
+      // create CLI parser and parse input options from command line
+      CommandLineParser cliParser = new DefaultParser();
+      CommandLine cmd =  cliParser.parse(options, args);
+  
+      // help: when --help
+      if (cmd.hasOption("h")) {
+        printHelp(options);
+        // do not continue, when help is printed
+        return;
+      }
+      
+      // if -i input is missing: also print help and stop
+      if (!cmd.hasOption("i")) {
+        printHelp(options);
+        // do not continue, when help is printed
+        return;
+      }
+      
+      // -option developer logging
+      if (cmd.hasOption("d")) {
+        Log.initDEBUG();
+      } else {
+        Log.init();
+      }
+  
+      // parse input file, which is now available
+      // (only returns if successful)
+      ASTAutomaton astAutomaton = parse(cmd.getOptionValue("i"));
+      
+      createSymbolTable(astAutomaton);
+  
+      // -option pretty print
+      if (cmd.hasOption("pp")) {
+        String path = cmd.getOptionValue("pp", StringUtils.EMPTY);
+        prettyPrint(astAutomaton, path);
+      }
+  
+      // -option reports
+      if (cmd.hasOption("r")) {
+        String path = cmd.getOptionValue("r", StringUtils.EMPTY);
+        report(astAutomaton, path);
+      }
+  
+      String outputDir = cmd.hasOption("o")
+        ? cmd.getOptionValue("o")+astAutomaton.getName()
+        : "target/gen-test"+astAutomaton.getName();
+      generateCD(astAutomaton,outputDir);
+      
+    } catch (ParseException e) {
+      Log.error("0xA7105 Could not process parameters: "+e.getMessage());
     }
-    String model = args[0];
-    
-    // parse the model and create the AST representation
-    final ASTAutomaton ast = parse(model);
-    Log.info(model + " parsed successfully!", AutomataTool.class.getName());
-    
-    // setup the symbol table
-    IAutomataArtifactScope modelTopScope = createSymbolTable(ast);
-    
-    // can be used for resolving things in the model
-    Optional<StateSymbol> aSymbol = modelTopScope.resolveState("Ping");
-    if (aSymbol.isPresent()) {
-      Log.info("Resolved state symbol \"Ping\"; FQN = " + aSymbol.get().toString(),
-        AutomataTool.class.getName());
-    }
-    
-    // execute default context conditions
-    runDefaultCoCos(ast);
-    
-    // execute a custom set of context conditions
-    AutomataCoCoChecker customCoCos = new AutomataCoCoChecker();
-    customCoCos.addCoCo(new StateNameStartsWithCapitalLetter());
-    customCoCos.checkAll(ast);
-    
-    // store artifact scope
-    String symFile = "target/symbols/" + getPathFromPackage(modelTopScope.getFullName()) + ".autsym";
-    storeSymbols(modelTopScope, symFile);
-    
-    // analyze the model with a visitor
-    CountStates cs = new CountStates();
-    AutomataTraverser t = AutomataMill.traverser();
-    t.add4Automata(cs);
-    ast.accept(t);
-    Log.info("The model contains " + cs.getCount() + " states.", AutomataTool.class.getName());
-    
-    // execute a pretty printer
-    prettyPrint(ast, null);
-    
-    String outDir = args.length > 1 ?args[1] :"target/gen-test/"+ast.getName();
-    generateCD(ast, outDir);
   }
+  
   
   /**
    * Create the symbol table from the parsed AST.
