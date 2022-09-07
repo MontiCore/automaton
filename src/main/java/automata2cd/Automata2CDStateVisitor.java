@@ -8,10 +8,7 @@ import automata._visitor.AutomataVisitor2;
 import de.monticore.cd.methodtemplates.CD4C;
 import de.monticore.cd4code.CD4CodeMill;
 import de.monticore.cdbasis.CDBasisMill;
-import de.monticore.cdbasis._ast.ASTCDClass;
-import de.monticore.cdbasis._ast.ASTCDCompilationUnit;
-import de.monticore.cdbasis._ast.ASTCDCompilationUnitBuilder;
-import de.monticore.cdbasis._ast.ASTCDDefinition;
+import de.monticore.cdbasis._ast.*;
 import de.monticore.cdinterfaceandenum._ast.ASTCDEnum;
 import de.monticore.cdinterfaceandenum._ast.ASTCDEnumConstant;
 import de.monticore.generating.templateengine.GlobalExtensionManagement;
@@ -30,6 +27,8 @@ public class Automata2CDStateVisitor implements AutomataVisitor2 {
   protected ASTAutomaton astAutomaton;
   
   protected ASTCDCompilationUnit cdCompilationUnit;
+  
+  protected ASTCDPackage cdPackage;
 
   protected ASTCDClass automataClass;
   /**
@@ -65,6 +64,14 @@ public class Automata2CDStateVisitor implements AutomataVisitor2 {
     ASTCDDefinition astcdDefinition = CDBasisMill.cDDefinitionBuilder().setName(astAutomaton.getName())
       .setModifier(UMLModifierMill.modifierBuilder().build()).build();
   
+    cdPackage = CDBasisMill.cDPackageBuilder()
+      .setMCQualifiedName(CDBasisMill.mCQualifiedNameBuilder()
+        .setPartsList(Arrays.asList(astAutomaton.getName().toLowerCase()))
+        .build())
+      .build();
+    
+    astcdDefinition.addCDElement(cdPackage);
+    
     ASTCDCompilationUnitBuilder cdCompilationUnitBuilder = CDBasisMill.cDCompilationUnitBuilder();
     cdCompilationUnitBuilder.setCDDefinition(astcdDefinition);
   
@@ -74,7 +81,7 @@ public class Automata2CDStateVisitor implements AutomataVisitor2 {
     // Main class, names equally to the Automaton
     automataClass = CDBasisMill.cDClassBuilder().setName(astAutomaton.getName())
       .setModifier(CDBasisMill.modifierBuilder().PUBLIC().build()).build();
-    astcdDefinition.addCDElement(automataClass);
+    cdPackage.addCDElement(automataClass);
     
     // replace the template to add a setState method
     this.cd4C.addMethod(this.automataClass, "automaton2cd.StateSetStateMethod");
@@ -85,7 +92,7 @@ public class Automata2CDStateVisitor implements AutomataVisitor2 {
       .setName("Stimuli")
       .addAllCDEnumConstants(createConstants(astAutomaton.getTransitionList()))
       .build();
-    astcdDefinition.addCDElement(stimuli);
+    cdPackage.addCDElement(stimuli);
     
     cd4C.addMethod(automataClass, "automaton2cd.Run",
       stimuli.getCDEnumConstantList().stream().map(ASTCDEnumConstant::getName).collect(Collectors.toList()));
@@ -121,7 +128,7 @@ public class Automata2CDStateVisitor implements AutomataVisitor2 {
     cd4C.addConstructor(stateClass, "automaton2cd.StateConstructor", state.getName(), state.isFinal());
   
     // Add the StateClass to the CD and mapping
-    this.cdCompilationUnit.getCDDefinition().addCDElement(stateClass);
+    this.cdPackage.addCDElement(stateClass);
     this.stateToClassMap.put(state.getName(), stateClass);
     
     // Add reference to this in the main class, in form of an attribute
@@ -160,7 +167,7 @@ public class Automata2CDStateVisitor implements AutomataVisitor2 {
     ASTCDClass astClass = CDBasisMill.cDClassBuilder()
       .setModifier(CDBasisMill.modifierBuilder().PUBLIC().ABSTRACT().build())
       .setName("StateClass").build();
-    this.cdCompilationUnit.getCDDefinition().addCDElement(astClass);
+    cdPackage.addCDElement(astClass);
     cd4C.addAttribute(astClass, true, false, "protected boolean isFinal");
     return astClass;
   }

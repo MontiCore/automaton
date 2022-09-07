@@ -43,7 +43,7 @@ public class AutomatonSymbolSerializationTest {
   }
 
   @Test
-  public void testserializationOfAutomatonScope() {
+  public void testSerializationOfAutomatonScope() {
     setup("automata/symboltable/PingPong.aut");
     final AutomatonSymbol automatonSymbol = scope.resolveAutomaton("PingPong").orElse(null);
     assertNotNull(automatonSymbol);

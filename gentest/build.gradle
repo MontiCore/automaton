@@ -13,7 +13,6 @@ repositories {
         credentials.password mavenPassword
         url repo
     }
-    gradlePluginPortal()
 }
 
 def junit_version = '4.13.1'
@@ -21,38 +20,24 @@ def junit_version = '4.13.1'
 dependencies {
     implementation "de.se_rwth.commons:se-commons-logging:$se_commons_version"
     implementation "de.se_rwth.commons:se-commons-utilities:$se_commons_version"
-
-    implementation "de.monticore:monticore-runtime:$mc_version"
-    implementation "de.monticore:monticore-grammar:$mc_version"
-   /*  grammar (project(path: ':monticore-grammar')) {
-       capabilities {
-         requireCapability("de.monticore:monticore-grammar-grammars")
-       }
-     }*/
-    implementation "de.se_rwth.commons:se-commons-logging:$se_commons_version"
-    implementation "de.se_rwth.commons:se-commons-utilities:$se_commons_version"
-    implementation group: 'com.google.guava', name: 'guava', version: '30.0-jre'
-    implementation group: 'de.monticore.lang', name: 'cd4analysis', version: mc_version
-    implementation group: 'org.antlr', name: 'antlr4-runtime', version: '4.7.1'
-    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.11'
-    compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.29'
     testImplementation group: 'junit', name: 'junit', version: junit_version
 }
 
-task adoeslfkj(type: JavaExec) {
-    doFirst {
-        de.se_rwth.commons.logging.Log.init()
-        de.se_rwth.commons.logging.Log.enableFailQuick(false)
-    }
-    classpath = sourceSets.main.runtimeClasspath
-    classpath += files('../target/classes/java/main')
-    print(classpath)
-
-    mainClass = 'automata.AutomataTool'
-
-    args 'src/main/resources/PingPong.aut', 'target/foo/'
+sourceSets {
+    main.java.srcDirs += ["$projectDir/target/generated-sources"]
 }
 
-compileJava {}
+task genPingPong(type: JavaExec) {
+    classpath += files('../target/libs/MCAutomaton.jar')
+    mainClass = 'automata.AutomataTool'
 
-jar.enabled = false
+    args 'src/main/resources/PingPong.aut', 'target/generated-sources/'
+}
+
+compileJava {
+    dependsOn genPingPong
+}
+
+clean.doFirst {
+    delete "${projectDir}/target/"
+}
