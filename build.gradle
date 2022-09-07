@@ -1,9 +1,7 @@
 /* (c) https://github.com/MontiCore/monticore */
-import de.monticore.MCTask
-
 plugins {
     id "java"
-    id "monticore"  version "$mc_version" // MontiCore Plugin
+    id "monticore" version "$mc_version" // MontiCore Plugin
     id "maven-publish"
     id "com.github.johnrengelman.shadow" version "6.0.0"
     // useful reports
@@ -25,18 +23,18 @@ version = '1.0.0-SNAPSHOT'
 description = "Automata DSL"
 sourceCompatibility = "11"
 
+buildDir = file("$projectDir/target")
+
 // configure non-standard source sets
 sourceSets {
-  main.java.srcDirs += [ "$projectDir/target/generated-sources/monticore/sourcecode"]
-  grammars {
-    resources {
-        srcDirs([grammarDir])
-        include "**/*.mc4"
+    main.java.srcDirs += ["$projectDir/target/generated-sources/monticore/sourcecode"]
+    grammars {
+        resources {
+            srcDirs([grammarDir])
+            include "**/*.mc4"
+        }
     }
 }
-
-}
-buildDir = file("$projectDir/target")
 
 java {
     registerFeature('grammars') {
@@ -45,25 +43,30 @@ java {
 }
 
 dependencies {
-  implementation "de.monticore:monticore-runtime:$mc_version"
-  implementation "de.monticore:monticore-grammar:$mc_version"
-  grammar ("de.monticore:monticore-grammar:$mc_version"){ capabilities {
-            requireCapability("de.monticore:monticore-grammar-grammars")}
-          }
-  implementation "de.se_rwth.commons:se-commons-logging:$se_commons_version"
-  implementation "de.se_rwth.commons:se-commons-utilities:$se_commons_version"
-  implementation group:'com.google.guava', name:'guava', version:guava_version
-  implementation group:'org.antlr', name:'antlr4-runtime', version:antlr_version
-  testImplementation "de.monticore:monticore-generator:$mc_version"
-  testImplementation group:'junit', name:'junit', version:junit_version
-  testImplementation ("de.monticore:monticore-runtime:$mc_version"){ capabilities {
-    requireCapability("de.monticore:monticore-runtime-tests")}
-  }
+    implementation "de.monticore:monticore-runtime:$mc_version"
+    implementation "de.monticore:monticore-grammar:$mc_version"
+    grammar("de.monticore:monticore-grammar:$mc_version") {
+        capabilities {
+            requireCapability("de.monticore:monticore-grammar-grammars")
+        }
+    }
+    implementation "de.se_rwth.commons:se-commons-logging:$se_commons_version"
+    implementation "de.se_rwth.commons:se-commons-utilities:$se_commons_version"
+    implementation group: 'com.google.guava', name: 'guava', version: guava_version
+    implementation group: 'de.monticore.lang', name: 'cd4analysis', version: mc_version
+    implementation group: 'org.antlr', name: 'antlr4-runtime', version: antlr_version
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.11'
+    testImplementation group: 'junit', name: 'junit', version: junit_version
+    testImplementation("de.monticore:monticore-runtime:$mc_version") {
+        capabilities {
+            requireCapability("de.monticore:monticore-runtime-tests")
+        }
+    }
 }
 
 // has to be placed directly under the dependency definition, since otherwise the grammar configurations are not found
 repositories {
-    if(("true").equals(getProperty('useLocalRepo'))){
+    if (("true").equals(getProperty('useLocalRepo'))) {
         mavenLocal()
     }
     maven {
@@ -72,7 +75,6 @@ repositories {
         url repo
     }
 }
-
 
 
 // one task per file
@@ -90,11 +92,11 @@ repositories {
 //    }
 //}
 
-task  generateAutomata (type: MCTask) {
-  grammar = file "$grammarDir/Automata.mc4"
-  outputDir = file "$buildDir/generated-sources/monticore/sourcecode"
-  def uptoDate = incCheck("Automata.mc4")
-  outputs.upToDateWhen { uptoDate }
+task generateAutomata(type: MCTask) {
+    grammar = file "$grammarDir/Automata.mc4"
+    outputDir = file "$buildDir/generated-sources/monticore/sourcecode"
+    def uptoDate = incCheck("Automata.mc4")
+    outputs.upToDateWhen { uptoDate }
 }
 
 compileJava {
@@ -102,11 +104,11 @@ compileJava {
 }
 
 java {
-  withSourcesJar()
-  withJavadocJar()
+    withSourcesJar()
+    withJavadocJar()
 }
 
-sourcesJar.dependsOn project.collect { it.tasks.withType(MCTask)}
+sourcesJar.dependsOn project.collect { it.tasks.withType(MCTask) }
 
 // generated java doc contains errors, disable for now
 javadoc.failOnError(false)
@@ -115,7 +117,7 @@ shadowJar { // all in one jar
     manifest {
         attributes "Main-Class": "automata.AutomataTool"
     }
-    archiveClassifier =  "mc-tool"
+    archiveClassifier = "mc-tool"
     archiveFileName = "MCAutomaton.${archiveExtension.get()}"
 }
 
@@ -123,10 +125,9 @@ jar.dependsOn(shadowJar)
 
 // build grammar jar as well
 task grammarJar(type: Jar) {
-    from ("$projectDir/$grammarDir"){ include "**/*.mc4" }
+    from("$projectDir/$grammarDir") { include "**/*.mc4" }
     archiveClassifier = "grammars"
 }
-
 
 
 // configure deployment
@@ -165,7 +166,7 @@ task testReport(type: TestReport) {
 
 
 task buildAll(type: GradleBuild) {
-  tasks = [ 'build' ]
+    tasks = ['build']
 }
 
 defaultTasks 'build'
