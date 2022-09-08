@@ -35,7 +35,6 @@ public class AutomataTool extends AutomataToolTOP {
   @Override
   public void run(String[] args) {
     Options options = initOptions();
-    options.addOption(new Option("o","output",true,"Sets the output path"));
 
     try {
       // create CLI parser and parse input options from command line
@@ -178,5 +177,11 @@ public class AutomataTool extends AutomataToolTOP {
     configTemplateArgs = Arrays.asList(glex, converter, setup.getHandcodedPath(), generator);
     
     hpp.processValue(tc, ast, configTemplateArgs);
+  }
+
+  @Override
+  public Options addAdditionalOptions(Options options) {
+    options.addOption(new Option("o","output",true,"Sets the output path"));
+    return options;
   }
 }
