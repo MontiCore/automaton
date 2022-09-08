@@ -35,9 +35,7 @@ public class AutomataTool extends AutomataToolTOP {
   @Override
   public void run(String[] args) {
     Options options = initOptions();
-    System.out.println("hello");
     options.addOption(new Option("o","output",true,"Sets the output path"));
-    System.out.println("bye");
 
     try {
       // create CLI parser and parse input options from command line
