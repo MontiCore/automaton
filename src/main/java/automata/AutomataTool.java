@@ -35,7 +35,10 @@ public class AutomataTool extends AutomataToolTOP {
   @Override
   public void run(String[] args) {
     Options options = initOptions();
-  
+    System.out.println("hello");
+    options.addOption(new Option("o","output",true,"Sets the output path"));
+    System.out.println("bye");
+
     try {
       // create CLI parser and parse input options from command line
       CommandLineParser cliParser = new DefaultParser();
@@ -102,7 +105,7 @@ public class AutomataTool extends AutomataToolTOP {
       }
   
       String outputDir = cmd.hasOption("o")
-        ? cmd.getOptionValue("o")+astAutomaton.getName()
+        ? cmd.getOptionValue("o")
         : "target/gen-test/"+astAutomaton.getName();
       generateCD(astAutomaton,outputDir);
       
