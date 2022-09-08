@@ -19,16 +19,16 @@ import java.util.Optional;
 import static org.junit.Assert.*;
 
 public class AutomatonSymbolSerializationTest {
-  
+
   @BeforeClass
-  public static void init() {
+  public static void init () {
     Log.enableFailQuick(false);
     AutomataMill.init();
   }
 
   private IAutomataArtifactScope scope;
 
-  public void setup(String model) {
+  public void setup (String model) {
     Log.enableFailQuick(false);
     ASTAutomaton ast = new AutomataTool().parse("src/test/resources/" + model);
 
@@ -44,7 +44,7 @@ public class AutomatonSymbolSerializationTest {
   }
 
   @Test
-  public void testSerializationOfAutomatonScope() {
+  public void testSerializationOfAutomatonScope () {
     setup("automata/symboltable/PingPong.aut");
     final AutomatonSymbol automatonSymbol = scope.resolveAutomaton("PingPong").orElse(null);
     assertNotNull(automatonSymbol);
@@ -63,7 +63,7 @@ public class AutomatonSymbolSerializationTest {
   }
 
   @Test
-  public void testLoadSymbol() {
+  public void testLoadSymbol () {
     MCPath mp = new MCPath(Paths.get("src/test/resources"));
     IAutomataGlobalScope gs = AutomataMill.globalScope();
     gs.clear();
@@ -73,9 +73,9 @@ public class AutomatonSymbolSerializationTest {
   }
 
   @Test
-  public void testStoreSymbols() {
+  public void testStoreSymbols () {
     String path = "automata/cocos/valid/A.aut";
-    AutomataTool.main(new String[] { "src/test/resources/" + path });
+    AutomataTool.main(new String[] {"src/test/resources/" + path});
     // Note: usually, the stored symbols will be in a file located in the folder structure that
     // matches the package structure. However, the automata language does not defines packages for
     // automata.
@@ -83,10 +83,10 @@ public class AutomatonSymbolSerializationTest {
   }
 
   @Test
-  public void testDoorModel() {
+  public void testDoorModel () {
     String path = "automata/symboltable/Door.aut";
     String symbolPath = "target/symbols/Door.autsym";
-    AutomataTool.main(new String[] { "src/test/resources/" + path, "-option pp"});
+    AutomataTool.main(new String[] {"-input","src/test/resources/" + path});
     assertTrue(new File(symbolPath).exists());
 
     AutomataSymbols2Json symbols2Json = new AutomataSymbols2Json();
@@ -115,15 +115,15 @@ public class AutomatonSymbolSerializationTest {
     StateSymbol closing = automatonScope.getLocalStateSymbols().get(1);
     assertEquals("Closing", closing.getName());
     assertEquals(automatonScope, closing.getEnclosingScope());
-  
+
     StateSymbol closed = automatonScope.getLocalStateSymbols().get(2);
     assertEquals("Closed", closed.getName());
     assertEquals(automatonScope, closed.getEnclosingScope());
-  
+
     StateSymbol opening = automatonScope.getLocalStateSymbols().get(3);
     assertEquals("Opening", opening.getName());
     assertEquals(automatonScope, opening.getEnclosingScope());
-  
+
     StateSymbol open = automatonScope.getLocalStateSymbols().get(4);
     assertEquals("Open", open.getName());
     assertEquals(automatonScope, open.getEnclosingScope());
