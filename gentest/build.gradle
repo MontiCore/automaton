@@ -28,10 +28,9 @@ sourceSets {
 }
 
 task genPingPong(type: JavaExec) {
-    classpath += files('../target/libs/MCAutomaton.jar')
-    mainClass = 'automata.AutomataTool'
-
+    classpath += parent.tasks.shadowJar.outputs.files
     args '-i','src/main/resources/PingPong.aut', '-o', 'target/generated-sources/'
+    dependsOn parent.tasks.shadowJar
 }
 
 compileJava {
