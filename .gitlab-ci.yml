@@ -6,6 +6,7 @@ stages:
   - build
 #  - test
   - report
+  - deploy
   
 before_script:
   - export GRADLE_USER_HOME=`pwd`/.gradle
@@ -20,6 +21,13 @@ build_gradle:
     paths:
       - "target"
     expire_in: 1 week
+
+deploy_gradle:
+  stage: deploy
+  script:
+    - "gradle publish -PmavenPassword=$password -PmavenUser=$username"
+  only:
+    - master
 
 #test_gradle:
 #  stage: test
