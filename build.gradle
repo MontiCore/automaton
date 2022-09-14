@@ -19,7 +19,7 @@ def junit_version = '4.13.1'
 def grammarDir = 'src/main/grammars'
 
 group = "de.monticore.lang"
-version = '1.0.0-SNAPSHOT'
+version = '7.4.0-SNAPSHOT'
 description = "Automata DSL"
 sourceCompatibility = "11"
 
@@ -117,18 +117,10 @@ shadowJar { // all in one jar
     manifest {
         attributes "Main-Class": "automata.AutomataTool"
     }
-    archiveClassifier = "mc-tool"
-    archiveFileName = "MCAutomaton.${archiveExtension.get()}"
+    archiveClassifier = "tool"
 }
 
 jar.dependsOn(shadowJar)
-
-// build grammar jar as well
-task grammarJar(type: Jar) {
-    from("$projectDir/$grammarDir") { include "**/*.mc4" }
-    archiveClassifier = "grammars"
-}
-
 
 // configure deployment
 publishing {
@@ -137,7 +129,6 @@ publishing {
         mavenJava(MavenPublication) {
             artifactId = "$project.name"
             from components.java
-            artifact grammarJar
         }
     }
     repositories.maven {
@@ -152,11 +143,6 @@ publishing {
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
-
-// todo: reactivate this plugin when new version compatible to gradle 6.0.1 is available
-//visteg {
-//    destination    = 'target/reports/visteg.dot'
-//}
 
 task testReport(type: TestReport) {
     destinationDir = file("$buildDir/reports/allTests")
