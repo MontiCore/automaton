@@ -19,7 +19,7 @@ def junit_version = '4.13.1'
 def grammarDir = 'src/main/grammars'
 
 group = "de.monticore.lang"
-version = '7.4.0'
+version = '7.5.0-SNAPSHOT'
 description = "Automata DSL"
 sourceCompatibility = "11"
 
