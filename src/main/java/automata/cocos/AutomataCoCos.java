@@ -10,6 +10,7 @@ public class AutomataCoCos {
     checker.addCoCo(new AtLeastOneInitialAndFinalState());
     checker.addCoCo(new StateNameStartsWithCapitalLetter());
     checker.addCoCo(new TransitionStatesExist());
+    checker.addCoCo(new AutomatonIsDeterministic());
     
     return checker;
   }
