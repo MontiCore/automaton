@@ -5,18 +5,21 @@ import automata._ast.ASTTransition;
 import automata._cocos.AutomataASTTransitionCoCo;
 import de.se_rwth.commons.logging.Log;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Map;
+import java.util.HashMap;
 
 public class AutomatonIsDeterministic implements AutomataASTTransitionCoCo {
 
-   protected Map<String, List<String>> transitions = new HashMap<>();
+   protected Map<String, Set<String>> transitions = new HashMap<>();
 
   @Override
   public void check(ASTTransition node) {
     String from = node.getFrom();
     String input = node.getInput();
     if(!transitions.containsKey(from)) {
-      List<String> inputs = new ArrayList<>();
+      Set<String> inputs = new HashSet<>();
       inputs.add(input);
       transitions.put(from, inputs);
     } else {
