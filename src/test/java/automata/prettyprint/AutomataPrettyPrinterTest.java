@@ -3,17 +3,16 @@ package automata.prettyprint;
 
 import automata.AutomataMill;
 import automata._ast.ASTAutomaton;
+import automata._prettyprint.AutomataFullPrettyPrinter;
 import automata.lang.AbstractTest;
+import de.monticore.prettyprint.IndentPrinter;
 import de.se_rwth.commons.logging.Log;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-/**
- * Test for {@link PrettyPrinter}.
- */
-public class PrettyPrinterTest extends AbstractTest {
+public class AutomataPrettyPrinterTest extends AbstractTest {
   
   @BeforeClass
   public static void init() {
@@ -22,14 +21,13 @@ public class PrettyPrinterTest extends AbstractTest {
   }
 
   @Test
-  public void test() {
+  public void testPrettyPrinter() {
     ASTAutomaton automaton = parseModel("src/test/resources/automata/prettyprinter/valid/A.aut");
-    PrettyPrinter pp = new PrettyPrinter();
-    pp.handle(automaton);
-
-    String actual = pp.getResult();
-    String expected = "automaton A {\n  state S <<initial>> <<final>>;\n}\n";
-    assertEquals(expected, actual);
+    AutomataFullPrettyPrinter pp = new AutomataFullPrettyPrinter(new IndentPrinter());
+    String printed = pp.prettyprint(automaton);
+    ASTAutomaton reparsed = parseStringModel(printed);
+    String reprinted = pp.prettyprint(reparsed);
+    assertEquals(printed, reprinted);
   }
 
 }
