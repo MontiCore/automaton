@@ -10,6 +10,7 @@ import automata._symboltable.IAutomataScope;
 import automata._visitor.AutomataTraverser;
 import de.monticore.io.paths.MCPath;
 import de.se_rwth.commons.logging.Log;
+import de.se_rwth.commons.logging.LogStub;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -19,17 +20,18 @@ import java.nio.file.Paths;
 import static org.junit.Assert.assertTrue;
 
 public class AutomatonSymbolTableCreatorTest {
-  
-  @BeforeClass
-  public static void init() {
-    Log.enableFailQuick(false);
-    AutomataMill.init();
-  }
 
   private IAutomataGlobalScope globalScope;
 
   @Before
   public void setup() {
+
+    AutomataMill.reset();
+    AutomataMill.init();
+    LogStub.init();
+    Log.enableFailQuick(false);
+    Log.getFindings().clear();
+
     final MCPath symbolPath =
             new MCPath(Paths.get("src/test/resources/automata/symboltable"));
 

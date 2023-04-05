@@ -27,18 +27,15 @@ import java.util.Collections;
 import static org.junit.Assert.assertEquals;
 
 public class TransitionStatesExistTest extends AbstractTest {
-  
-  @BeforeClass
-  public static void init() {
-    Log.enableFailQuick(false);
-    AutomataMill.init();
-  }
 
   private IAutomataGlobalScope globalScope;
 
   @Before
   public void setUp() throws RecognitionException {
+    AutomataMill.reset();
+    AutomataMill.init();
     LogStub.init();
+    Log.enableFailQuick(false);
     Log.getFindings().clear();
     globalScope = AutomataMill.globalScope();
     globalScope.clear();
