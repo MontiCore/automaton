@@ -4,6 +4,8 @@ package automata;
 import static org.junit.Assert.assertTrue;
 
 import de.se_rwth.commons.logging.Log;
+import de.se_rwth.commons.logging.LogStub;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -12,11 +14,14 @@ import org.junit.Test;
  *
  */
 public class AutomataToolTest {
-  
-  @BeforeClass
-  public static void init() {
-    Log.enableFailQuick(false);
+
+  @Before
+  public void setUp() {
+    AutomataMill.reset();
     AutomataMill.init();
+    LogStub.init();
+    Log.enableFailQuick(false);
+    Log.getFindings().clear();
   }
   
   @Test

@@ -19,14 +19,12 @@ import static org.junit.Assert.assertTrue;
 
 public class AutomatonIsDeterministicTest extends AbstractTest {
 
-  @BeforeClass
-  public static void init() {
-    AutomataMill.init();
-  }
-
   @Before
   public void setUp() throws RecognitionException {
+    AutomataMill.reset();
+    AutomataMill.init();
     LogStub.init();
+    Log.enableFailQuick(false);
     Log.getFindings().clear();
   }
 

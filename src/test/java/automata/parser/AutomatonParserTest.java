@@ -7,7 +7,9 @@ import automata._ast.ASTState;
 import automata._parser.AutomataParser;
 import automata.lang.AbstractTest;
 import de.se_rwth.commons.logging.Log;
+import de.se_rwth.commons.logging.LogStub;
 import org.antlr.v4.runtime.RecognitionException;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -18,11 +20,14 @@ import java.util.Optional;
 import static org.junit.Assert.*;
 
 public class AutomatonParserTest extends AbstractTest {
-  
-  @BeforeClass
-  public static void init() {
-    Log.enableFailQuick(false);
+
+  @Before
+  public void setUp() {
+    AutomataMill.reset();
     AutomataMill.init();
+    LogStub.init();
+    Log.enableFailQuick(false);
+    Log.getFindings().clear();
   }
   
   @Test
