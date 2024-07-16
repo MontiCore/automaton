@@ -1,9 +1,9 @@
 /* (c) https://github.com/MontiCore/monticore */
 plugins {
-  id "java-library" // Java while providing specific knowledge about Java libraries
+  id "java-library" // Java plus providing specific knowledge about Java libraries
   id "de.monticore.generator" version "$mc_version" // MontiCore Plugin
   id "maven-publish"
-  id "com.github.johnrengelman.shadow" version "6.0.0"
+  id "com.github.johnrengelman.shadow" version "6.0.0" // for creating the all-in-one jar
   id 'jacoco' // Test coverage reports
   id 'de.se_rwth.codestyle' version "$mc_version" // Enforces & Provides SE CodeStyle
 }
@@ -26,7 +26,8 @@ generateMCGrammars {
 
 
 java {
-  // Configure the java toolchain to use Java 11
+  // Configure the java toolchain to use Java 11 (overriding the locally installed JDK)
+  // https://docs.gradle.org/current/userguide/toolchains.html
   toolchain {
     languageVersion = JavaLanguageVersion.of(11)
   }
@@ -40,6 +41,7 @@ dependencies {
   implementation group: 'com.google.guava', name: 'guava', version: guava_version
   implementation group: 'de.monticore.lang', name: 'cd4analysis', version: mc_version
   implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.11'
+
   // And dependencies for the test source set
   testImplementation group: 'junit', name: 'junit', version: junit_version
   // Provide MontiCore-specific tests, such as de.monticore.cocos.helper.Assert
