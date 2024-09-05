@@ -8,15 +8,14 @@ import automata.lang.AbstractTest;
 import de.monticore.prettyprint.IndentPrinter;
 import de.se_rwth.commons.logging.Log;
 import de.se_rwth.commons.logging.LogStub;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AutomataPrettyPrinterTest extends AbstractTest {
 
-  @Before
+  @BeforeEach
   public void setUp() {
     AutomataMill.reset();
     AutomataMill.init();

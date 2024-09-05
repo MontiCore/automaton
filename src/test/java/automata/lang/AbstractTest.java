@@ -1,19 +1,16 @@
 /* (c) https://github.com/MontiCore/monticore */
 package automata.lang;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import automata._ast.ASTAutomaton;
+import automata._parser.AutomataParser;
+import org.antlr.v4.runtime.RecognitionException;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
 
-import org.antlr.v4.runtime.RecognitionException;
-
-import automata._ast.ASTAutomaton;
-import automata._parser.AutomataParser;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Provides some helpers for tests.

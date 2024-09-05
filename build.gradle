@@ -10,7 +10,7 @@ plugins {
 
 
 def guava_version = '33.1.0-jre'
-def junit_version = '4.13.1'
+def junit_version = '5.10.3'
 
 group = "de.monticore.lang"
 description = "Automata DSL"
@@ -43,7 +43,7 @@ dependencies {
   implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.11'
 
   // And dependencies for the test source set
-  testImplementation group: 'junit', name: 'junit', version: junit_version
+  testImplementation "org.junit.jupiter:junit-jupiter-api:$junit_version"
   // Provide MontiCore-specific tests, such as de.monticore.cocos.helper.Assert
   testImplementation("de.monticore:monticore-runtime:$mc_version") {
     capabilities {

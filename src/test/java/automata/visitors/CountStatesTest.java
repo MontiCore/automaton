@@ -1,17 +1,15 @@
 /* (c) https://github.com/MontiCore/monticore */
 package automata.visitors;
 
-import static org.junit.Assert.assertEquals;
-
 import automata.AutomataMill;
 import automata._visitor.AutomataTraverser;
 import automata.lang.AbstractTest;
-
 import de.se_rwth.commons.logging.Log;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import automata._ast.ASTAutomaton;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Test for {@link CountStates}.
@@ -19,7 +17,7 @@ import automata._ast.ASTAutomaton;
  */
 public class CountStatesTest extends AbstractTest {
   
-  @BeforeClass
+  @BeforeAll
   public static void init() {
     Log.enableFailQuick(false);
     AutomataMill.init();

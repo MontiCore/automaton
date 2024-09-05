@@ -1,13 +1,13 @@
 /* (c) https://github.com/MontiCore/monticore */
 package automata;
 
-import static org.junit.Assert.assertTrue;
 
 import de.se_rwth.commons.logging.Log;
 import de.se_rwth.commons.logging.LogStub;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * A very short test for the main function
@@ -15,7 +15,7 @@ import org.junit.Test;
  */
 public class AutomataToolTest {
 
-  @Before
+  @BeforeEach
   public void setUp() {
     AutomataMill.reset();
     AutomataMill.init();
