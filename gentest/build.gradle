@@ -21,6 +21,7 @@ dependencies {
     implementation "de.se_rwth.commons:se-commons-logging:$se_commons_version"
     implementation "de.se_rwth.commons:se-commons-utilities:$se_commons_version"
     testImplementation "org.junit.jupiter:junit-jupiter-api:$junit_version"
+    testImplementation "org.junit.jupiter:junit-jupiter-engine:$junit_version"
 }
 
 sourceSets {
@@ -36,6 +37,11 @@ task genPingPong(type: JavaExec) {
 compileJava {
     dependsOn genPingPong
 }
+
+test {
+    useJUnitPlatform()
+}
+
 
 clean.doFirst {
     delete "${projectDir}/target/"
