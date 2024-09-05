@@ -1,28 +1,26 @@
 /* (c) https://github.com/MontiCore/monticore */
 package automata.symboltable;
 
-import automata.AutomataTool;
 import automata.AutomataMill;
-import automata.AutomataToolTOP;
+import automata.AutomataTool;
 import automata._ast.ASTAutomaton;
 import automata._symboltable.*;
 import automata._visitor.AutomataTraverser;
 import de.monticore.io.paths.MCPath;
 import de.se_rwth.commons.logging.Log;
 import de.se_rwth.commons.logging.LogStub;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.nio.file.Paths;
 import java.util.Optional;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AutomatonSymbolSerializationTest {
 
-  @Before
+  @BeforeEach
   public void setUp() {
     AutomataMill.reset();
     AutomataMill.init();

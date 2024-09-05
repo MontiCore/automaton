@@ -1,8 +1,8 @@
 /* (c) https://github.com/MontiCore/monticore */
 package automata.symboltable;
 
-import automata.AutomataTool;
 import automata.AutomataMill;
+import automata.AutomataTool;
 import automata._ast.ASTAutomaton;
 import automata._symboltable.AutomataScopesGenitor;
 import automata._symboltable.IAutomataGlobalScope;
@@ -11,19 +11,18 @@ import automata._visitor.AutomataTraverser;
 import de.monticore.io.paths.MCPath;
 import de.se_rwth.commons.logging.Log;
 import de.se_rwth.commons.logging.LogStub;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.nio.file.Paths;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AutomatonSymbolTableCreatorTest {
 
   private IAutomataGlobalScope globalScope;
 
-  @Before
+  @BeforeEach
   public void setup() {
 
     AutomataMill.reset();
