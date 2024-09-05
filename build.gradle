@@ -44,6 +44,7 @@ dependencies {
 
   // And dependencies for the test source set
   testImplementation "org.junit.jupiter:junit-jupiter-api:$junit_version"
+  testImplementation "org.junit.jupiter:junit-jupiter-engine:$junit_version"
   // Provide MontiCore-specific tests, such as de.monticore.cocos.helper.Assert
   testImplementation("de.monticore:monticore-runtime:$mc_version") {
     capabilities {
@@ -103,6 +104,10 @@ publishing {
 
 tasks.withType(JavaCompile) {
   options.encoding = 'UTF-8'
+}
+
+test {
+  useJUnitPlatform()
 }
 
 task testReport(type: TestReport) {
