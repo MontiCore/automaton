@@ -21,7 +21,8 @@ symbol scope Automaton =
 symbol State =
   "state" Name
 
-  (("<<" ["initial"] ">>" ) | ("<<" ["final"] ">>" ))*
+  (  ("<<" ["initial"] ">>" ) 
+   | ("<<" ["final"] ">>"   ) )*
 
   ( ("{" (State | Transition)* "}") | ";") ;
 
