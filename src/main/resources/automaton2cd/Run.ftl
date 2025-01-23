@@ -11,7 +11,7 @@ for(Stimuli stimulus: stimuli) {
       }
     </#list>
       default:
-        Log.error("0x25371 no defined stimulus for input " + stimulus);
+        de.se_rwth.commons.logging.Log.error("0x25371 no defined stimulus for input " + stimulus);
   }
 }
 return this.state.isIsFinal();

@@ -2,4 +2,4 @@
 ${tc.signature("stimulus", "classname")}
 ${cd4c.method("public void handle${stimulus?cap_first}(${classname} k)")}
 
-Log.error("0x25370 transition for given stimulus '${stimulus}' does not exist.");
+de.se_rwth.commons.logging.Log.error("0x25370 transition for given stimulus '${stimulus}' does not exist.");

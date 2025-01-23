@@ -1,22 +1,27 @@
 /* (c) https://github.com/MontiCore/monticore */
 package automata;
 
-import static org.junit.Assert.assertTrue;
 
 import de.se_rwth.commons.logging.Log;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import de.se_rwth.commons.logging.LogStub;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * A very short test for the main function
  *
  */
 public class AutomataToolTest {
-  
-  @BeforeClass
-  public static void init() {
-    Log.enableFailQuick(false);
+
+  @BeforeEach
+  public void setUp() {
+    AutomataMill.reset();
     AutomataMill.init();
+    LogStub.init();
+    Log.enableFailQuick(false);
+    Log.getFindings().clear();
   }
   
   @Test

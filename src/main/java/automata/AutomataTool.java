@@ -3,6 +3,7 @@ package automata;
 
 import automata._ast.ASTAutomaton;
 import automata._cocos.AutomataCoCoChecker;
+import automata._prettyprint.AutomataFullPrettyPrinter;
 import automata._symboltable.AutomataScopesGenitor;
 import automata._symboltable.IAutomataArtifactScope;
 import automata._symboltable.IAutomataGlobalScope;
@@ -11,7 +12,6 @@ import automata.cocos.AtLeastOneInitialAndFinalState;
 import automata.cocos.AutomataCoCos;
 import automata.cocos.StateNameStartsWithCapitalLetter;
 import automata.cocos.TransitionStatesExist;
-import automata.prettyprint.PrettyPrinter;
 import automata.visitors.CountStates;
 import automata2cd.Automata2CDConverter;
 import de.monticore.cd.codegen.CDGenerator;
@@ -20,6 +20,7 @@ import de.monticore.generating.GeneratorSetup;
 import de.monticore.generating.templateengine.GlobalExtensionManagement;
 import de.monticore.generating.templateengine.TemplateController;
 import de.monticore.generating.templateengine.TemplateHookPoint;
+import de.monticore.prettyprint.IndentPrinter;
 import de.se_rwth.commons.logging.Log;
 import org.apache.commons.cli.*;
 import org.apache.commons.lang3.StringUtils;
@@ -136,10 +137,10 @@ public class AutomataTool extends AutomataToolTOP {
   
   @Override
   public void prettyPrint(ASTAutomaton ast, String file) {
-    PrettyPrinter pp = new PrettyPrinter();
-    pp.handle(ast);
+    AutomataFullPrettyPrinter printer = new AutomataFullPrettyPrinter(new IndentPrinter(),true);
+    String result = printer.prettyprint(ast);
     Log.info("Pretty printing the parsed automata into console:", AutomataTool.class.getName());
-    System.out.println(pp.getResult());
+    System.out.println(result);
   }
   
   

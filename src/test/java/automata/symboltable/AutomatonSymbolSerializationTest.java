@@ -1,35 +1,37 @@
 /* (c) https://github.com/MontiCore/monticore */
 package automata.symboltable;
 
-import automata.AutomataTool;
 import automata.AutomataMill;
-import automata.AutomataToolTOP;
+import automata.AutomataTool;
 import automata._ast.ASTAutomaton;
 import automata._symboltable.*;
 import automata._visitor.AutomataTraverser;
 import de.monticore.io.paths.MCPath;
 import de.se_rwth.commons.logging.Log;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import de.se_rwth.commons.logging.LogStub;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.nio.file.Paths;
 import java.util.Optional;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AutomatonSymbolSerializationTest {
 
-  @BeforeClass
-  public static void init () {
-    Log.enableFailQuick(false);
+  @BeforeEach
+  public void setUp() {
+    AutomataMill.reset();
     AutomataMill.init();
+    LogStub.init();
+    Log.enableFailQuick(false);
+    Log.getFindings().clear();
   }
 
   private IAutomataArtifactScope scope;
 
   public void setup (String model) {
-    Log.enableFailQuick(false);
     ASTAutomaton ast = new AutomataTool().parse("src/test/resources/" + model);
 
     MCPath mp = new MCPath(Paths.get("src/test/resources/" + model).getParent());
