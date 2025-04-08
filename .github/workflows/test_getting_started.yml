@@ -28,6 +28,7 @@ jobs:
         java-version: [ 11, 17, 21 ]
         gradle-version: [ '7.4.2', '7.6.4', '8.13', 'wrapper' ]
       fail-fast: false
+    continue-on-error: true # just report incompatibility
     steps:
       - name: Checkout project sources
         uses: actions/checkout@v4
