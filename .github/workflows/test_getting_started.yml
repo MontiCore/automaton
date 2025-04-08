@@ -7,10 +7,7 @@ concurrency: # run this test workflow only once per "branch"
   group: ${{ github.repository }}-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-on:
-  push: # run this pipeline on every push
-    paths-ignore:
-      - "*.md" # do not run this pipeline if the only change was to markdown files
+on: workflow_dispatch # only run this file on demand, as GitHub (to this day) does not support optional jobs
 
 env:
   GRADLE_CLI_OPTS: "-Pci --build-cache --refresh-dependencies" # CLI options passed to Gradle
