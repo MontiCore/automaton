@@ -27,6 +27,7 @@ jobs:
       matrix:
         java-version: [ 11, 17, 21 ]
         gradle-version: [ '7.4.2', '7.6.4', '8.13', 'wrapper' ]
+        fail-fast: true
     steps:
       - name: Checkout project sources
         uses: actions/checkout@v4
