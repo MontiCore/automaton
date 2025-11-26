@@ -28,7 +28,7 @@ public abstract class Automata2CDTransitionVisitor implements AutomataVisitor2 {
   protected final ASTMCReturnType voidReturnType;
   protected final ASTCDClass stateSuperClass;
   protected final CD4C cd4C;
-  protected final Set<String> stimuli = new HashSet<>();
+  protected final Set<String> stimuli = new LinkedHashSet<>();
   
   public Automata2CDTransitionVisitor(ASTCDClass automataClass,
                                 Map<String, ASTCDClass> stateToClassMap,

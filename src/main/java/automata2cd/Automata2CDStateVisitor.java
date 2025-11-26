@@ -38,7 +38,7 @@ public class Automata2CDStateVisitor implements AutomataVisitor2 {
   /**
    * Mapping of the state implementation classes for every state
    */
-  protected final Map<String, ASTCDClass> stateToClassMap = new HashMap<>();
+  protected final Map<String, ASTCDClass> stateToClassMap = new LinkedHashMap<>();
   /**
    * Code template reference
    */
