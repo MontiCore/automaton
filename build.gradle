@@ -9,8 +9,8 @@ plugins {
 }
 
 
-def guava_version = '33.1.0-jre'
-def junit_version = '5.10.3'
+def guava_version = '33.5.0-jre'
+def junit_version = '5.14.1'
 def junit_platform_version = '1.14.1'
 
 group = "de.monticore.lang"
@@ -41,7 +41,7 @@ dependencies {
   // Next, dependencies of the project itself
   implementation group: 'com.google.guava', name: 'guava', version: guava_version
   implementation group: 'de.monticore.lang', name: 'cd4analysis', version: mc_version
-  implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.11'
+  implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.20.0'
 
   // And dependencies for the test source set
   testImplementation "org.junit.jupiter:junit-jupiter-api:$junit_version"
