@@ -17,7 +17,7 @@ group = "de.monticore.lang"
 description = "Automata DSL"
 
 // Change the output directory
-buildDir = file("$projectDir/target")
+layout.buildDirectory = file("$projectDir/target")
 
 generateMCGrammars {
   // The mc4 grammars are build from the src/main/grammars directory by default
@@ -104,7 +104,7 @@ publishing {
   }
 }
 
-tasks.withType(JavaCompile) {
+tasks.withType(JavaCompile).configureEach {
   options.encoding = 'UTF-8'
 }
 
@@ -112,14 +112,14 @@ test {
   useJUnitPlatform()
 }
 
-task testReport(type: TestReport) {
-  destinationDir = file("$buildDir/reports/allTests")
+tasks.register('testReport', TestReport) {
+  destinationDirectory = file("$layout.buildDirectory/reports/allTests")
   // Include the results from the 'test' task
   reportOn tasks.withType(Test)
 }
 
 
-task buildAll(type: GradleBuild) {
+tasks.register('buildAll', GradleBuild) {
   tasks = ['build']
 }
 
