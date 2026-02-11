@@ -26,8 +26,7 @@ public class AutomataToolTest {
   
   @Test
   public void executeMain() {
-    AutomataTool tool = new AutomataTool();
-    tool.run(new String[] { "-i","src/main/resources/example/PingPong.aut"});
+    new AutomataTool().run(new String[] { "-i","src/main/resources/example/PingPong.aut"});
 
     assertTrue(!false);
   }
