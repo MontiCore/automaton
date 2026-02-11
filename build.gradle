@@ -9,8 +9,6 @@ plugins {
 }
 
 
-def guava_version = '33.1.0-jre'
-def junit_version = '5.10.3'
 
 group = "de.monticore.lang"
 description = "Automata DSL"
@@ -25,15 +23,6 @@ generateMCGrammars {
 }
 
 
-java {
-  // Configure the java toolchain to use Java 11 (overriding the locally installed JDK)
-  // https://docs.gradle.org/current/userguide/toolchains.html
-  toolchain {
-    languageVersion = JavaLanguageVersion.of(11)
-  }
-}
-
-
 dependencies {
   // Depend on the MontiCore language library (which in term depends on the runtime)
   grammar "de.monticore:monticore-grammar:$mc_version"
@@ -43,8 +32,8 @@ dependencies {
   implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.11'
 
   // And dependencies for the test source set
-  testImplementation "org.junit.jupiter:junit-jupiter-api:$junit_version"
-  testImplementation "org.junit.jupiter:junit-jupiter-engine:$junit_version"
+  testImplementation "org.junit.jupiter:junit-jupiter:$junit_version"
+  testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
   // Provide MontiCore-specific tests, such as de.monticore.cocos.helper.Assert
   testImplementation("de.monticore:monticore-runtime:$mc_version") {
     capabilities {
