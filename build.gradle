@@ -1,7 +1,7 @@
 /* (c) https://github.com/MontiCore/monticore */
 plugins {
   id "java-library" // Java plus providing specific knowledge about Java libraries
-  id "de.monticore.generator" version "$mc_version" // MontiCore Plugin
+  id "de.monticore.generator-withtr" version "$mc_version" // MontiCore Plugin
   id "maven-publish"
   id "com.github.johnrengelman.shadow" version "7.1.2" // for creating the all-in-one jar
   id 'jacoco' // Test coverage reports
@@ -27,6 +27,12 @@ generateMCGrammars {
 dependencies {
   // Depend on the MontiCore language library (which in term depends on the runtime)
   grammar "de.monticore:monticore-grammar:$mc_version"
+
+  if ("true".equals(getProperty('genTR'))) {
+    // and their respective trafo-components (as a grammar dependency of the trafo source set)
+    trafoGrammar grammar("de.monticore:monticore-grammar-trafo:$mc_version")
+  }
+
   // Next, dependencies of the project itself
   implementation group: 'com.google.guava', name: 'guava', version: guava_version
   implementation group: 'de.monticore.lang', name: 'cd4analysis', version: mc_version
