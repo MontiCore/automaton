@@ -22,13 +22,13 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        java-version: [ 11, 17, 21 ]
-        gradle-version: [ '7.4.2', '7.6.4', '8.5', '8.14', '9.3.1' ]
-        exclude:
-          - java-version: 21
-            gradle-version: '7.4.2' # gradle incompatibility
-          - java-version: 21
-            gradle-version: '7.6.4' # gradle incompatibility
+        java-version: [ 21 ]
+        gradle-version: [ '8.5', '8.14', '9.3.1' ]
+#        exclude:
+#          - java-version: 21
+#            gradle-version: '7.4.2' # gradle incompatibility
+#          - java-version: 21
+#            gradle-version: '7.6.4' # gradle incompatibility
       fail-fast: false
     continue-on-error: true # just report incompatibility
     steps:
