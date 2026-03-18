@@ -34,14 +34,14 @@ dependencies {
   }
 
   // Next, dependencies of the project itself
-  implementation group: 'com.google.guava', name: 'guava', version: guava_version
-  implementation group: 'de.monticore.lang', name: 'cd4analysis', version: mc_version
-  implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.20.0'
+  implementation "com.google.guava:guava:$guava_version"
+  implementation "de.monticore.lang:cd4analysis:$mc_version"
+  implementation "org.apache.commons:commons-lang3:$commons_lang3_version"
 
   // And dependencies for the test source set
   testImplementation "org.junit.jupiter:junit-jupiter-api:$junit_version"
   testImplementation "org.junit.jupiter:junit-jupiter-engine:$junit_version"
-  testRuntimeOnly "org.junit.platform:junit-platform-launcher:$junit_platform_version"
+  testRuntimeOnly "org.junit.platform:junit-platform-launcher:$junit_version"
   // Provide MontiCore-specific tests, such as de.monticore.cocos.helper.Assert
   testImplementation("de.monticore:monticore-runtime:$mc_version") {
     capabilities {

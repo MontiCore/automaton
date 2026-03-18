@@ -15,13 +15,12 @@ repositories {
     }
 }
 
-def junit_version = '5.10.3'
-
 dependencies {
     implementation "de.se_rwth.commons:se-commons-logging:$se_commons_version"
     implementation "de.se_rwth.commons:se-commons-utilities:$se_commons_version"
     testImplementation "org.junit.jupiter:junit-jupiter-api:$junit_version"
     testImplementation "org.junit.jupiter:junit-jupiter-engine:$junit_version"
+    testRuntimeOnly "org.junit.platform:junit-platform-launcher:$junit_version"
 }
 
 sourceSets {
