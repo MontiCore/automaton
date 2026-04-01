@@ -3,7 +3,7 @@ plugins {
   id "java-library" // Java plus providing specific knowledge about Java libraries
   id "maven-publish"
   id "de.monticore.generator-withtr" version "$mc_version" // MontiCore Plugin
-  id "com.github.johnrengelman.shadow" version "7.1.2" // for creating the all-in-one jar
+  id "com.gradleup.shadow" version "$shadow_version" // for creating the all-in-one jar
   id 'jacoco' // Test coverage reports
   id 'de.se_rwth.codestyle' version "$mc_version" // Enforces & Provides SE CodeStyle
 }
