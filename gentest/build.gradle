@@ -9,9 +9,9 @@ repositories {
         mavenLocal()
     }
     maven {
-        credentials.username mavenUser
-        credentials.password mavenPassword
-        url repo
+        credentials.username = mavenUser
+        credentials.password = mavenPassword
+        url = repo
     }
 }
 
@@ -27,9 +27,9 @@ sourceSets {
     main.java.srcDirs += ["$projectDir/target/generated-sources"]
 }
 
-task genPingPong(type: JavaExec) {
+tasks.register('genPingPong', JavaExec) {
     classpath += parent.tasks.shadowJar.outputs.files
-    args '-i','src/main/resources/PingPong.aut', '-o', 'target/generated-sources/'
+    args = ['-i', 'src/main/resources/PingPong.aut', '-o', 'target/generated-sources/']
     dependsOn parent.tasks.shadowJar
 }
 
@@ -43,5 +43,5 @@ test {
 
 
 clean.doFirst {
-    delete "${projectDir}/target/"
+    delete layout.projectDirectory.dir("target").getAsFile()
 }
