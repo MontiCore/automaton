@@ -121,3 +121,8 @@ spotless {
 }
 
 defaultTasks 'build'
+
+// Dependency of random forests. TODO: optional dependency?
+dependencies {
+  implementation("com.github.haifengl:smile-kotlin:4.4.2")
+}
