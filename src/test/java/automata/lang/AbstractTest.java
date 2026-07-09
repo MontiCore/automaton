@@ -44,16 +44,10 @@ abstract public class AbstractTest {
 
   protected ASTAutomaton parseStringModel(String model) {
     AutomataParser parser = new AutomataParser();
-    Optional<ASTAutomaton> optAutomaton;
-    try {
-      optAutomaton = parser.parse_StringAutomaton(model);
-      assertFalse(parser.hasErrors());
-      assertTrue(optAutomaton.isPresent());
-      return optAutomaton.get();
-    } catch(IOException e) {
-      e.printStackTrace();
-      fail("There was an exception when parsing the input model: "+e.getMessage());
-    }
-    return null;
+    Optional<ASTAutomaton> optAutomaton =
+        parser.parse_StringAutomaton(model);
+    assertFalse(parser.hasErrors());
+    assertTrue(optAutomaton.isPresent());
+    return optAutomaton.get();
   }
 }
