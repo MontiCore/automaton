@@ -34,82 +34,55 @@ import static de.se_rwth.commons.Names.getPathFromPackage;
 public class AutomataTool extends AutomataToolTOP {
   
   @Override
-  public void run(String[] args) {
-    Options options = initOptions();
-
-    try {
-      // create CLI parser and parse input options from command line
-      CommandLineParser cliParser = new DefaultParser();
-      CommandLine cmd =  cliParser.parse(options, args);
-  
-      // help: when --help
-      if (cmd.hasOption("h")) {
-        printHelp(options);
-        // do not continue, when help is printed
-        return;
-      }
-      
-      // if -i input is missing: also print help and stop
-      if (!cmd.hasOption("i")) {
-        printHelp(options);
-        // do not continue, when help is printed
-        return;
-      }
-      
-      // -option developer logging
-      if (cmd.hasOption("d")) {
-        Log.initDEBUG();
-      } else {
-        Log.init();
-      }
-  
-      // parse input file, which is now available
-      // (only returns if successful)
-      ASTAutomaton astAutomaton = parse(cmd.getOptionValue("i"));
-      Log.info(cmd.getOptionValue("i") + " parsed successfully!", AutomataTool.class.getName());
-
-      IAutomataArtifactScope modelTopScope = createSymbolTable(astAutomaton);
-
-      // execute default context conditions
-      runDefaultCoCos(astAutomaton);
-
-      // execute a custom set of context conditions
-      AutomataCoCoChecker customCoCos = new AutomataCoCoChecker();
-      customCoCos.addCoCo(new StateNameStartsWithCapitalLetter());
-      customCoCos.checkAll(astAutomaton);
-
-      // store artifact scope
-      String symFile = "target/symbols/" + getPathFromPackage(modelTopScope.getFullName()) + ".autsym";
-      storeSymbols(modelTopScope, symFile);
-
-      // analyze the model with a visitor
-      CountStates cs = new CountStates();
-      AutomataTraverser t = AutomataMill.traverser();
-      t.add4Automata(cs);
-      astAutomaton.accept(t);
-      Log.info("The model contains " + cs.getCount() + " states.", AutomataTool.class.getName());
-
-
-      // -option pretty print
-      if (cmd.hasOption("pp")) {
-        String path = cmd.getOptionValue("pp", StringUtils.EMPTY);
-        prettyPrint(astAutomaton, path);
-      }
-  
-      // -option reports
-      if (cmd.hasOption("r")) {
-        String path = cmd.getOptionValue("r", StringUtils.EMPTY);
-        report(astAutomaton, path);
-      }
-  
-      String outputDir = cmd.hasOption("o")
-        ? cmd.getOptionValue("o")
-        : "target/gen-test/"+astAutomaton.getName();
-      generateCD(astAutomaton,outputDir);
-      
-    } catch (ParseException e) {
-      Log.error("0xA7105 Could not process parameters: "+e.getMessage());
+  public void doRun(CommandLine cmd) {
+    if (!cmd.hasOption("i")) {
+      // if -i input is missing:
+      Log.error("0xA1013 Please specify the input file(s) using the -i option");
+      return;
     }
+    // parse input file, which is now available
+    // (only returns if successful)
+    ASTAutomaton astAutomaton = parse(cmd.getOptionValue("i"));
+    Log.info(cmd.getOptionValue("i") + " parsed successfully!", AutomataTool.class.getName());
+
+    IAutomataArtifactScope modelTopScope = createSymbolTable(astAutomaton);
+
+    // execute default context conditions
+    runDefaultCoCos(astAutomaton);
+
+    // execute a custom set of context conditions
+    AutomataCoCoChecker customCoCos = new AutomataCoCoChecker();
+    customCoCos.addCoCo(new StateNameStartsWithCapitalLetter());
+    customCoCos.checkAll(astAutomaton);
+
+    // store artifact scope
+    String symFile = "target/symbols/" + getPathFromPackage(modelTopScope.getFullName()) + ".autsym";
+    storeSymbols(modelTopScope, symFile);
+
+    // analyze the model with a visitor
+    CountStates cs = new CountStates();
+    AutomataTraverser t = AutomataMill.traverser();
+    t.add4Automata(cs);
+    astAutomaton.accept(t);
+    Log.info("The model contains " + cs.getCount() + " states.", AutomataTool.class.getName());
+
+
+    // -option pretty print
+    if (cmd.hasOption("pp")) {
+      String path = cmd.getOptionValue("pp", StringUtils.EMPTY);
+      prettyPrint(astAutomaton, path);
+    }
+
+    // -option reports
+    if (cmd.hasOption("r")) {
+      String path = cmd.getOptionValue("r", StringUtils.EMPTY);
+      report(astAutomaton, path);
+    }
+
+    String outputDir = cmd.hasOption("o")
+      ? cmd.getOptionValue("o")
+      : "target/gen-test/"+astAutomaton.getName();
+    generateCD(astAutomaton,outputDir);
   }
   
   
