@@ -48,12 +48,14 @@ public class AutomataTool extends AutomataToolTOP {
     IAutomataArtifactScope modelTopScope = createSymbolTable(astAutomaton);
 
     // execute default context conditions
+    Log.enableFailQuick(false);
     runDefaultCoCos(astAutomaton);
 
     // execute a custom set of context conditions
     AutomataCoCoChecker customCoCos = new AutomataCoCoChecker();
     customCoCos.addCoCo(new StateNameStartsWithCapitalLetter());
     customCoCos.checkAll(astAutomaton);
+    Log.enableFailQuick(true);
 
     // store artifact scope
     String symFile = "target/symbols/" + getPathFromPackage(modelTopScope.getFullName()) + ".autsym";
