@@ -12,7 +12,7 @@ import java.util.LinkedHashMap;
 
 public class AutomatonIsDeterministic implements AutomataASTTransitionCoCo {
 
-   protected Map<String, Set<String>> transitions = new LinkedHashMap<>();
+  protected Map<String, Set<String>> transitions = new LinkedHashMap<>();
 
   @Override
   public void check(ASTTransition node) {
@@ -26,7 +26,8 @@ public class AutomatonIsDeterministic implements AutomataASTTransitionCoCo {
       if(!transitions.get(from).contains(input)) {
         transitions.get(from).add(input);
       } else {
-        Log.error("0x14708 Automaton must be deterministic");
+        // Issue error...
+        Log.error("0x14708 Automaton must be deterministic. Your Automation contains duplicate transitions for state '" + from + "' with input '" + input + "'.", node.get_SourcePositionStart());
       }
     }
   }

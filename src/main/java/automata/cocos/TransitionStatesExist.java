@@ -18,14 +18,17 @@ public class TransitionStatesExist implements AutomataASTTransitionCoCo {
 
     if (!sourceState.isPresent()) {
       // Issue error...
-      Log.error("0xB4003 The source state of the transition does not exist.", node.get_SourcePositionStart());
-    }
+      Log.error("0xB4003 The source state "+  node.getFrom() + " of the transition does not exist. Your declared transition: "
+          + "'" + node.getFrom() + " - " + node.getInput() + " > " + node.getTo() + ";' "
+          + "is invalid.", node.get_SourcePositionStart());    }
 
     Optional<StateSymbol> targetState = enclosingScope.resolveState(node.getTo());
 
     if (!targetState.isPresent()) {
       // Issue error...
-      Log.error("0xB4004 The target state of the transition does not exist.", node.get_SourcePositionStart());
+      Log.error("0xB4004 The target state "+  node.getTo() + " of the transition does not exist. Your declared transition: "
+          + "'" + node.getFrom() + " - " + node.getInput() + " > " + node.getTo() + ";' "
+          + "is invalid.", node.get_SourcePositionStart());
     }
   }
 }

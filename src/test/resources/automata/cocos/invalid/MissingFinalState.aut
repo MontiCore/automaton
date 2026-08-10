@@ -1,7 +1,5 @@
 /* (c) https://github.com/MontiCore/monticore */
 
-automaton NotExisingTransitionSource {
+automaton MissingFinalState {
   state S <<initial>>;
-
-  a - t > S;
 }

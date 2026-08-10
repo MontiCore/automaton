@@ -47,7 +47,21 @@ public class AtLeastOneInitialAndFinalStateTest extends AbstractTest {
     coco.check(automaton);
 
     Collection<Finding> expectedErrors = Collections.singletonList(
-      Finding.error("0xB4114 An automata must have at least one initial and one final state.",
+      Finding.error("0xB4111 An automaton must have one initial state. Do this by adding <<initial>> after a state name.",
+        new SourcePosition(3, 0)));
+
+    Assert.assertErrors(expectedErrors, Log.getFindings());
+  }
+
+  @Test
+  public  void testMissingFinalState() {
+    ASTAutomaton automaton = parseModel("src/test/resources/automata/cocos/invalid/MissingFinalState.aut");
+
+    AtLeastOneInitialAndFinalState coco = new AtLeastOneInitialAndFinalState();
+    coco.check(automaton);
+
+    Collection<Finding> expectedErrors = Collections.singletonList(
+      Finding.error("0xB4112 An automaton must have at least one final state. Do this by adding <<final>> after a state name.",
         new SourcePosition(3, 0)));
 
     Assert.assertErrors(expectedErrors, Log.getFindings());

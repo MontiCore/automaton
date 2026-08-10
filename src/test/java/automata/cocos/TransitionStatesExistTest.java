@@ -76,9 +76,32 @@ public class TransitionStatesExistTest extends AbstractTest {
     coco.check(transition);
     
     Collection<Finding> expectedErrors = Collections.singletonList(
-      Finding.error("0xB4003 The source state of the transition does not exist.",
+      Finding.error("0xB4003 The source state a of the transition does not exist. Your declared transition: 'a - t > S;' is invalid.",
         new SourcePosition(6, 2)));
     
+    Assert.assertErrors(expectedErrors, Log.getFindings());
+  }
+
+  @Test
+  public void testNotExistingTransitionTarget() {
+    globalScope.setSymbolPath(new MCPath(Paths.get("src/test/resources/automata/cocos/invalid")));
+    ASTAutomaton ast = parseModel("src/test/resources/automata/cocos/invalid/NotExistingTransitionTarget.aut");
+    AutomataScopesGenitor genitor = AutomataMill.scopesGenitor();
+    AutomataTraverser traverser = AutomataMill.traverser();
+    traverser.setAutomataHandler(genitor);
+    traverser.add4Automata(genitor);
+    genitor.putOnStack(globalScope);
+    genitor.createFromAST(ast);
+
+    ASTTransition transition = ast.getTransitionList().get(0);
+
+    TransitionStatesExist coco = new TransitionStatesExist();
+    coco.check(transition);
+
+    Collection<Finding> expectedErrors = Collections.singletonList(
+      Finding.error("0xB4004 The target state a of the transition does not exist. Your declared transition: 'S - t > a;' is invalid.",
+        new SourcePosition(6, 2)));
+
     Assert.assertErrors(expectedErrors, Log.getFindings());
   }
   

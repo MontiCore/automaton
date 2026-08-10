@@ -10,21 +10,26 @@ public class AtLeastOneInitialAndFinalState implements AutomataASTAutomatonCoCo 
 
   @Override
   public void check(ASTAutomaton automaton) {
-    boolean initialState = false;
-    boolean finalState = false;
+    boolean hasInitial = false;
+    boolean hasFinal = false;
 
     for (ASTState state : automaton.getStateList()) {
       if (state.isInitial()) {
-        initialState = true;
+        hasInitial = true;
       }
       if (state.isFinal()) {
-        finalState = true;
+        hasFinal = true;
       }
     }
 
-    if (!initialState || !finalState) {
+    if (!hasInitial) {
       // Issue error...
-      Log.error("0xB4114 An automata must have at least one initial and one final state.", automaton.get_SourcePositionStart());
+      Log.error("0xB4111 An automaton must have one initial state. Do this by adding <<initial>> after a state name.", automaton.get_SourcePositionStart());
+    }
+
+    if (!hasFinal) {
+      // Issue error...
+      Log.error("0xB4112 An automaton must have at least one final state. Do this by adding <<final>> after a state name.", automaton.get_SourcePositionStart());
     }
   }
 
