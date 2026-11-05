@@ -5,7 +5,6 @@ import automata._ast.ASTAutomaton;
 import automata._parser.AutomataParser;
 import org.antlr.v4.runtime.RecognitionException;
 
-import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
@@ -34,7 +33,7 @@ abstract public class AbstractTest {
       assertTrue(optAutomaton.isPresent());
       return optAutomaton.get();
     }
-    catch (RecognitionException | IOException e) {
+    catch (RecognitionException e) {
       e.printStackTrace();
       fail("There was an exception when parsing the model " + modelFile + ": "
           + e.getMessage());
