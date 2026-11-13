@@ -7,7 +7,8 @@ public class AutomataCoCos {
   
   public AutomataCoCoChecker getCheckerForAllCoCos() {
     final AutomataCoCoChecker checker = new AutomataCoCoChecker();
-    checker.addCoCo(new AtLeastOneInitialAndFinalState());
+    checker.addCoCo(new AtLeastOneInitialState());
+    checker.addCoCo(new AtLeastOneFinalState());
     checker.addCoCo(new StateNameStartsWithCapitalLetter());
     checker.addCoCo(new TransitionStatesExist());
     checker.addCoCo(new AutomatonIsDeterministic());

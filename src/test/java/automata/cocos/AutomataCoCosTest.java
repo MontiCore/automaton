@@ -4,21 +4,47 @@ package automata.cocos;
 import automata.AutomataMill;
 import automata._ast.ASTAutomaton;
 import automata._cocos.AutomataCoCoChecker;
+import automata._symboltable.IAutomataArtifactScope;
 import automata.lang.AbstractTest;
-import de.monticore.cocos.helper.Assert;
-import de.se_rwth.commons.SourcePosition;
-import de.se_rwth.commons.logging.Finding;
+import de.monticore.runtime.junit.MCAssertions;
 import de.se_rwth.commons.logging.Log;
 import de.se_rwth.commons.logging.LogStub;
 import org.antlr.v4.runtime.RecognitionException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.Collection;
-import java.util.Collections;
+import java.util.stream.Stream;
 
 public class AutomataCoCosTest extends AbstractTest {
 
+  static Stream<Arguments> testArgs() {
+    return Stream.of(
+        Arguments.argumentSet(
+            "StateNameStartsWithCapitalLetter",
+            "src/test/resources/automata/cocos/invalid/StateDoesNotStartWithCapitalLetter.aut",
+            "0xB4002"),
+        Arguments.argumentSet(
+            "AtLeastOneInitialState",
+            "src/test/resources/automata/cocos/invalid/MissingInitialState.aut",
+            "0xB4114"),
+        Arguments.argumentSet(
+            "AtLeastOneFinalState",
+            "src/test/resources/automata/cocos/invalid/MissingFinalState.aut",
+            "0xB4115"),
+        Arguments.argumentSet(
+            "TransitionStatesExist",
+            "src/test/resources/automata/cocos/invalid/NotExistingTransitionSource.aut",
+            "0xB4003"),
+        Arguments.argumentSet(
+            "AutomatonIsDeterministic",
+            "src/test/resources/automata/cocos/invalid/NonDeterministicAutomaton.aut",
+            "0x14708")
+    );
+  }
+  
   @BeforeEach
   public void setUp() throws RecognitionException {
     AutomataMill.reset();
@@ -29,34 +55,24 @@ public class AutomataCoCosTest extends AbstractTest {
   }
   
   @Test
-  public void testWithChecker(){
-    ASTAutomaton ast = // ...
-    parseModel("src/test/resources/automata/cocos/invalid/StateDoesNotStartWithCapitalLetter.aut");
-    
-    AutomataCoCoChecker checker = new AutomataCoCoChecker();
-    checker.addCoCo(new AtLeastOneInitialAndFinalState());
-    checker.addCoCo(new StateNameStartsWithCapitalLetter());
-    
-    checker.checkAll(ast);
-    
-    Collection<Finding> expectedErrors = Collections.singletonList(
-      Finding.warning("0xB4002 State name 'notCapital' should start with a capital letter.",
-        new SourcePosition(5, 2)));
-    Assert.assertErrors(expectedErrors, Log.getFindings());
-  }
-  
-  @Test
-  public void testStateDoesNotStartWithCapitalLetter() {
-    ASTAutomaton automaton = parseModel("src/test/resources/automata/cocos/invalid/StateDoesNotStartWithCapitalLetter.aut");
-    
+  public void testAllValid(){
+    ASTAutomaton ast = parseModel("src/test/resources/automata/cocos/valid/A.aut");
     AutomataCoCoChecker checker = new AutomataCoCos().getCheckerForAllCoCos();
-    checker.checkAll(automaton);
-    
-    Collection<Finding> expectedErrors = Collections.singletonList(
-      Finding.warning("0xB4002 State name 'notCapital' should start with a capital letter.",
-        new SourcePosition(5, 2)));
-    
-    Assert.assertErrors(expectedErrors, Log.getFindings());
+    IAutomataArtifactScope artifactScope = AutomataMill.scopesGenitorDelegator().createFromAST(ast);
+
+    checker.checkAll(ast);
+    MCAssertions.assertNoFindings();
   }
   
+  @ParameterizedTest
+  @MethodSource("testArgs")
+  public void testAllInvalid(String model, String errorCode) {
+    ASTAutomaton ast = parseModel(model);
+    AutomataCoCoChecker checker = new AutomataCoCos().getCheckerForAllCoCos();
+    AutomataMill.scopesGenitorDelegator().createFromAST(ast);
+
+    checker.checkAll(ast);
+    MCAssertions.assertHasFindingStartingWith(errorCode);
+  }
+
 }

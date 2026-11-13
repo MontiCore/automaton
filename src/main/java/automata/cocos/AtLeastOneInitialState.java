@@ -6,25 +6,25 @@ import automata._ast.ASTState;
 import automata._cocos.AutomataASTAutomatonCoCo;
 import de.se_rwth.commons.logging.Log;
 
-public class AtLeastOneInitialAndFinalState implements AutomataASTAutomatonCoCo {
+public class AtLeastOneInitialState implements AutomataASTAutomatonCoCo {
 
   @Override
   public void check(ASTAutomaton automaton) {
     boolean initialState = false;
-    boolean finalState = false;
 
     for (ASTState state : automaton.getStateList()) {
       if (state.isInitial()) {
         initialState = true;
-      }
-      if (state.isFinal()) {
-        finalState = true;
+        break;
       }
     }
 
-    if (!initialState || !finalState) {
-      // Issue error...
-      Log.error("0xB4114 An automata must have at least one initial and one final state.", automaton.get_SourcePositionStart());
+    if (!initialState) {
+      Log.error(String.format("0xB4114 Automaton %s must have at least one initial state.",
+              automaton.getName()
+          ),
+          automaton.get_SourcePositionStart(),
+          automaton.get_SourcePositionEnd());
     }
   }
 
