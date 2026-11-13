@@ -14,7 +14,11 @@ public class StateNameStartsWithCapitalLetter implements AutomataASTStateCoCo {
 
     if (!startsWithUpperCase) {
       // Issue warning...
-      Log.warn(String.format("0xB4002 State name '%s' should start with a capital letter.", stateName), state.get_SourcePositionStart());
+      Log.warn(
+          String.format("0xB4002 State name '%s' should start with a capital letter.", stateName),
+          state.get_SourcePositionStart(),
+          state.get_SourcePositionEnd()
+      );
     }
   }
 

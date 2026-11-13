@@ -8,7 +8,9 @@ import automata._symboltable.AutomataScopesGenitor;
 import automata._symboltable.IAutomataArtifactScope;
 import automata._symboltable.IAutomataGlobalScope;
 import automata._visitor.AutomataTraverser;
-import automata.cocos.AtLeastOneInitialAndFinalState;
+import automata.cocos.AtLeastOneInitialState;
+import automata.cocos.AtLeastOneFinalState;
+import automata.cocos.AutomatonIsDeterministic;
 import automata.cocos.AutomataCoCos;
 import automata.cocos.StateNameStartsWithCapitalLetter;
 import automata.cocos.TransitionStatesExist;
@@ -120,9 +122,12 @@ public class AutomataTool extends AutomataToolTOP {
   
   
   /**
-   * Run the default context conditions {@link AtLeastOneInitialAndFinalState},
-   * {@link TransitionStatesExist}, and
-   * {@link StateNameStartsWithCapitalLetter}.
+   * Run the default context conditions
+   * {@link AtLeastOneInitialState},
+   * {@link AtLeastOneFinalState},
+   * {@link TransitionStatesExist},
+   * {@link StateNameStartsWithCapitalLetter}, and
+   * {@link AutomatonIsDeterministic}.
    *
    * @param ast The input AST.
    */

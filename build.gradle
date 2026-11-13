@@ -6,6 +6,7 @@ plugins {
   id "com.gradleup.shadow" version "$shadow_version" // for creating the all-in-one jar
   id 'jacoco' // Test coverage reports
   id 'de.se_rwth.codestyle' version "$mc_version" // Enforces & Provides SE CodeStyle
+  id "java-test-fixtures"
 }
 
 
@@ -38,6 +39,7 @@ dependencies {
 
   // And dependencies for the test source set
   testImplementation "org.junit.jupiter:junit-jupiter-api:$junit_version"
+  testImplementation "org.junit.jupiter:junit-jupiter-params:$junit_version"
   testImplementation "org.junit.jupiter:junit-jupiter-engine:$junit_version"
   testRuntimeOnly "org.junit.platform:junit-platform-launcher:$junit_version"
   // Provide MontiCore-specific tests, such as de.monticore.cocos.helper.Assert
@@ -46,6 +48,7 @@ dependencies {
       requireCapability("de.monticore:monticore-runtime-tests")
     }
   }
+  testFixturesApi testFixtures("de.monticore:monticore-grammar:$mc_version")
 }
 
 // Where can we find the dependencies?

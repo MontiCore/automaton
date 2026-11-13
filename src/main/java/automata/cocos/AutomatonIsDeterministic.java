@@ -26,7 +26,14 @@ public class AutomatonIsDeterministic implements AutomataASTTransitionCoCo {
       if(!transitions.get(from).contains(input)) {
         transitions.get(from).add(input);
       } else {
-        Log.error("0x14708 Automaton must be deterministic");
+        Log.error(
+            String.format("0x14708 Automaton must be deterministic. "
+                + "State '%s' has multiple outgoing transitions with input '%s'.",
+              node.getFrom(),
+              node.getInput()),
+            node.get_SourcePositionStart(),
+            node.get_SourcePositionEnd()
+        );
       }
     }
   }
